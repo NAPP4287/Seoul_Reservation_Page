@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import downArrow from '../assets/downArrow.png';
+import smallDownArrow from '../assets/smallDownArrow.png';
 
 export const NavWrap = styled.div`
   height: 80px;
@@ -14,10 +16,6 @@ export const NavWrap = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    > .btnColor {
-      background-color: black;
-      color: white;
-    }
   }
 `;
 
@@ -29,8 +27,23 @@ export const GlobalWrap = styled.div`
   height: 30px;
   line-height: 30px;
   border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  > div {
+    width: 10px;
+    height: 10px;
+    margin-left: 5px;
+    background: url(${smallDownArrow}) no-repeat center;
+  }
 `;
 
 export const BackPageBtn = styled.div`
   font-size: 25px;
+  > div {
+    width: 20px;
+    height: 20px;
+    background: url(${downArrow}) no-repeat center;
+    transform: rotate(90deg);
+  }
 `;

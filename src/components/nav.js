@@ -1,6 +1,4 @@
 import { NavWrap, GlobalWrap } from '../style/navStyle';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
 
 function Nav() {
   return (
@@ -8,7 +6,7 @@ function Nav() {
       <div>
         <div></div>
         <GlobalWrap>
-          Languages <FontAwesomeIcon icon={faAngleDown} />
+          Languages <div></div>
         </GlobalWrap>
       </div>
     </NavWrap>

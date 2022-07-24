@@ -13,6 +13,9 @@ export const ProgramListWrap = styled.ul`
     justify-content: space-between;
     > h3 {
       text-align: left;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
   > li:nth-child(1) {
@@ -34,6 +37,9 @@ export const BottomContent = styled.div`
     font-size: 12px;
     height: 30px;
     line-height: 50px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   > a {
     button {

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import backgroundImg from '../example.jpg';
+import backgroundImg from '../assets/example.jpg';
 
 export const LandingWrap = styled.div`
   height: 100vh;

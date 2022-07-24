@@ -24,7 +24,7 @@ function LandingPage() {
               <Link to='/programList'>
                 <button>예약하기</button>
               </Link>
-              <Link to='/programList'>
+              <Link to='/checkReservation'>
                 <button>예약조회</button>
               </Link>
             </ButtonWrap>

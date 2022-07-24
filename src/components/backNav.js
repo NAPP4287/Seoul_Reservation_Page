@@ -1,6 +1,4 @@
 import { NavWrap, GlobalWrap, BackPageBtn } from '../style/navStyle';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown, faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 
 function BackNav() {
   const backPage = () => {
@@ -11,10 +9,10 @@ function BackNav() {
     <NavWrap className='backNav'>
       <div>
         <BackPageBtn onClick={backPage}>
-          <FontAwesomeIcon icon={faAngleLeft} />
+          <div></div>
         </BackPageBtn>
         <GlobalWrap className='btnColor'>
-          Languages <FontAwesomeIcon icon={faAngleDown} />
+          Languages <div></div>
         </GlobalWrap>
       </div>
     </NavWrap>
