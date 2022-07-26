@@ -18,7 +18,7 @@ function ProList() {
 
             <BottomContent>
               <span>무료</span>
-              <Link to='/'>
+              <Link to='/programList/reservation'>
                 <button>예약하기</button>
               </Link>
             </BottomContent>
