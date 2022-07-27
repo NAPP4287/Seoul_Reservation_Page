@@ -10,7 +10,7 @@ import smallNextArrow from '../assets/smallDownArrow.png';
 // import disableArrow from '../assets/disableArrow.png';
 import { useState, useEffect } from 'react';
 
-function CalendarComp() {
+function CalendarComp({ setSelectDay }) {
   const [calendarMonth, setCalendarMonth] = useState(9);
   const [activeColor, setActiveColor] = useState({ idx: null, active: false });
   const date = ['일', '월', '화', '수', '목', '금', '토'];
@@ -62,9 +62,9 @@ function CalendarComp() {
     return arrDate;
   };
 
-  const handleChangeDate = (idx) => {
+  const handleChangeDate = (idx, date) => {
     setActiveColor({ idx: idx, active: true });
-    // axios get 요청 보낼 것
+    setSelectDay({ month: calendarMonth, date: date });
   };
 
   handleCalendarBody();
@@ -72,6 +72,8 @@ function CalendarComp() {
   return (
     <div className='contentWrap'>
       <CalendarWrap>
+        <div className='headTitle'>일정을 선택해주세요</div>
+
         <MonthWrap>
           <button className='left' onClick={() => goMonth('prev')}>
             {calendarMonth === 9 ? (
@@ -101,7 +103,7 @@ function CalendarComp() {
             <button
               key={idx}
               style={!el.enable ? { color: '#C5C5C5' } : { color: 'black' }}
-              onClick={() => handleChangeDate(idx)}
+              onClick={() => handleChangeDate(idx, el.date)}
               disabled={!el.enable}
             >
               <span
@@ -118,13 +120,13 @@ function CalendarComp() {
         </CalendarBody>
         <CalendarEnd>
           <div>
-            <span class='possible'></span> 예약가능
+            <span className='possible'></span> 예약가능
           </div>
           <div>
-            <span class='end'></span> 예약마감
+            <span className='end'></span> 예약마감
           </div>
           <div>
-            <span class='impossible'></span> 예약불가
+            <span className='impossible'></span> 예약불가
           </div>
         </CalendarEnd>
       </CalendarWrap>

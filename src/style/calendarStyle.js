@@ -1,17 +1,21 @@
 import styled from 'styled-components';
 
 export const CalendarWrap = styled.div`
-  width: calc(100% - 40px);
-  margin: 0 auto;
   padding-bottom: 30px;
-  border-bottom: 2px solid black;
-  border-top: 2px solid black;
+  > .headTitle {
+    padding-top: 100px;
+    text-align: left;
+    font-weight: bold;
+    font-size: 17px;
+    padding-bottom: 15px;
+  }
 `;
 
 export const MonthWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  border-top: 1px solid black;
   > button {
     border: none;
     background-color: transparent;

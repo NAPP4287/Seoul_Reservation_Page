@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ProgramListWrap = styled.ul`
-  padding: 100px 20px 20px 20px;
+  padding: 100px 0 20px 0;
   > li {
     background-color: #d9d9d9;
     border-radius: 3px;

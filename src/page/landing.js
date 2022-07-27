@@ -12,7 +12,7 @@ function LandingPage() {
   return (
     <div>
       <Nav />
-      <div className='contentWrap'>
+      <div className='landingWrap'>
         <LandingWrap>
           <LandingImg />
           <LandingContent>

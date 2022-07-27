@@ -8,6 +8,7 @@ export const NavWrap = styled.div`
   width: 100%;
   padding: 0 20px;
   z-index: 999;
+  background-color: white;
   .backNav {
     border-bottom: 1px solid #dcdcdc;
   }

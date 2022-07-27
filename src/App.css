@@ -28,11 +28,35 @@
   color: #61dafb;
 }
 
+.landingWrap {
+  max-width: 375px;
+  margin: 0 auto;
+}
+
 .contentWrap {
   max-width: 375px;
+  padding: 0 20px;
   margin: 0 auto;
 }
 
 input:focus {
   outline: none;
+}
+
+.reservationTitleWrap {
+  border-bottom: 1px solid black;
+}
+.headTitle {
+  padding: 20px 0;
+  text-align: left;
+  font-weight: bold;
+  font-size: 17px;
+  padding-bottom: 15px;
+}
+
+.normalBtn {
+  width: calc(100% - 40px);
+  height: 40px;
+  border: none;
+  background-color: #ebebeb;
 }
