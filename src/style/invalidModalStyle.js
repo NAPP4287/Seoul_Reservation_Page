@@ -12,12 +12,13 @@ export const ModalBack = styled.div`
   > .modalBox {
     width: calc(100% - 40px);
     height: 200px;
+    padding: 40px 0;
     background-color: white;
     border-radius: 5px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    > div {
+    justify-content: space-between;
+    > .title {
       padding-bottom: 30px;
     }
     > button {
@@ -28,6 +29,25 @@ export const ModalBack = styled.div`
       background-color: black;
       color: white;
       margin: 0 auto;
+    }
+    > .btnWrap {
+      display: flex;
+      width: calc(100% - 40px);
+      margin: 0 auto;
+      > button {
+        width: 50%;
+        height: 50px;
+        margin-left: 10px;
+        border-radius: 5px;
+        border: 1px solid black;
+        background-color: white;
+      }
+      > button:nth-child(1) {
+        margin-left: 0;
+        background-color: black;
+        color: white;
+        border: none;
+      }
     }
   }
 `;

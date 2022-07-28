@@ -7,7 +7,7 @@ function InvalidModal() {
   return (
     <ModalBack>
       <div className='modalBox'>
-        <div>유효하지 않는 접근입니다.</div>
+        <div className='title'>유효하지 않는 접근입니다.</div>
         <button onClick={goLanding}>확인</button>
       </div>
     </ModalBack>

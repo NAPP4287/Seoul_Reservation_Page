@@ -5,9 +5,13 @@ import CheckReservation from './page/checkReservation';
 import ReservationPage from './page/reservationPage';
 import ConfirmReservation from './page/confirmReservation';
 import InvalidModal from './modal/invalidModal';
+import EditReservation from './page/editReservation';
+import ReservationList from './page/reservationList';
+import CompleteReservation from './page/completeReservation';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { modalInfo } from './redux/modal/modalOpen';
+import BackNav from './components/backNav';
 
 function App() {
   const { invalidOpen } = useSelector(modalInfo);
@@ -18,13 +22,69 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<LandingPage />} />
-          <Route path='/programList' element={<ProList />} />
-          <Route path='/checkReservation' element={<CheckReservation />} />
+          <Route
+            path='/programList'
+            element={
+              <div>
+                <BackNav />
+                <ProList />
+              </div>
+            }
+          />
+          <Route
+            path='/checkReservation'
+            element={
+              <div>
+                <BackNav />
+                <CheckReservation />
+              </div>
+            }
+          />
+          <Route
+            path='/checkReservation/reservationList'
+            element={
+              <div>
+                <BackNav />
+                <ReservationList />
+              </div>
+            }
+          />
+          <Route
+            path='/checkReservation/reservationList/edit'
+            element={
+              <div>
+                <BackNav />
+                <EditReservation />
+              </div>
+            }
+          />
           <Route
             path='/programList/reservation'
-            element={<ReservationPage />}
+            element={
+              <div>
+                <BackNav />
+                <ReservationPage />
+              </div>
+            }
           />
-          <Route path='/reservationConfirm' element={<ConfirmReservation />} />
+          <Route
+            path='/reservationConfirm'
+            element={
+              <div>
+                <BackNav />
+                <ConfirmReservation />
+              </div>
+            }
+          />
+          <Route
+            path='/reservationConfirm/complete'
+            element={
+              <div>
+                <BackNav />
+                <CompleteReservation />
+              </div>
+            }
+          />
         </Routes>
       </BrowserRouter>
     </div>

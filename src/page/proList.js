@@ -1,4 +1,3 @@
-import BackNav from '../components/backNav';
 import { ProgramListWrap, BottomContent } from '../style/programListStyle';
 import { Link } from 'react-router-dom';
 import { programList } from '../data/programList';
@@ -6,8 +5,6 @@ import { programList } from '../data/programList';
 function ProList() {
   return (
     <div>
-      <BackNav />
-
       <div className='contentWrap'>
         <ProgramListWrap>
           {programList.map((el, idx) => (

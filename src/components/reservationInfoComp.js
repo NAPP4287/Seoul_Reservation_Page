@@ -3,7 +3,13 @@ import {
   LikeSelectBox,
   LikeCountrySelectBox,
 } from '../style/reservationInfoCompStyle';
-import { programList } from '../data/programList';
+import { programList, countryCode } from '../data/programList';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  saveReservation,
+  reservation,
+} from '../redux/reservation/reservationInfo';
+import { useState } from 'react';
 
 function ReservationInfoComp({
   certConfirm,
@@ -14,6 +20,14 @@ function ReservationInfoComp({
   setShowCountryCode,
   reservationPage,
 }) {
+  const dispatch = useDispatch();
+  const reservationInfo = useSelector(reservation);
+  const [selectOption, setSelectOption] = useState({
+    selectType: '예약 유형을 선택하세요',
+    countryCode: '+82',
+    name: '',
+  });
+
   const handlePhoneCertReq = () => {
     setCertConfirm(true);
   };
@@ -43,6 +57,20 @@ function ReservationInfoComp({
     }
   };
 
+  const clickOption = (select, value) => {
+    if (select === 'selectType') {
+      setSelectOption({ ...selectOption, selectType: value });
+      setShowOptionBox(false);
+    } else {
+      setSelectOption({ ...selectOption, countryCode: value });
+      setShowCountryCode(false);
+    }
+  };
+
+  const handleChangeUserName = (e) => {
+    setSelectOption({ ...selectOption, name: e.target.value });
+  };
+
   return (
     <div>
       {reservationPage ? null : (
@@ -52,15 +80,22 @@ function ReservationInfoComp({
             <div
               className='selectType'
               onClick={() => handleShowOptionBox('reservation')}
+              style={
+                selectOption.selectType === '예약 유형을 선택하세요'
+                  ? { color: '#c5c5c5' }
+                  : { color: 'black' }
+              }
             >
-              예약 유형을 선택하세요
+              {selectOption.selectType}
             </div>
             <ul
               className='list-member'
               style={showOptionBox ? { display: 'block' } : { display: 'none' }}
             >
               {programList.map((el, idx) => (
-                <li key={idx}>{el}</li>
+                <li key={idx} onClick={() => clickOption('selectType', el)}>
+                  {el}
+                </li>
               ))}
             </ul>
           </LikeSelectBox>
@@ -69,7 +104,11 @@ function ReservationInfoComp({
 
       <ChkBodyWrap>
         <p>성명</p>
-        <input placeholder='예약자 성명을 입력하세요' />
+        <input
+          placeholder='예약자 성명을 입력하세요'
+          onChange={handleChangeUserName}
+          value={selectOption.name}
+        />
       </ChkBodyWrap>
 
       <ChkBodyWrap>
@@ -80,7 +119,7 @@ function ReservationInfoComp({
               className='selectType'
               onClick={() => handleShowOptionBox('countryCode')}
             >
-              +82
+              {selectOption.countryCode}
             </div>
             <ul
               className='list-member'
@@ -88,11 +127,11 @@ function ReservationInfoComp({
                 showCountryCode ? { display: 'block' } : { display: 'none' }
               }
             >
-              <li>+82</li>
-              <li>+86</li>
-              <li>+81</li>
-              <li>+1</li>
-              <li>+기타</li>
+              {countryCode.map((el) => (
+                <li key={el} onClick={() => clickOption('countryCode', el)}>
+                  {el}
+                </li>
+              ))}
             </ul>
           </LikeCountrySelectBox>
 

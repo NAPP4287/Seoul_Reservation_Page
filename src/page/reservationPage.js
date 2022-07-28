@@ -1,6 +1,5 @@
 import CalendarComp from '../components/calendar';
 import SelectTime from '../components/selectTime';
-import BackNav from '../components/backNav';
 import SelectTicketCount from '../components/selctTicketCount';
 import InfoCert from '../components/infoCert';
 import Terms from '../components/terms';
@@ -58,7 +57,6 @@ function ReservationPage() {
     <div>
       {termsIdx === 0 ? (
         <div>
-          <BackNav />
           <CalendarComp
             setReservationInfo={setReservationInfo}
             reservationInfo={reservationInfo}

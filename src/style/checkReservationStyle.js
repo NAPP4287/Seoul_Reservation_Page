@@ -9,7 +9,7 @@ export const ChkResWrap = styled.div`
     bottom: 20px;
     width: calc(100% - 40px);
     max-width: 375px;
-    height: 40px;
+    height: 50px;
     border: none;
     background-color: #ebebeb;
     border-radius

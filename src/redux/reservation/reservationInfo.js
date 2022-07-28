@@ -7,6 +7,7 @@ const initialState = {
   personCount: 1,
   userName: '',
   userPhoneNum: '',
+  typeSelect: '',
   completeCert: false,
   termsAll: false,
 };

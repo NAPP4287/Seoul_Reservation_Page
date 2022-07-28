@@ -1,4 +1,3 @@
-import BackNav from '../components/backNav';
 import { ChkResWrap, ChkTitleWrap } from '../style/checkReservationStyle';
 import { useState, useRef } from 'react';
 import ReservationInfoComp from '../components/reservationInfoComp';
@@ -11,8 +10,6 @@ function CheckReservation() {
 
   return (
     <div>
-      <BackNav />
-
       <ChkResWrap
         className='contentWrap'
         ref={outSection}
