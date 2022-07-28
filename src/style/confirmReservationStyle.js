@@ -95,3 +95,10 @@ export const NotificationCheck = styled.ul`
     }
   }
 `;
+
+export const NotificationBox = styled.div`
+  text-align: left;
+  font-size: 13px;
+  padding: 20px;
+  background-color: #f5f5f7;
+`;
