@@ -1,13 +1,25 @@
 import { TermsWrap } from '../style/termsStyle';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-function Terms({ setTermsIdx }) {
+// 인증번호 여섯글자
+// 성명은 영문과 한글
+// 예약자로 통일
+
+function Terms({ setTermsIdx, setReservationInfo, reservationInfo }) {
   const [inputs, setInputs] = useState([
     { name: 'one', checked: false },
     { name: 'two', checked: false },
     { name: 'three', checked: false },
     { name: 'four', checked: false },
   ]);
+  const isAllChecked = inputs.filter((el) => !el.checked).length === 0;
+  useEffect(() => {
+    if (isAllChecked) {
+      setReservationInfo({ ...reservationInfo, termsAll: true });
+    } else {
+      setReservationInfo({ ...reservationInfo, termsAll: false });
+    }
+  }, [isAllChecked]);
 
   const checkboxHandler = (e) => {
     if (e.target.name !== 'one') {
@@ -26,7 +38,7 @@ function Terms({ setTermsIdx }) {
   };
 
   return (
-    <div className='contentWrap'>
+    <div className='contentWrap leftPadding'>
       <div className='reservationTitleWrap'>
         <div className='headTitle'>약관동의</div>
       </div>
@@ -36,7 +48,7 @@ function Terms({ setTermsIdx }) {
           <input
             name='one'
             type={'checkbox'}
-            checked={inputs[0].checked}
+            checked={inputs.filter((el) => !el.checked).length === 0}
             onChange={(e) => {
               checkboxHandler(e);
             }}

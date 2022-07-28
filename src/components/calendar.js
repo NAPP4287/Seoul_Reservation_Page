@@ -10,7 +10,7 @@ import smallNextArrow from '../assets/smallDownArrow.png';
 // import disableArrow from '../assets/disableArrow.png';
 import { useState, useEffect } from 'react';
 
-function CalendarComp({ setSelectDay }) {
+function CalendarComp({ setReservationInfo, reservationInfo }) {
   const [calendarMonth, setCalendarMonth] = useState(9);
   const [activeColor, setActiveColor] = useState({ idx: null, active: false });
   const date = ['일', '월', '화', '수', '목', '금', '토'];
@@ -64,7 +64,11 @@ function CalendarComp({ setSelectDay }) {
 
   const handleChangeDate = (idx, date) => {
     setActiveColor({ idx: idx, active: true });
-    setSelectDay({ month: calendarMonth, date: date });
+    setReservationInfo({
+      ...reservationInfo,
+      month: calendarMonth,
+      date: date,
+    });
   };
 
   handleCalendarBody();

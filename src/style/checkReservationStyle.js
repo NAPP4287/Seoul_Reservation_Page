@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ChkResWrap = styled.div`
-  padding: 100px 20px 10px 20px;
+  padding: 110px 20px 10px 20px;
   text-align: left;
   height: 100vh;
   > button {

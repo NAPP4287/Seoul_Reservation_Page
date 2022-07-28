@@ -12,7 +12,7 @@ export const CloseWrap = styled.div`
   background-color: white;
 `;
 
-export const TermsDetailBox = styled.div`
+export const DetailBox = styled.div`
   padding-top: 100px;
   text-align: left;
   font-size: 13px;

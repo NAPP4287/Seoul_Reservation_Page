@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const CalendarWrap = styled.div`
   padding-bottom: 30px;
   > .headTitle {
-    padding-top: 100px;
+    padding-top: 110px;
     text-align: left;
     font-weight: bold;
     font-size: 17px;

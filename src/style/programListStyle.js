@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const ProgramListWrap = styled.ul`
-  padding: 100px 0 20px 0;
+  padding: 110px 0 20px 0;
   > li {
     background-color: #d9d9d9;
     border-radius: 3px;
@@ -20,13 +20,6 @@ export const ProgramListWrap = styled.ul`
   }
   > li:nth-child(1) {
     margin-top: 0;
-  }
-`;
-
-export const ProgramBoxWrap = styled.div`
-  > .backNav {
-    border-bottom: 1px solid #a6a6aa;
-    background-color: white;
   }
 `;
 

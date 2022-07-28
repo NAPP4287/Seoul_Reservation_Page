@@ -59,4 +59,18 @@ input:focus {
   height: 40px;
   border: none;
   background-color: #ebebeb;
+  border-radius: 3px;
+}
+
+.activeBtn {
+  width: calc(100% - 40px);
+  height: 40px;
+  border: none;
+  background-color: black;
+  color: white;
+  border-radius: 3px;
+}
+
+.leftPadding {
+  padding-bottom: 20px;
 }

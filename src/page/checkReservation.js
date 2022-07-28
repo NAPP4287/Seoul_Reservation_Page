@@ -1,5 +1,4 @@
 import BackNav from '../components/backNav';
-import { ProgramBoxWrap } from '../style/programListStyle';
 import { ChkResWrap, ChkTitleWrap } from '../style/checkReservationStyle';
 import { useState, useRef } from 'react';
 import ReservationInfoComp from '../components/reservationInfoComp';
@@ -11,7 +10,7 @@ function CheckReservation() {
   const outSection = useRef();
 
   return (
-    <ProgramBoxWrap>
+    <div>
       <BackNav />
 
       <ChkResWrap
@@ -39,7 +38,7 @@ function CheckReservation() {
 
         <button style={{ color: '#C5C5C5' }}>조회하기</button>
       </ChkResWrap>
-    </ProgramBoxWrap>
+    </div>
   );
 }
 

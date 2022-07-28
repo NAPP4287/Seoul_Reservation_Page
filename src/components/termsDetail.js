@@ -1,11 +1,11 @@
-import { CloseWrap, TermsDetailBox } from '../style/termsDetailStyle';
+import { CloseWrap, DetailBox } from '../style/termsDetailStyle';
 import close from '../assets/close.png';
 
 function TermsDetail({ termsIdx, setTermsIdx }) {
   const termsDesc = () => {
     if (termsIdx === 1) {
       return (
-        <TermsDetailBox>
+        <DetailBox>
           <div>개인정보 수집 동의</div>
           <p>
             1. 수집항목 개인식별정보(CI), 이름, 휴대전화번호 <br />
@@ -21,11 +21,11 @@ function TermsDetail({ termsIdx, setTermsIdx }) {
             정보주체는 개인정보의 수집 및 이용 동의를 거부할 권리가 있으나, 이
             경우 서비스 이용이 제한될 수 있습니다.
           </p>
-        </TermsDetailBox>
+        </DetailBox>
       );
     } else if (termsIdx === 2) {
       return (
-        <TermsDetailBox>
+        <DetailBox>
           <div>개인정보 제공 동의</div>
           <p>
             1. 개인정보를 제공받는 자<br /> 서울뷰티트래블위크 사무국, 주식회사
@@ -49,17 +49,17 @@ function TermsDetail({ termsIdx, setTermsIdx }) {
             5. 동의 거부권 등에 대한 고지 정보주체는 개인정보 제공 동의를 거부할
             권리가 있으나, 이 경우 서비스 이용이 제한될 수 있습니다.
           </p>
-        </TermsDetailBox>
+        </DetailBox>
       );
     } else {
       return (
-        <TermsDetailBox>
+        <DetailBox>
           <div>신청결과 알림 및 수신 동의</div>
           <p>
             공간예약 관련 결과 및 변동사항 안내를 신청하신 휴대폰으로 수신하는
             것에 대해 동의합니다.
           </p>
-        </TermsDetailBox>
+        </DetailBox>
       );
     }
   };

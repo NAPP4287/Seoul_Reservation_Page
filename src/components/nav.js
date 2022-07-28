@@ -1,15 +1,15 @@
-import { NavWrap, GlobalWrap } from '../style/navStyle';
+import { NoneBackNavWrap, GlobalWrap } from '../style/navStyle';
 
 function Nav() {
   return (
-    <NavWrap>
-      <div>
+    <NoneBackNavWrap>
+      <div className='navPadding'>
         <div></div>
         <GlobalWrap>
           Languages <div></div>
         </GlobalWrap>
       </div>
-    </NavWrap>
+    </NoneBackNavWrap>
   );
 }
 

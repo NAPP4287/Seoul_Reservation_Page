@@ -6,8 +6,8 @@ function BackNav() {
   };
 
   return (
-    <NavWrap className='backNav'>
-      <div>
+    <NavWrap>
+      <div className='navPadding'>
         <BackPageBtn onClick={backPage}>
           <div></div>
         </BackPageBtn>

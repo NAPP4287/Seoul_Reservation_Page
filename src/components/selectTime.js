@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { SelectTimeWrap, SelectTimeBox } from '../style/selectTimeStyle';
 
-function SelectTime({ setSelectTime }) {
+function SelectTime({ setReservationInfo, reservationInfo }) {
   const [activeBtn, setActiveBtn] = useState({ idx: null, active: false });
 
   const handleTime = (idx, time) => {
-    setSelectTime({ time: time });
+    setReservationInfo({ ...reservationInfo, time: time });
     setActiveBtn({ idx: idx, active: true });
   };
 

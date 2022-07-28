@@ -6,11 +6,28 @@ export const NavWrap = styled.div`
   height: 80px;
   position: fixed;
   width: 100%;
-  padding: 0 20px;
   z-index: 999;
   background-color: white;
-  .backNav {
-    border-bottom: 1px solid #dcdcdc;
+  border-bottom: 1px solid #dcdcdc;
+  .navPadding {
+    padding: 0 20px;
+  }
+  > div {
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+`;
+
+export const NoneBackNavWrap = styled.div`
+  height: 80px;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+  background-color: transparent;
+  .navPadding {
+    padding: 0 20px;
   }
   > div {
     height: 80px;

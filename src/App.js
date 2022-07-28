@@ -3,6 +3,7 @@ import LandingPage from './page/landing';
 import ProList from './page/proList';
 import CheckReservation from './page/checkReservation';
 import ReservationPage from './page/reservationPage';
+import ConfirmReservation from './page/confirmReservation';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
             path='/programList/reservation'
             element={<ReservationPage />}
           />
+          <Route path='/reservationConfirm' element={<ConfirmReservation />} />
         </Routes>
       </BrowserRouter>
     </div>
