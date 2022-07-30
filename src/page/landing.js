@@ -6,9 +6,22 @@ import {
   LandingContent,
 } from '../style/landingStyle';
 import Nav from '../components/nav';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function LandingPage() {
+  const navigate = useNavigate();
+  const clickGoPage = (page) => {
+    switch (page) {
+      case 'reservation':
+        navigate('/programList');
+        break;
+      case 'check':
+        navigate('/checkReservation');
+        break;
+      default:
+        break;
+    }
+  };
   return (
     <div>
       <Nav />
@@ -21,12 +34,20 @@ function LandingPage() {
               Travel Week
             </LandingTitle>
             <ButtonWrap>
-              <Link to='/programList'>
-                <button>예약하기</button>
-              </Link>
-              <Link to='/checkReservation'>
-                <button>예약조회</button>
-              </Link>
+              <button
+                onClick={() => {
+                  clickGoPage('reservation');
+                }}
+              >
+                예약하기
+              </button>
+              <button
+                onClick={() => {
+                  clickGoPage('check');
+                }}
+              >
+                예약조회
+              </button>
             </ButtonWrap>
 
             <a href='https://www.naver.com/'>

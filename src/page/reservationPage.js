@@ -11,8 +11,9 @@ import { saveReservation } from '../redux/reservation/reservationInfo';
 import { invalidModalOpen, invalidModalClose } from '../redux/modal/modalOpen';
 
 function ReservationPage() {
+  const param = new URLSearchParams(window.location.search);
   const dispatch = useDispatch();
-  const [queryIdx, setQueryIdx] = useState(null);
+  const queryIdx = param.get('idx');
 
   const checkRoute = (routeIdx) => {
     const numberIdx = Number(routeIdx);
@@ -29,8 +30,6 @@ function ReservationPage() {
   };
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    setQueryIdx(params.get('idx'));
     checkRoute(queryIdx);
   }, [queryIdx]);
 
@@ -60,6 +59,7 @@ function ReservationPage() {
           <CalendarComp
             setReservationInfo={setReservationInfo}
             reservationInfo={reservationInfo}
+            queryIdx={queryIdx}
           />
           {reservationInfo.month !== '' && reservationInfo.date !== '' ? (
             <SelectTime

@@ -1,21 +1,34 @@
 import { ProgramListWrap, BottomContent } from '../style/programListStyle';
-import { Link } from 'react-router-dom';
-import { programList } from '../data/programList';
+import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { customAxios } from '../axios/custromAxios';
 
 function ProList() {
+  const [proList, setProList] = useState([]);
+  const navigate = useNavigate();
+
+  const clickProgram = (viewIdx) => {
+    navigate(`/programList/reservation?idx=${viewIdx}`);
+  };
+  useEffect(() => {
+    const params = { lang: 'ko' };
+    customAxios
+      .get('reservation/list', { params })
+      .then((r) => setProList([...r.data.list]));
+  }, []);
   return (
     <div>
       <div className='contentWrap'>
         <ProgramListWrap>
-          {programList.map((el, idx) => (
+          {proList.map((el, idx) => (
             <li key={idx}>
-              <h3>{el}</h3>
+              <h3>{el.title}</h3>
 
               <BottomContent>
-                <span>무료</span>
-                <Link to={`/programList/reservation?idx=${idx}`}>
-                  <button>예약하기</button>
-                </Link>
+                <span>{el.price === 0 ? '무료' : el.price}</span>
+                <button onClick={() => clickProgram(el.viewIdx)}>
+                  예약하기
+                </button>
               </BottomContent>
             </li>
           ))}

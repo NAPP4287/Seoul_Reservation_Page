@@ -34,15 +34,13 @@ export const BottomContent = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  > a {
-    button {
-      background-color: black;
-      color: white;
-      width: 100px;
-      height: 35px;
-      border: none;
-      border-radius: 3px;
-      font-size: 12px;
-    }
+  > button {
+    background-color: black;
+    color: white;
+    width: 100px;
+    height: 35px;
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
   }
 `;

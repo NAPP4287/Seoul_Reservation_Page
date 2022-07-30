@@ -27,19 +27,16 @@ export const LandingTitle = styled.div`
 `;
 
 export const ButtonWrap = styled.div`
-  > a {
-    display: block;
-    > button {
-      width: 100%;
-      height: 50px;
-      background-color: white;
-      border: none;
-      border-radius: 2px;
-      /* font-weight: bold; */
-      // font-weight 굵기 어떻게 할건지
-    }
+  > button {
+    width: 100%;
+    height: 50px;
+    background-color: white;
+    border: none;
+    border-radius: 2px;
+    font-weight: bold;
+    // font-weight 굵기 어떻게 할건지
   }
-  > a:nth-child(2) {
+  > button:nth-child(2) {
     margin-top: 25px;
   }
 `;

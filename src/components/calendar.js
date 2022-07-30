@@ -7,10 +7,10 @@ import {
   CalendarEnd,
 } from '../style/calendarStyle';
 import smallNextArrow from '../assets/smallDownArrow.png';
-// import disableArrow from '../assets/disableArrow.png';
 import { useState, useEffect } from 'react';
+import { customAxios } from '../axios/custromAxios';
 
-function CalendarComp({ setReservationInfo, reservationInfo }) {
+function CalendarComp({ setReservationInfo, reservationInfo, queryIdx }) {
   const [calendarMonth, setCalendarMonth] = useState(9);
   const [activeColor, setActiveColor] = useState({ idx: null, active: false });
   const date = ['일', '월', '화', '수', '목', '금', '토'];
@@ -21,6 +21,7 @@ function CalendarComp({ setReservationInfo, reservationInfo }) {
   let arrDate = [];
 
   useEffect(() => {
+    customAxios.get(`reservation/view/${queryIdx}`).then((r) => console.log(r));
     if (currentDate.getMonth() > calendarMonth - 1) {
       setCalendarMonth(10);
     }
