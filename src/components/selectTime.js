@@ -1,7 +1,12 @@
 import { useState } from 'react';
 import { SelectTimeWrap, SelectTimeBox } from '../style/selectTimeStyle';
 
-function SelectTime({ setReservationInfo, reservationInfo, ticketList }) {
+function SelectTime({
+  setReservationInfo,
+  reservationInfo,
+  ticketList,
+  queryIdx,
+}) {
   const [activeBtn, setActiveBtn] = useState({ idx: null, active: false });
 
   const handleTime = (idx) => {
@@ -9,11 +14,26 @@ function SelectTime({ setReservationInfo, reservationInfo, ticketList }) {
     setActiveBtn({ idx: idx, active: true });
   };
 
-  // const aaa = (idx) => {
-  //   let changeTime = 10;
+  const setTime = () => {
+    let arr = [];
 
-  //   for (let i = 0; i < ticketList.length; i++) {}
-  // };
+    if (queryIdx === '1') {
+      for (let i = 0; i < ticketList.length; i++) {
+        if (i === 2) {
+          arr.push(`PM 12:00`);
+        }
+
+        if (i >= 3) {
+          arr.push(`PM ${i - 2}:00`);
+        } else {
+          arr.push(`AM ${10 + i}:00`);
+        }
+      }
+    }
+    return arr;
+  };
+
+  setTime();
 
   return (
     <div className='contentWrap'>
@@ -32,7 +52,7 @@ function SelectTime({ setReservationInfo, reservationInfo, ticketList }) {
                   : { backgroundColor: 'transparent' }
               }
             >
-              10:00
+              {setTime()[idx]}
               <span>{el.remainTicket} / 20</span>
             </button>
           ))}

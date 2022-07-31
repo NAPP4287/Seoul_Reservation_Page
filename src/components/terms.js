@@ -1,9 +1,5 @@
 import { TermsWrap } from '../style/termsStyle';
-import { useState, useEffect } from 'react';
-
-// 인증번호 여섯글자
-// 성명은 영문과 한글
-// 예약자로 통일
+import { useState } from 'react';
 
 function Terms({ setTermsIdx, setReservationInfo, reservationInfo }) {
   const [inputs, setInputs] = useState([
@@ -12,14 +8,6 @@ function Terms({ setTermsIdx, setReservationInfo, reservationInfo }) {
     { name: 'three', checked: false },
     { name: 'four', checked: false },
   ]);
-  const isAllChecked = inputs.filter((el) => !el.checked).length === 0;
-  useEffect(() => {
-    if (isAllChecked) {
-      setReservationInfo({ ...reservationInfo, termsAll: true });
-    } else {
-      setReservationInfo({ ...reservationInfo, termsAll: false });
-    }
-  }, [isAllChecked]);
 
   const checkboxHandler = (e) => {
     if (e.target.name !== 'one') {
@@ -30,10 +18,33 @@ function Terms({ setTermsIdx, setReservationInfo, reservationInfo }) {
             : { ...item }
         )
       );
+      if (e.target.name === 'two') {
+        setReservationInfo({
+          ...reservationInfo,
+          IsPersonalInfo: !inputs[1].checked,
+        });
+      } else if (e.target.name === 'three') {
+        setReservationInfo({
+          ...reservationInfo,
+          IsCreditInfo: !inputs[2].checked,
+        });
+      } else if (e.target.name === 'four') {
+        setReservationInfo({
+          ...reservationInfo,
+          IsSmsReceive: !inputs[3].checked,
+        });
+      }
     } else {
       setInputs(
         inputs.map((item) => ({ ...item, checked: e.currentTarget.checked }))
       );
+
+      setReservationInfo({
+        ...reservationInfo,
+        IsPersonalInfo: true,
+        IsCreditInfo: true,
+        IsSmsReceive: true,
+      });
     }
   };
 
@@ -48,7 +59,10 @@ function Terms({ setTermsIdx, setReservationInfo, reservationInfo }) {
           <input
             name='one'
             type={'checkbox'}
-            checked={inputs.filter((el) => !el.checked).length === 0}
+            checked={
+              inputs.filter((el) => el.name !== 'one' && el.checked).length ===
+              3
+            }
             onChange={(e) => {
               checkboxHandler(e);
             }}

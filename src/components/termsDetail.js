@@ -1,4 +1,4 @@
-import { CloseWrap, DetailBox } from '../style/termsDetailStyle';
+import { CloseWrap, DetailBox, TermsWrap } from '../style/termsDetailStyle';
 import close from '../assets/close.png';
 
 function TermsDetail({ termsIdx, setTermsIdx }) {
@@ -65,13 +65,13 @@ function TermsDetail({ termsIdx, setTermsIdx }) {
   };
 
   return (
-    <div>
+    <TermsWrap>
       <CloseWrap>
         <img src={close} onClick={() => setTermsIdx(0)} alt='close button' />
       </CloseWrap>
 
       <div className='contentWrap'>{termsDesc()}</div>
-    </div>
+    </TermsWrap>
   );
 }
 

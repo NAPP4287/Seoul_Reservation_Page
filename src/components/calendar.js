@@ -15,6 +15,7 @@ function CalendarComp({
   reservationInfo,
   queryIdx,
   setTicketList,
+  setItemIdx,
 }) {
   const [calendarMonth, setCalendarMonth] = useState(9);
   const [activeColor, setActiveColor] = useState({
@@ -31,13 +32,12 @@ function CalendarComp({
 
   const getDate = (month) => {
     if (calendarMonth < 10) {
-      // customAxios
-      //   .get(`reservation/view/${queryIdx}/20220${month}`)
-      //   .then((r) => {
-      //     console.log('9', r);
-      //     setDateArr([...r.data.dateList]);
-      //   });
-      setDateArr([{ itemIdx: 6, itemDate: '2022.9.30', isType: 0 }]);
+      customAxios
+        .get(`reservation/view/${queryIdx}/20220${month}`)
+        .then((r) => {
+          console.log('9', r);
+          setDateArr([...r.data.dateList]);
+        });
     } else {
       customAxios.get(`reservation/view/${queryIdx}/2022${month}`).then((r) => {
         console.log('10', r);
@@ -60,7 +60,7 @@ function CalendarComp({
       setCalendarMonth(9);
     }
     setActiveColor({ idx: null, active: false });
-    setReservationInfo({ ...reservationInfo, itemIdx: null });
+    setItemIdx(null);
   };
 
   const handleCalendarBody = () => {
@@ -91,18 +91,10 @@ function CalendarComp({
 
   const handleChangeDate = (idx, date, itemIdx) => {
     setActiveColor({ idx: idx, active: true });
-    setReservationInfo({
-      ...reservationInfo,
-      month: calendarMonth,
-      date: date,
-      itemIdx: itemIdx,
+    setItemIdx(itemIdx);
+    customAxios.get(`/reservation/date/${queryIdx}/${itemIdx}`).then((r) => {
+      setTicketList([...r.data.ticketList]);
     });
-
-    console.log(reservationInfo);
-
-    customAxios
-      .get(`/reservation/date/${queryIdx}/${itemIdx}`)
-      .then((r) => setTicketList([...r.data.ticketList]));
   };
 
   handleCalendarBody();

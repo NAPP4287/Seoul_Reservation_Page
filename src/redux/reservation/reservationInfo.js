@@ -18,7 +18,7 @@ export const reservationInfoSlice = createSlice({
   reducers: {
     saveReservation: (state, action) => {
       state = action.payload;
-      console.log(state);
+      console.log(action);
     },
   },
 });

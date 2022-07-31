@@ -6,13 +6,17 @@ import Terms from '../components/terms';
 import TermsDetail from '../components/termsDetail';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { saveReservation } from '../redux/reservation/reservationInfo';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  saveReservation,
+  reservation,
+} from '../redux/reservation/reservationInfo';
 import { invalidModalOpen, invalidModalClose } from '../redux/modal/modalOpen';
 
 function ReservationPage() {
   const param = new URLSearchParams(window.location.search);
   const dispatch = useDispatch();
+  const sendReservationData = useSelector(reservation);
   const queryIdx = param.get('idx');
 
   const checkRoute = (routeIdx) => {
@@ -36,81 +40,71 @@ function ReservationPage() {
   const [termsIdx, setTermsIdx] = useState(0);
 
   const [reservationInfo, setReservationInfo] = useState({
-    month: '',
-    date: '',
     ticketIdx: null,
-    ticketCount: 1,
     name: '',
-    userPhoneNum: '',
-    itemIdx: null,
-    completeCert: false,
-    termsAll: false,
+    phone: '',
+    countryCode: 82,
+    authCode: '',
+    ticketCount: 1,
+    IsPersonalInfo: false,
+    IsCreditInfo: false,
+    IsSmsReceive: false,
   });
 
-  const [ticketList, setTicketList] = useState([]);
+  const [itemIdx, setItemIdx] = useState(null);
 
-  // "ticketIdx": 0,
-  // "name": "이름",
-  // "phone": "1012345678",
-  // "countryCode": "82",
-  // "authCode": "123456",
-  // "ticketCount": 0,
-  // "IsPersonalInfo": true,
-  // "IsCreditInfo": true,
-  // "IsSmsReceive": true
+  const [ticketList, setTicketList] = useState([]);
 
   const reservationClick = () => {
     dispatch(saveReservation(reservationInfo));
   };
 
-  // 날짜, 시간, 인원 수량, 예약자 성명, 핸드폰 번호, 인증확인 여부, 약관동의 전체 동의 여부
-
   return (
     <div>
-      {termsIdx === 0 ? (
-        <div>
-          <CalendarComp
-            setReservationInfo={setReservationInfo}
-            reservationInfo={reservationInfo}
-            queryIdx={queryIdx}
-            setTicketList={setTicketList}
-          />
-          {reservationInfo.itemIdx === null ? null : (
-            <SelectTime
-              setReservationInfo={setReservationInfo}
-              reservationInfo={reservationInfo}
-              ticketList={ticketList}
-            />
-          )}
-
-          <SelectTicketCount
-            setReservationInfo={setReservationInfo}
-            reservationInfo={reservationInfo}
-          />
-
-          {reservationInfo.itemIdx === null ? null : (
-            <div className='leftPadding'>
-              <InfoCert />
-              <Terms
-                setTermsIdx={setTermsIdx}
-                setReservationInfo={setReservationInfo}
-                reservationInfo={reservationInfo}
-              />
-              <Link to={`/reservationConfirm`}>
-                <button
-                  className='normalBtn'
-                  onClick={reservationClick}
-                  disabled
-                >
-                  예약하기
-                </button>
-              </Link>
-            </div>
-          )}
-        </div>
-      ) : (
+      {termsIdx === 0 ? null : (
         <TermsDetail termsIdx={termsIdx} setTermsIdx={setTermsIdx} />
       )}
+      <div>
+        <CalendarComp
+          setReservationInfo={setReservationInfo}
+          reservationInfo={reservationInfo}
+          queryIdx={queryIdx}
+          setTicketList={setTicketList}
+          setItemIdx={setItemIdx}
+        />
+        {itemIdx === null ? null : (
+          <SelectTime
+            setReservationInfo={setReservationInfo}
+            reservationInfo={reservationInfo}
+            ticketList={ticketList}
+            queryIdx={queryIdx}
+          />
+        )}
+
+        <SelectTicketCount
+          setReservationInfo={setReservationInfo}
+          reservationInfo={reservationInfo}
+        />
+
+        {itemIdx === null ? null : (
+          <div className='leftPadding'>
+            <InfoCert
+              setReservationInfo={setReservationInfo}
+              reservationInfo={reservationInfo}
+            />
+            <Terms
+              setTermsIdx={setTermsIdx}
+              setReservationInfo={setReservationInfo}
+              reservationInfo={reservationInfo}
+            />
+            <Link to={`/reservationConfirm`}>
+              <button className='normalBtn' onClick={reservationClick} disabled>
+                예약하기
+              </button>
+            </Link>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

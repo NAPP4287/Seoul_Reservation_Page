@@ -1,7 +1,7 @@
 import ReservationInfoComp from './reservationInfoComp';
 import { useState } from 'react';
 
-function InfoCert() {
+function InfoCert({ setReservationInfo, reservationInfo }) {
   const [certConfirm, setCertConfirm] = useState(false);
   const [showOptionBox, setShowOptionBox] = useState(false);
   const [showCountryCode, setShowCountryCode] = useState(false);
@@ -22,6 +22,8 @@ function InfoCert() {
           showCountryCode={showCountryCode}
           setShowCountryCode={setShowCountryCode}
           reservationPage={reservationPage}
+          setReservationInfo={setReservationInfo}
+          reservationInfo={reservationInfo}
         />
       </div>
     </div>

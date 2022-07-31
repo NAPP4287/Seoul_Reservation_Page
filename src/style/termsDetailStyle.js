@@ -21,3 +21,10 @@ export const DetailBox = styled.div`
     padding-bottom: 10px;
   }
 `;
+
+export const TermsWrap = styled.div`
+  background-color: white;
+  height: 100vh;
+  position: fixed;
+  z-index: 99999;
+`;
