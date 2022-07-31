@@ -46,6 +46,18 @@ export const ChkBodyWrap = styled.div`
       border-radius: 3px;
     }
   }
+  > button {
+    width: 100%;
+    height: 40px;
+    margin-top: 10px;
+    font-weight: bold;
+  }
+  > span {
+    padding: 10px 0;
+    display: block;
+    font-size: 12px;
+    color: red;
+  }
 `;
 
 export const LikeSelectBox = styled.div`

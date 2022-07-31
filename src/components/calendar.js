@@ -10,7 +10,12 @@ import smallNextArrow from '../assets/smallDownArrow.png';
 import { useState, useEffect } from 'react';
 import { customAxios } from '../axios/custromAxios';
 
-function CalendarComp({ setReservationInfo, reservationInfo, queryIdx }) {
+function CalendarComp({
+  setReservationInfo,
+  reservationInfo,
+  queryIdx,
+  setTicketList,
+}) {
   const [calendarMonth, setCalendarMonth] = useState(9);
   const [activeColor, setActiveColor] = useState({
     idx: null,
@@ -26,13 +31,13 @@ function CalendarComp({ setReservationInfo, reservationInfo, queryIdx }) {
 
   const getDate = (month) => {
     if (calendarMonth < 10) {
-      customAxios
-        .get(`reservation/view/${queryIdx}/20220${month}`)
-        .then((r) => {
-          console.log('9', r);
-          setDateArr([...r.data.dateList]);
-        });
-      // setDateArr([{ itemIdx: 1, itemDate: '2022.9.30', isType: 0 }]);
+      // customAxios
+      //   .get(`reservation/view/${queryIdx}/20220${month}`)
+      //   .then((r) => {
+      //     console.log('9', r);
+      //     setDateArr([...r.data.dateList]);
+      //   });
+      setDateArr([{ itemIdx: 6, itemDate: '2022.9.30', isType: 0 }]);
     } else {
       customAxios.get(`reservation/view/${queryIdx}/2022${month}`).then((r) => {
         console.log('10', r);
@@ -55,11 +60,12 @@ function CalendarComp({ setReservationInfo, reservationInfo, queryIdx }) {
       setCalendarMonth(9);
     }
     setActiveColor({ idx: null, active: false });
+    setReservationInfo({ ...reservationInfo, itemIdx: null });
   };
 
   const handleCalendarBody = () => {
     for (let j = 0; j < startDay; j++) {
-      arrDate.push({ date: null, itemIdx: 1, itemIdx: null });
+      arrDate.push({ date: null, isType: 1, itemIdx: null });
     }
 
     for (let i = 1; i <= lastDate; i++) {
@@ -67,66 +73,36 @@ function CalendarComp({ setReservationInfo, reservationInfo, queryIdx }) {
       const activeMonth = dateArr.map((el) =>
         Number(el.itemDate.split('.')[1])
       );
+      const itemIdxArr = dateArr.map((el) => el.itemIdx);
+      const isTypeArr = dateArr.map((el) => el.isType);
 
-      if (activeMonth[0] === calendarMonth) {
-        if (activeDate.includes(i)) {
-          arrDate.push({ date: i, itemIdx: 0 });
-        } else {
-          arrDate.push({ date: i, itemIdx: 1 });
-        }
+      if (activeDate.includes(i)) {
+        arrDate.push({
+          date: i,
+          isType: isTypeArr[i - 1],
+          itemIdx: itemIdxArr[i - 1],
+        });
       } else {
-        arrDate.push({ date: i, itemIdx: 1 });
+        arrDate.push({ date: i, isType: 1, itemIdx: null });
       }
     }
     return arrDate;
   };
 
-  // const handleCalendarBody = () => {
-  //   for (let j = 0; j < startDay; j++) {
-  //     arrDate.push({ date: null, enable: false });
-  //   }
-
-  //   for (let i = 1; i <= lastDate; i++) {
-  //     if (calendarMonth === 9 && i !== 30) {
-  //       arrDate.push({ date: i, enable: false });
-  //     } else if (calendarMonth === 10 && i > 5) {
-  //       arrDate.push({ date: i, enable: false });
-  //     } else {
-  //       arrDate.push({ date: i, enable: true });
-  //     }
-  //   }
-
-  //   // for (let i = 1; i <= lastDate; i++) {
-  //   //   if (calendarMonth > currentDate.getMonth()) {
-  //   //     if (calendarMonth === 9 && i !== 30) {
-  //   //       arrDate.push({ date: i, enable: false });
-  //   //     } else if (calendarMonth === 10) {
-  //   //       if (currentDate.getMonth() === 9 && currentDate.getDate() > i) {
-  //   //         arrDate.push({ date: i, enable: false });
-  //   //       } else if (i < 6) {
-  //   //         arrDate.push({ date: i, enable: true });
-  //   //       } else {
-  //   //         arrDate.push({ date: i, enable: false });
-  //   //       }
-  //   //     } else {
-  //   //       arrDate.push({ date: i, enable: true });
-  //   //     }
-  //   //   } else {
-  //   //     arrDate.push({ date: i, enable: false });
-  //   //   }
-  //   // }
-
-  //   // return arrDate;
-  // };
-
-  const handleChangeDate = (idx, date) => {
-    console.log(date, calendarMonth);
+  const handleChangeDate = (idx, date, itemIdx) => {
     setActiveColor({ idx: idx, active: true });
     setReservationInfo({
       ...reservationInfo,
       month: calendarMonth,
       date: date,
+      itemIdx: itemIdx,
     });
+
+    console.log(reservationInfo);
+
+    customAxios
+      .get(`/reservation/date/${queryIdx}/${itemIdx}`)
+      .then((r) => setTicketList([...r.data.ticketList]));
   };
 
   handleCalendarBody();
@@ -165,14 +141,14 @@ function CalendarComp({ setReservationInfo, reservationInfo, queryIdx }) {
             <button
               key={idx}
               style={
-                el.itemIdx === 1 ? { color: '#C5C5C5' } : { color: 'black' }
+                el.isType === 1 ? { color: '#C5C5C5' } : { color: 'black' }
               }
-              onClick={() => handleChangeDate(idx, el.date)}
-              disabled={el.itemIdx === 1}
+              onClick={() => handleChangeDate(idx, el.date, el.itemIdx)}
+              disabled={el.isType === 1}
             >
               <span
                 style={
-                  activeColor.idx === idx && el.itemIdx === 0
+                  activeColor.idx === idx && el.isType === 0
                     ? { backgroundColor: 'black', color: 'white' }
                     : { backgroundColor: 'transparent' }
                 }

@@ -5,12 +5,12 @@ function SelectTicketCount({ setReservationInfo, reservationInfo }) {
     if (plusOrMinu === 'add') {
       setReservationInfo({
         ...reservationInfo,
-        personCount: reservationInfo.personCount + 1,
+        ticketCount: reservationInfo.ticketCount + 1,
       });
     } else {
       setReservationInfo({
         ...reservationInfo,
-        personCount: reservationInfo.personCount - 1,
+        ticketCount: reservationInfo.ticketCount - 1,
       });
     }
   };
@@ -21,7 +21,7 @@ function SelectTicketCount({ setReservationInfo, reservationInfo }) {
         <div className='headTitle'>인원/수량을 선택해주세요</div>
       </div>
       <CountPersonWrap>
-        {reservationInfo.time === '' ? (
+        {reservationInfo.ticketIdx === null ? (
           <p>*일정을 먼저 선택해주세요</p>
         ) : (
           <div className='personCountBtn'>
@@ -30,16 +30,16 @@ function SelectTicketCount({ setReservationInfo, reservationInfo }) {
               <button
                 className='minus'
                 onClick={() => addPerson('minus')}
-                disabled={reservationInfo.personCount === 0}
+                disabled={reservationInfo.ticketCount === 0}
               >
                 -
               </button>
-              <span>{reservationInfo.personCount}</span>
+              <span>{reservationInfo.ticketCount}</span>
               <button
                 onClick={() => addPerson('add')}
-                disabled={reservationInfo.personCount === 2}
+                disabled={reservationInfo.ticketCount === 2}
                 style={
-                  reservationInfo.personCount === 2
+                  reservationInfo.ticketCount === 2
                     ? { backroundColor: '#C5C5C5' }
                     : { backgroundColor: 'black' }
                 }

@@ -1,21 +1,19 @@
 import { useState } from 'react';
 import { SelectTimeWrap, SelectTimeBox } from '../style/selectTimeStyle';
 
-function SelectTime({ setReservationInfo, reservationInfo }) {
+function SelectTime({ setReservationInfo, reservationInfo, ticketList }) {
   const [activeBtn, setActiveBtn] = useState({ idx: null, active: false });
 
-  const handleTime = (idx, time) => {
-    setReservationInfo({ ...reservationInfo, time: time });
+  const handleTime = (idx) => {
+    setReservationInfo({ ...reservationInfo, ticketIdx: idx });
     setActiveBtn({ idx: idx, active: true });
   };
 
-  const aaa = [
-    { time: '오전 10시', count: 15 },
-    { time: '오전 12시', count: 20 },
-    { time: '오후 2시', count: 0 },
-    { time: '오후 4시', count: 5 },
-    { time: '오후 5시', count: 2 },
-  ];
+  // const aaa = (idx) => {
+  //   let changeTime = 10;
+
+  //   for (let i = 0; i < ticketList.length; i++) {}
+  // };
 
   return (
     <div className='contentWrap'>
@@ -23,18 +21,19 @@ function SelectTime({ setReservationInfo, reservationInfo }) {
         <div className='timeTitle'>시간을 선택해주세요</div>
 
         <SelectTimeBox>
-          {aaa.map((el, idx) => (
+          {ticketList.map((el, idx) => (
             <button
-              key={idx}
+              key={el.ticketIdx}
               disabled={el.count === 0 ? true : false}
-              onClick={() => handleTime(idx, 10)}
+              onClick={() => handleTime(el.ticketIdx)}
               style={
-                activeBtn.idx === idx && activeBtn.active
+                activeBtn.idx === el.ticketIdx && activeBtn.active
                   ? { backgroundColor: 'black', color: 'white' }
                   : { backgroundColor: 'transparent' }
               }
             >
-              {el.time} <span>{el.count} / 20</span>
+              10:00
+              <span>{el.remainTicket} / 20</span>
             </button>
           ))}
         </SelectTimeBox>

@@ -38,13 +38,26 @@ function ReservationPage() {
   const [reservationInfo, setReservationInfo] = useState({
     month: '',
     date: '',
-    time: '',
-    personCount: 1,
-    userName: '',
+    ticketIdx: null,
+    ticketCount: 1,
+    name: '',
     userPhoneNum: '',
+    itemIdx: null,
     completeCert: false,
     termsAll: false,
   });
+
+  const [ticketList, setTicketList] = useState([]);
+
+  // "ticketIdx": 0,
+  // "name": "이름",
+  // "phone": "1012345678",
+  // "countryCode": "82",
+  // "authCode": "123456",
+  // "ticketCount": 0,
+  // "IsPersonalInfo": true,
+  // "IsCreditInfo": true,
+  // "IsSmsReceive": true
 
   const reservationClick = () => {
     dispatch(saveReservation(reservationInfo));
@@ -60,20 +73,22 @@ function ReservationPage() {
             setReservationInfo={setReservationInfo}
             reservationInfo={reservationInfo}
             queryIdx={queryIdx}
+            setTicketList={setTicketList}
           />
-          {reservationInfo.month !== '' && reservationInfo.date !== '' ? (
+          {reservationInfo.itemIdx === null ? null : (
             <SelectTime
               setReservationInfo={setReservationInfo}
               reservationInfo={reservationInfo}
+              ticketList={ticketList}
             />
-          ) : null}
+          )}
 
           <SelectTicketCount
             setReservationInfo={setReservationInfo}
             reservationInfo={reservationInfo}
           />
 
-          {reservationInfo.time === '' ? null : (
+          {reservationInfo.itemIdx === null ? null : (
             <div className='leftPadding'>
               <InfoCert />
               <Terms
@@ -81,13 +96,12 @@ function ReservationPage() {
                 setReservationInfo={setReservationInfo}
                 reservationInfo={reservationInfo}
               />
-              {/* <Link to='/' onClick={(e) => e.preventDefault()}>
-                <button className='normalBtn' disabled>
-                  예약하기
-                </button>
-              </Link> */}
               <Link to={`/reservationConfirm`}>
-                <button className='normalBtn' onClick={reservationClick}>
+                <button
+                  className='normalBtn'
+                  onClick={reservationClick}
+                  disabled
+                >
                   예약하기
                 </button>
               </Link>

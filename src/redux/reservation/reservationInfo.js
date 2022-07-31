@@ -1,15 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  month: '',
-  date: '',
-  time: '',
-  personCount: 1,
-  userName: '',
-  userPhoneNum: '',
-  typeSelect: '',
-  completeCert: false,
-  termsAll: false,
+  ticketIdx: null,
+  name: '',
+  phone: '',
+  countryCode: '82',
+  authCode: '',
+  ticketCount: 1,
+  IsPersonalInfo: false,
+  IsCreditInfo: false,
+  IsSmsReceive: false,
 };
 
 export const reservationInfoSlice = createSlice({

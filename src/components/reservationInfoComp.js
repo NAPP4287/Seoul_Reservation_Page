@@ -9,7 +9,9 @@ import {
   saveReservation,
   reservation,
 } from '../redux/reservation/reservationInfo';
+import Timer from './timer';
 import { useState } from 'react';
+import { customAxios } from '../axios/custromAxios';
 
 function ReservationInfoComp({
   certConfirm,
@@ -24,13 +26,52 @@ function ReservationInfoComp({
   const reservationInfo = useSelector(reservation);
   const [selectOption, setSelectOption] = useState({
     selectType: '예약 유형을 선택하세요',
-    countryCode: '+82',
     name: '',
   });
+  const [sendPhone, SetSendPhone] = useState({
+    countryCode: '82',
+    phone: '',
+  });
+
+  const [btnText, setBtnText] = useState('인증요청');
+
+  const [certTime, setCertTime] = useState(false);
+  const [errorMsg, setErrorMsg] = useState('');
 
   const handlePhoneCertReq = () => {
-    setCertConfirm(true);
+    test();
   };
+
+  const test = () => {
+    customAxios
+      .post('/auth/phone', {
+        phone: sendPhone.phone.replace('0', ''),
+        countryCode: sendPhone.countryCode,
+      })
+      .then((r) => {
+        console.log(r);
+        setCertConfirm(true);
+        setCertTime(false);
+      })
+      .catch((e) => {
+        const status = e.response.status;
+        if (status === 400) {
+          setErrorMsg('잘못된 인증 요청입니다.');
+        } else if (status === 500) {
+          setErrorMsg('서버 오류입니다.');
+        }
+        setCertTime(true);
+      });
+  };
+
+  // const removeFirstZero = () => {
+  //   if (sendPhone.countryCode === '82' && sendPhone.phone[0] === '0') {
+  //     SetSendPhone({
+  //       ...sendPhone,
+  //       phone: sendPhone.phone.replace('0', ''),
+  //     });
+  //   }
+  // };
 
   const handleShowOptionBox = (selectType, e) => {
     let type = selectType;
@@ -62,13 +103,19 @@ function ReservationInfoComp({
       setSelectOption({ ...selectOption, selectType: value });
       setShowOptionBox(false);
     } else {
-      setSelectOption({ ...selectOption, countryCode: value });
+      SetSendPhone({ ...sendPhone, countryCode: value });
       setShowCountryCode(false);
     }
   };
 
   const handleChangeUserName = (e) => {
+    e.target.value = e.target.value.replace(/[^ㄱ-ㅎ|가-힣|a-z|A-Z|\s]/gi, '');
     setSelectOption({ ...selectOption, name: e.target.value });
+  };
+
+  const checkPhone = (e) => {
+    e.target.value = e.target.value.replace(/[^0-9]/g, '');
+    SetSendPhone({ ...sendPhone, phone: e.target.value });
   };
 
   return (
@@ -119,7 +166,7 @@ function ReservationInfoComp({
               className='selectType'
               onClick={() => handleShowOptionBox('countryCode')}
             >
-              {selectOption.countryCode}
+              +{sendPhone.countryCode}
             </div>
             <ul
               className='list-member'
@@ -129,13 +176,18 @@ function ReservationInfoComp({
             >
               {countryCode.map((el) => (
                 <li key={el} onClick={() => clickOption('countryCode', el)}>
-                  {el}
+                  +{el}
                 </li>
               ))}
             </ul>
           </LikeCountrySelectBox>
 
-          <input placeholder='번호를 입력하세요' />
+          <input
+            placeholder='번호를 입력하세요'
+            onChange={checkPhone}
+            maxLength='11'
+            value={sendPhone.phone}
+          />
         </div>
       </ChkBodyWrap>
 
@@ -143,10 +195,23 @@ function ReservationInfoComp({
         <p>인증 번호</p>
         <div className='certWrap'>
           <input placeholder='인증 번호 입력' />
-          <button onClick={handlePhoneCertReq}>
-            {certConfirm ? '확인' : '인증요청'}
+          <button onClick={handlePhoneCertReq} disabled={certConfirm}>
+            {certConfirm ? (
+              <Timer
+                setCertTime={setCertTime}
+                setcertConfirm={setCertConfirm}
+                certTime={certTime}
+                setErrorMsg={setErrorMsg}
+                setBtnText={setBtnText}
+              />
+            ) : (
+              btnText
+            )}
           </button>
         </div>
+        {certTime ? <span>{errorMsg}</span> : null}
+
+        {certConfirm ? <button className='normalBtn'>인증완료</button> : null}
       </ChkBodyWrap>
     </div>
   );

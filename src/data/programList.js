@@ -7,4 +7,4 @@ export const programList = [
   '윤동주문학관 투어',
 ];
 
-export const countryCode = ['+82', '+86', '+81', '+1', '기타'];
+export const countryCode = ['82', '86', '81', '1', '기타'];
