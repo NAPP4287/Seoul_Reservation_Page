@@ -34,6 +34,7 @@ function Terms({ setTermsIdx, setReservationInfo, reservationInfo }) {
           IsSmsReceive: !inputs[3].checked,
         });
       }
+      console.log(reservationInfo);
     } else {
       setInputs(
         inputs.map((item) => ({ ...item, checked: e.currentTarget.checked }))
@@ -41,9 +42,9 @@ function Terms({ setTermsIdx, setReservationInfo, reservationInfo }) {
 
       setReservationInfo({
         ...reservationInfo,
-        IsPersonalInfo: true,
-        IsCreditInfo: true,
-        IsSmsReceive: true,
+        IsPersonalInfo: e.currentTarget.checked,
+        IsCreditInfo: e.currentTarget.checked,
+        IsSmsReceive: e.currentTarget.checked,
       });
     }
   };

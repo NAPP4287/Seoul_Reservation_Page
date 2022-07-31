@@ -24,6 +24,7 @@ function ReservationInfoComp({
   reservationPage,
   setReservationInfo,
   reservationInfo,
+  setIsTermComplete,
 }) {
   const [selectOption, setSelectOption] = useState({
     selectType: '예약 유형을 선택하세요',
@@ -123,7 +124,6 @@ function ReservationInfoComp({
   };
 
   const clickCheckCode = () => {
-    console.log(sendPhone);
     customAxios
       .post('/auth/phone/check', {
         phone: sendPhone.phone.replace('0', ''),
@@ -131,11 +131,11 @@ function ReservationInfoComp({
         authCode: sendPhone.authCode,
       })
       .then((r) => {
-        console.log(r);
         setErrorMsg('');
         setCertConfirm(false);
         setBtnText('완료');
         dispatch(saveToken(r.data.Authorization));
+        setIsTermComplete(true);
       })
       .catch((e) => {
         const status = e.response.status;

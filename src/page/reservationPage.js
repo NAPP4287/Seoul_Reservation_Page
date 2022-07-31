@@ -11,11 +11,13 @@ import {
   saveReservation,
   reservation,
 } from '../redux/reservation/reservationInfo';
+import { getAccessToken } from '../redux/token/accessToken';
 import { invalidModalOpen, invalidModalClose } from '../redux/modal/modalOpen';
 
 function ReservationPage() {
   const param = new URLSearchParams(window.location.search);
   const dispatch = useDispatch();
+  const getToken = useSelector(getAccessToken);
   const sendReservationData = useSelector(reservation);
   const queryIdx = param.get('idx');
 
@@ -35,9 +37,12 @@ function ReservationPage() {
 
   useEffect(() => {
     checkRoute(queryIdx);
-  }, [queryIdx]);
+    console.log('?');
+    checkReservation();
+  });
 
   const [termsIdx, setTermsIdx] = useState(0);
+  const [activeBtn, setActiveBtn] = useState(true);
 
   const [reservationInfo, setReservationInfo] = useState({
     ticketIdx: null,
@@ -52,11 +57,28 @@ function ReservationPage() {
   });
 
   const [itemIdx, setItemIdx] = useState(null);
+  const [isTermComplete, setIsTermComplete] = useState(false);
 
   const [ticketList, setTicketList] = useState([]);
 
   const reservationClick = () => {
     dispatch(saveReservation(reservationInfo));
+  };
+
+  const checkReservation = () => {
+    console.log(getToken);
+    if (
+      reservationInfo.ticketIdx !== null &&
+      reservation.name !== '' &&
+      getToken.accessToken !== '' &&
+      reservationInfo.IsCreditInfo &&
+      reservationInfo.IsPersonalInfo &&
+      reservationInfo.IsSmsReceive
+    ) {
+      setActiveBtn(false);
+    } else {
+      setActiveBtn(true);
+    }
   };
 
   return (
@@ -91,6 +113,7 @@ function ReservationPage() {
             <InfoCert
               setReservationInfo={setReservationInfo}
               reservationInfo={reservationInfo}
+              setIsTermComplete={setIsTermComplete}
             />
             <Terms
               setTermsIdx={setTermsIdx}
@@ -98,7 +121,11 @@ function ReservationPage() {
               reservationInfo={reservationInfo}
             />
             <Link to={`/reservationConfirm`}>
-              <button className='normalBtn' onClick={reservationClick} disabled>
+              <button
+                className={activeBtn ? 'normalBtn' : 'activeBtn'}
+                onClick={reservationClick}
+                disabled={activeBtn}
+              >
                 예약하기
               </button>
             </Link>

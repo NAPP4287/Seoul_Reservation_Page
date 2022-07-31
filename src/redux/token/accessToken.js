@@ -5,16 +5,15 @@ const initialState = {
 };
 
 export const accessTokenSlice = createSlice({
-  name: 'reservationInfo',
+  name: 'accessToken',
   initialState,
   reducers: {
     saveToken: (state, action) => {
-      state = action.payload;
-      console.log(state);
+      state.accessToken = action.payload;
     },
   },
 });
 
 export const { saveToken } = accessTokenSlice.actions;
-export const accessToken = (state) => state.saveToken;
+export const getAccessToken = (state) => state.accessToken;
 export default accessTokenSlice.reducer;
