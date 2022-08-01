@@ -14,7 +14,13 @@ import {
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['selectLanguage'],
+  whitelist: [
+    'selectLanguage',
+    'saveReservation',
+    'accessToken',
+    'saveEctInfo',
+    'saveCompleteInfo',
+  ],
   blacklist: [],
 };
 

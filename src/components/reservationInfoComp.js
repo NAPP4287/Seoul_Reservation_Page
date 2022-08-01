@@ -4,15 +4,12 @@ import {
   LikeCountrySelectBox,
 } from '../style/reservationInfoCompStyle';
 import { programList, countryCode } from '../data/programList';
-import {
-  saveReservation,
-  reservation,
-} from '../redux/reservation/reservationInfo';
 import Timer from './timer';
 import { useState } from 'react';
 import { customAxios } from '../axios/custromAxios';
 import { saveToken } from '../redux/token/accessToken';
 import { useDispatch } from 'react-redux';
+import { setCookie } from '../axios/cookie';
 
 function ReservationInfoComp({
   certConfirm,
@@ -24,7 +21,6 @@ function ReservationInfoComp({
   reservationPage,
   setReservationInfo,
   reservationInfo,
-  setIsTermComplete,
 }) {
   const [selectOption, setSelectOption] = useState({
     selectType: '예약 유형을 선택하세요',
@@ -119,7 +115,6 @@ function ReservationInfoComp({
   const handleChangeCode = (e) => {
     e.target.value = e.target.value.replace(/[^0-9]/g, '');
     setSendPhone({ ...sendPhone, authCode: e.target.value });
-    console.log(sendPhone);
     setReservationInfo({ ...reservationInfo, authCode: e.target.value });
   };
 
@@ -134,8 +129,8 @@ function ReservationInfoComp({
         setErrorMsg('');
         setCertConfirm(false);
         setBtnText('완료');
+        // setCookie('myToken', r.data.Authorization);
         dispatch(saveToken(r.data.Authorization));
-        setIsTermComplete(true);
       })
       .catch((e) => {
         const status = e.response.status;

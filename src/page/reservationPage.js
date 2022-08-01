@@ -5,21 +5,21 @@ import InfoCert from '../components/infoCert';
 import Terms from '../components/terms';
 import TermsDetail from '../components/termsDetail';
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import {
-  saveReservation,
-  reservation,
-} from '../redux/reservation/reservationInfo';
+import { saveReservaion } from '../redux/reservation/reservationInfo';
 import { getAccessToken } from '../redux/token/accessToken';
 import { invalidModalOpen, invalidModalClose } from '../redux/modal/modalOpen';
 
 function ReservationPage() {
   const param = new URLSearchParams(window.location.search);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const getToken = useSelector(getAccessToken);
-  const sendReservationData = useSelector(reservation);
   const queryIdx = param.get('idx');
+
+  const [itemIdx, setItemIdx] = useState(null);
+  const [ticketList, setTicketList] = useState([]);
 
   const checkRoute = (routeIdx) => {
     const numberIdx = Number(routeIdx);
@@ -37,7 +37,6 @@ function ReservationPage() {
 
   useEffect(() => {
     checkRoute(queryIdx);
-    console.log('?');
     checkReservation();
   });
 
@@ -56,20 +55,15 @@ function ReservationPage() {
     IsSmsReceive: false,
   });
 
-  const [itemIdx, setItemIdx] = useState(null);
-  const [isTermComplete, setIsTermComplete] = useState(false);
-
-  const [ticketList, setTicketList] = useState([]);
-
   const reservationClick = () => {
-    dispatch(saveReservation(reservationInfo));
+    dispatch(saveReservaion({ ...reservationInfo }));
+    navigate('/reservationConfirm');
   };
 
   const checkReservation = () => {
-    console.log(getToken);
     if (
       reservationInfo.ticketIdx !== null &&
-      reservation.name !== '' &&
+      reservationInfo.name !== '' &&
       getToken.accessToken !== '' &&
       reservationInfo.IsCreditInfo &&
       reservationInfo.IsPersonalInfo &&
@@ -113,22 +107,19 @@ function ReservationPage() {
             <InfoCert
               setReservationInfo={setReservationInfo}
               reservationInfo={reservationInfo}
-              setIsTermComplete={setIsTermComplete}
             />
             <Terms
               setTermsIdx={setTermsIdx}
               setReservationInfo={setReservationInfo}
               reservationInfo={reservationInfo}
             />
-            <Link to={`/reservationConfirm`}>
-              <button
-                className={activeBtn ? 'normalBtn' : 'activeBtn'}
-                onClick={reservationClick}
-                disabled={activeBtn}
-              >
-                예약하기
-              </button>
-            </Link>
+            <button
+              className={activeBtn ? 'normalBtn' : 'activeBtn'}
+              onClick={reservationClick}
+              disabled={activeBtn}
+            >
+              예약하기
+            </button>
           </div>
         )}
       </div>

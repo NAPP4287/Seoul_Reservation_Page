@@ -4,20 +4,27 @@ import {
   PersonCountWrap,
   UserInfoWrap,
 } from '../style/compReservationInfoStyle';
+import { useSelector } from 'react-redux';
+import { getCompleteInfo } from '../redux/reservation/completeReservation';
 
 function CompReservationInfo() {
+  const reservationInfo = useSelector(getCompleteInfo);
+
   return (
     <CompWrap>
       <div className='titleWrap'>
         <div className='confirmHead'>예약이 완료됐습니다</div>
-        <div className='reservationNum'>예약번호 (고유) 날짜 영문자 조합</div>
+        <div className='reservationNum'>{reservationInfo.reservationCode}</div>
       </div>
 
       <ReservationBox>
         <div className='headTitle'>2022.7.23(토) 오후 12:00</div>
         <PersonCountWrap>
           <div>예약인원 (수량)</div>
-          <div>2인/무료</div>
+          <div>
+            {reservationInfo.ticketCount}인/
+            {reservationInfo.price === 0 ? '무료' : reservationInfo.price}
+          </div>
         </PersonCountWrap>
 
         <UserInfoWrap>
@@ -28,18 +35,19 @@ function CompReservationInfo() {
           <ul>
             <li>
               <div className='type'>예약 유형</div>
-              <p>서울 뷰티 하우스</p>
+              <p>{reservationInfo.title}</p>
             </li>
 
             <li>
               <div className='type'>예약자</div>
-              <p>홍길동</p>
+              <p>{reservationInfo.userName}</p>
             </li>
 
             <li>
               <div className='type'>핸드폰 번호</div>
               <p>
-                <span>+82</span>01012345678
+                <span>+{reservationInfo.countryCode}</span>
+                {reservationInfo.userPhone}
               </p>
             </li>
           </ul>

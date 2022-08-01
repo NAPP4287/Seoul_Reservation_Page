@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { SelectTimeWrap, SelectTimeBox } from '../style/selectTimeStyle';
+import { saveEctInfo, getEctInfo } from '../redux/reservation/reservationEct';
+import { useDispatch, useSelector } from 'react-redux';
 
 function SelectTime({
   setReservationInfo,
@@ -9,9 +11,14 @@ function SelectTime({
 }) {
   const [activeBtn, setActiveBtn] = useState({ idx: null, active: false });
 
-  const handleTime = (idx) => {
+  const dispatch = useDispatch();
+  const ectInfo = useSelector(getEctInfo);
+
+  const handleTime = (idx, timeTitle) => {
     setReservationInfo({ ...reservationInfo, ticketIdx: idx });
     setActiveBtn({ idx: idx, active: true });
+    console.log(timeTitle);
+    dispatch(saveEctInfo({ ...ectInfo, time: timeTitle }));
   };
 
   const setTime = () => {
@@ -45,14 +52,15 @@ function SelectTime({
             <button
               key={el.ticketIdx}
               disabled={el.count === 0 ? true : false}
-              onClick={() => handleTime(el.ticketIdx)}
+              onClick={() => handleTime(el.ticketIdx, el.title)}
               style={
                 activeBtn.idx === el.ticketIdx && activeBtn.active
                   ? { backgroundColor: 'black', color: 'white' }
                   : { backgroundColor: 'transparent' }
               }
             >
-              {setTime()[idx]}
+              {/* {setTime()[idx]} */}
+              {el.title}
               <span>{el.remainTicket} / 20</span>
             </button>
           ))}

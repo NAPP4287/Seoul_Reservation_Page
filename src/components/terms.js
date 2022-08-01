@@ -34,7 +34,6 @@ function Terms({ setTermsIdx, setReservationInfo, reservationInfo }) {
           IsSmsReceive: !inputs[3].checked,
         });
       }
-      console.log(reservationInfo);
     } else {
       setInputs(
         inputs.map((item) => ({ ...item, checked: e.currentTarget.checked }))

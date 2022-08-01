@@ -16,12 +16,20 @@ export const reservationInfoSlice = createSlice({
   name: 'reservationInfo',
   initialState,
   reducers: {
-    saveReservation: (state, action) => {
-      state = action.payload;
+    saveReservaion: (state, action) => {
+      state.ticketIdx = action.payload.ticketIdx;
+      state.name = action.payload.name;
+      state.phone = action.payload.phone;
+      state.countryCode = String(action.payload.countryCode);
+      state.authCode = action.payload.authCode;
+      state.ticketCount = action.payload.ticketCount;
+      state.IsPersonalInfo = action.payload.IsPersonalInfo;
+      state.IsCreditInfo = action.payload.IsCreditInfo;
+      state.IsSmsReceive = action.payload.IsSmsReceive;
     },
   },
 });
 
-export const { saveReservation } = reservationInfoSlice.actions;
-export const reservation = (state) => state.saveReservation;
+export const { saveReservaion } = reservationInfoSlice.actions;
+export const getReservation = (state) => state.saveReservaion;
 export default reservationInfoSlice.reducer;

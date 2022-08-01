@@ -9,6 +9,8 @@ import {
 import smallNextArrow from '../assets/smallDownArrow.png';
 import { useState, useEffect } from 'react';
 import { customAxios } from '../axios/custromAxios';
+import { saveEctInfo, getEctInfo } from '../redux/reservation/reservationEct';
+import { useDispatch, useSelector } from 'react-redux';
 
 function CalendarComp({
   setReservationInfo,
@@ -29,6 +31,9 @@ function CalendarComp({
   const currentDate = new Date();
 
   let arrDate = [];
+
+  const dispatch = useDispatch();
+  const ectInfo = useSelector(getEctInfo);
 
   const getDate = (month) => {
     if (calendarMonth < 10) {
@@ -89,12 +94,23 @@ function CalendarComp({
     return arrDate;
   };
 
-  const handleChangeDate = (idx, date, itemIdx) => {
+  const handleChangeDate = (idx, selectDate, itemIdx) => {
     setActiveColor({ idx: idx, active: true });
     setItemIdx(itemIdx);
     customAxios.get(`/reservation/date/${queryIdx}/${itemIdx}`).then((r) => {
       setTicketList([...r.data.ticketList]);
     });
+
+    const week = date[new Date(2022, calendarMonth - 1, selectDate).getDay()];
+
+    dispatch(
+      saveEctInfo({
+        ...ectInfo,
+        week: week,
+        date: selectDate,
+        month: calendarMonth,
+      })
+    );
   };
 
   handleCalendarBody();
@@ -153,9 +169,6 @@ function CalendarComp({
         <CalendarEnd>
           <div>
             <span className='possible'></span> 예약가능
-          </div>
-          <div>
-            <span className='end'></span> 예약마감
           </div>
           <div>
             <span className='impossible'></span> 예약불가

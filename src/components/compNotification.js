@@ -6,7 +6,7 @@ import {
 } from '../style/confirmReservationStyle';
 import downArrow from '../assets/downArrow.png';
 
-function CompNotification() {
+function CompNotification({ setCheckNoti }) {
   const [showDetail, setShowDetail] = useState(false);
 
   const openNotification = () => {
@@ -17,6 +17,10 @@ function CompNotification() {
     }
   };
 
+  const handleCheckNoti = (e) => {
+    setCheckNoti(!e.currentTarget.checked);
+  };
+
   return (
     <NotificationWrap>
       <div className='reservationTitleWrap'>
@@ -24,7 +28,11 @@ function CompNotification() {
       </div>
       <NotificationCheck>
         <li>
-          <input name='one' type={'checkbox'} />
+          <input
+            name='one'
+            type={'checkbox'}
+            onChange={(e) => handleCheckNoti(e)}
+          />
 
           <div onClick={openNotification}>
             <label>주의사항 및 안내사항 확인</label>

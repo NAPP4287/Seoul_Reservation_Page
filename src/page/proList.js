@@ -1,15 +1,19 @@
 import { ProgramListWrap, BottomContent } from '../style/programListStyle';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-
+import { saveEctInfo, getEctInfo } from '../redux/reservation/reservationEct';
 import { customAxios } from '../axios/custromAxios';
+import { useDispatch, useSelector } from 'react-redux';
 
 function ProList() {
   const [proList, setProList] = useState([]);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const ectInfo = useSelector(getEctInfo);
 
-  const clickProgram = (viewIdx) => {
+  const clickProgram = (viewIdx, price, title) => {
     navigate(`/programList/reservation?idx=${viewIdx}`);
+    dispatch(saveEctInfo({ ...ectInfo, price: price, resType: title }));
   };
   useEffect(() => {
     const params = { lang: 'ko' };
@@ -27,7 +31,9 @@ function ProList() {
 
               <BottomContent>
                 <span>{el.price === 0 ? '무료' : el.price}</span>
-                <button onClick={() => clickProgram(el.viewIdx)}>
+                <button
+                  onClick={() => clickProgram(el.viewIdx, el.price, el.title)}
+                >
                   예약하기
                 </button>
               </BottomContent>

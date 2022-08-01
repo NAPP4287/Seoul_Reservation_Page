@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { getCookie } from './cookie';
+import { getAccessToken } from '../redux/token/accessToken';
+import { useSelector } from 'react-redux';
 
 export const customAxios = axios.create({
   baseURL: `http://first.likealocal.co.kr:4500`,

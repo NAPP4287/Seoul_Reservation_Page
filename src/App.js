@@ -41,6 +41,15 @@ function App() {
             }
           />
           <Route
+            path='/checkReservation/complete'
+            element={
+              <div>
+                <BackNav />
+                <CompleteReservation />
+              </div>
+            }
+          />
+          <Route
             path='/checkReservation/reservationList'
             element={
               <div>
