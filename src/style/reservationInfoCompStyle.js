@@ -44,6 +44,7 @@ export const ChkBodyWrap = styled.div`
       font-size: 11px;
       border: none;
       border-radius: 3px;
+      color: black;
     }
   }
   > button {

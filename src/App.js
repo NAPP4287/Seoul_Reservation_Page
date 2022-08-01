@@ -3,11 +3,12 @@ import LandingPage from './page/landing';
 import ProList from './page/proList';
 import CheckReservation from './page/checkReservation';
 import ReservationPage from './page/reservationPage';
+import CheckReservationList from './page/checkReservationList';
 import ConfirmReservation from './page/confirmReservation';
 import InvalidModal from './modal/invalidModal';
 import EditReservation from './page/editReservation';
-import ReservationList from './page/reservationList';
 import CompleteReservation from './page/completeReservation';
+import CancelReservation from './page/cancelReservation';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { modalInfo } from './redux/modal/modalOpen';
@@ -54,7 +55,7 @@ function App() {
             element={
               <div>
                 <BackNav />
-                <ReservationList />
+                <CheckReservationList />
               </div>
             }
           />
@@ -64,6 +65,15 @@ function App() {
               <div>
                 <BackNav />
                 <EditReservation />
+              </div>
+            }
+          />
+          <Route
+            path='/checkReservation/reservationList/edit/cancel'
+            element={
+              <div>
+                <BackNav />
+                <CancelReservation />
               </div>
             }
           />

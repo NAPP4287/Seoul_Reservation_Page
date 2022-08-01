@@ -7,9 +7,9 @@ import { programList, countryCode } from '../data/programList';
 import Timer from './timer';
 import { useState } from 'react';
 import { customAxios } from '../axios/custromAxios';
-import { saveToken } from '../redux/token/accessToken';
 import { useDispatch } from 'react-redux';
-import { setCookie } from '../axios/cookie';
+// import { setCookie } from '../axios/cookie';
+// import { saveToken } from '../redux/token/accessToken';
 
 function ReservationInfoComp({
   certConfirm,
@@ -21,6 +21,7 @@ function ReservationInfoComp({
   reservationPage,
   setReservationInfo,
   reservationInfo,
+  setToken,
 }) {
   const [selectOption, setSelectOption] = useState({
     selectType: '예약 유형을 선택하세요',
@@ -129,8 +130,10 @@ function ReservationInfoComp({
         setErrorMsg('');
         setCertConfirm(false);
         setBtnText('완료');
+        setToken(r.data.Authorization);
+
         // setCookie('myToken', r.data.Authorization);
-        dispatch(saveToken(r.data.Authorization));
+        // dispatch(saveToken(r.data.Authorization));
       })
       .catch((e) => {
         const status = e.response.status;
@@ -223,8 +226,12 @@ function ReservationInfoComp({
             placeholder='인증 번호 입력'
             value={reservationInfo.authCode}
             onChange={handleChangeCode}
+            disabled={btnText === '완료'}
           />
-          <button onClick={handlePhoneCertReq} disabled={certConfirm}>
+          <button
+            onClick={handlePhoneCertReq}
+            disabled={certConfirm || btnText === '완료'}
+          >
             {certConfirm ? (
               <Timer
                 setCertTime={setCertTime}

@@ -17,6 +17,7 @@ function ReservationPage() {
   const navigate = useNavigate();
   const getToken = useSelector(getAccessToken);
   const queryIdx = param.get('idx');
+  const [token, setToken] = useState('');
 
   const [itemIdx, setItemIdx] = useState(null);
   const [ticketList, setTicketList] = useState([]);
@@ -47,7 +48,7 @@ function ReservationPage() {
     ticketIdx: null,
     name: '',
     phone: '',
-    countryCode: 82,
+    countryCode: '82',
     authCode: '',
     ticketCount: 1,
     IsPersonalInfo: false,
@@ -64,7 +65,7 @@ function ReservationPage() {
     if (
       reservationInfo.ticketIdx !== null &&
       reservationInfo.name !== '' &&
-      getToken.accessToken !== '' &&
+      token !== '' &&
       reservationInfo.IsCreditInfo &&
       reservationInfo.IsPersonalInfo &&
       reservationInfo.IsSmsReceive
@@ -107,6 +108,7 @@ function ReservationPage() {
             <InfoCert
               setReservationInfo={setReservationInfo}
               reservationInfo={reservationInfo}
+              setToken={setToken}
             />
             <Terms
               setTermsIdx={setTermsIdx}

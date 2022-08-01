@@ -11,7 +11,6 @@ export const ChkResWrap = styled.div`
     max-width: 375px;
     height: 50px;
     border: none;
-    background-color: #ebebeb;
     border-radius
   }
 `;

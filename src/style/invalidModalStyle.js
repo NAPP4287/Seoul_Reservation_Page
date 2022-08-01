@@ -11,42 +11,35 @@ export const ModalBack = styled.div`
   align-items: center;
   > .modalBox {
     width: calc(100% - 40px);
-    height: 200px;
-    padding: 40px 0;
+    max-width: 375px;
+    padding: 60px 0 0 0;
     background-color: white;
-    border-radius: 5px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     > .title {
-      padding-bottom: 30px;
+      padding-bottom: 50px;
     }
     > button {
-      width: calc(100% - 40px);
-      height: 40px;
-      border-radius: 3px;
+      width: 100%;
+      height: 50px;
       border: none;
-      background-color: black;
-      color: white;
+      background-color: #f5f5f7;
       margin: 0 auto;
     }
     > .btnWrap {
       display: flex;
-      width: calc(100% - 40px);
       margin: 0 auto;
+      background-color: red;
+      width: 100%;
       > button {
         width: 50%;
         height: 50px;
-        margin-left: 10px;
-        border-radius: 5px;
-        border: 1px solid black;
-        background-color: white;
+        border: none;
+        background-color: #f5f5f7;
       }
       > button:nth-child(1) {
-        margin-left: 0;
-        background-color: black;
-        color: white;
-        border: none;
+        border-right: 1px solid #ebebeb;
       }
     }
   }
