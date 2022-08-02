@@ -12,8 +12,9 @@ import { getEctInfo } from '../redux/reservation/reservationEct';
 import { customAxios } from '../axios/custromAxios';
 import { useNavigate } from 'react-router';
 import CompReservationInfo from '../components/comReservationInfo';
+import { filterLanguage } from '../common/filterLanguage';
 
-function ConfirmReservation() {
+function ConfirmReservation({ langType }) {
   const confirmRes = useSelector((state) => state.saveReservation);
   const ectInfo = useSelector(getEctInfo);
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ function ConfirmReservation() {
   const navigate = useNavigate();
 
   const onClickReservation = () => {
-    console.log(typeof confirmRes.countryCode);
+    console.log(typeof confirmRes);
     customAxios
       .post('/reservation/create', confirmRes)
       .then((r) => {
@@ -39,7 +40,7 @@ function ConfirmReservation() {
           <ConfirmReservationWrap>
             <ConfirmHeadWrap>
               <div className='confirmHead'>
-                신청하신 예약 내용을 확인해주세요
+                {filterLanguage('checkResTitle', langType)}
               </div>
               {/* <div className='reservationNum'>
                 예약번호 (고유) 날짜 영문자 조합
@@ -51,31 +52,41 @@ function ConfirmReservation() {
                 {ectInfo.time}
               </div>
               <div className='dateBottom'>
-                <div>예약인원 (수량)</div>
+                <div>{filterLanguage('personCount', langType)}</div>
                 <div>
                   {confirmRes.ticketCount}인/
-                  {ectInfo.price === 0 ? '무료' : ectInfo.price}
+                  {ectInfo.price === 0
+                    ? filterLanguage('price', langType)
+                    : ectInfo.price}
                 </div>
               </div>
             </ReservationTime>
 
             <UserInfoWrap>
               <div className='reservationTitleWrap'>
-                <div className='headTitle'>예약자 정보</div>
+                <div className='headTitle'>
+                  {filterLanguage('userInfo', langType)}
+                </div>
               </div>
               <ul>
                 <li>
-                  <div className='type'>예약 유형</div>
+                  <div className='type'>
+                    {filterLanguage('reservationType', langType)}
+                  </div>
                   <p>{ectInfo.resType}</p>
                 </li>
 
                 <li>
-                  <div className='type'>예약자</div>
+                  <div className='type'>
+                    {filterLanguage('userTitle', langType)}
+                  </div>
                   <p>{confirmRes.name}</p>
                 </li>
 
                 <li>
-                  <div className='type'>핸드폰 번호</div>
+                  <div className='type'>
+                    {filterLanguage('phone', langType)}
+                  </div>
                   <p>
                     <span>+{confirmRes.countryCode}</span>
                     {confirmRes.phone}
@@ -83,7 +94,7 @@ function ConfirmReservation() {
                 </li>
               </ul>
             </UserInfoWrap>
-            <CompNotification setCheckNoti={setCheckNoti} />
+            <CompNotification setCheckNoti={setCheckNoti} langType={langType} />
           </ConfirmReservationWrap>
         </div>
         <button
@@ -91,7 +102,7 @@ function ConfirmReservation() {
           disabled={checkNoti}
           onClick={onClickReservation}
         >
-          예약 확인
+          {filterLanguage('completeReservationBtn', langType)}
         </button>
       </div>
     </div>

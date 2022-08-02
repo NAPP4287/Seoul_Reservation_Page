@@ -7,8 +7,9 @@ import {
 } from '../style/landingStyle';
 import Nav from '../components/nav';
 import { useNavigate } from 'react-router-dom';
+import { filterLanguage } from '../common/filterLanguage';
 
-function LandingPage() {
+function LandingPage({ langType }) {
   const navigate = useNavigate();
   const clickGoPage = (page) => {
     switch (page) {
@@ -22,6 +23,7 @@ function LandingPage() {
         break;
     }
   };
+
   return (
     <div>
       <Nav />
@@ -29,29 +31,31 @@ function LandingPage() {
         <LandingWrap>
           <LandingImg />
           <LandingContent>
-            <LandingTitle>
+            <LandingTitle className='hiddenText'>
               Seoul Beauty <br />
               Travel Week
             </LandingTitle>
             <ButtonWrap>
               <button
+                className='hiddenText'
                 onClick={() => {
                   clickGoPage('reservation');
                 }}
               >
-                예약하기
+                {filterLanguage('reservationBtn', langType)}
               </button>
               <button
+                className='hiddenText'
                 onClick={() => {
                   clickGoPage('check');
                 }}
               >
-                예약조회
+                {filterLanguage('checkReservationBtn', langType)}
               </button>
             </ButtonWrap>
 
-            <a href='https://www.naver.com/'>
-              서울 뷰티트래블 위크 홈페이지로 이동
+            <a className='hiddenText' href='https://www.naver.com/'>
+              {filterLanguage('seoulBeautyHomePage', langType)}
             </a>
           </LandingContent>
         </LandingWrap>

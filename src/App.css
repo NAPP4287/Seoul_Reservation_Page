@@ -107,3 +107,9 @@ input:focus {
   padding-bottom: 10px;
   border-bottom: 1px solid black;
 }
+
+.hiddenText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

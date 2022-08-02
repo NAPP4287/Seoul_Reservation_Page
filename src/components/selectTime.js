@@ -2,12 +2,14 @@ import { useState } from 'react';
 import { SelectTimeWrap, SelectTimeBox } from '../style/selectTimeStyle';
 import { saveEctInfo, getEctInfo } from '../redux/reservation/reservationEct';
 import { useDispatch, useSelector } from 'react-redux';
+import { filterLanguage } from '../common/filterLanguage';
 
 function SelectTime({
   setReservationInfo,
   reservationInfo,
   ticketList,
   queryIdx,
+  langType,
 }) {
   const [activeBtn, setActiveBtn] = useState({ idx: null, active: false });
 
@@ -45,7 +47,9 @@ function SelectTime({
   return (
     <div className='contentWrap'>
       <SelectTimeWrap>
-        <div className='timeTitle'>시간을 선택해주세요</div>
+        <div className='timeTitle'>
+          {filterLanguage('selectTime', langType)}
+        </div>
 
         <SelectTimeBox>
           {ticketList.map((el, idx) => (
@@ -59,7 +63,6 @@ function SelectTime({
                   : { backgroundColor: 'transparent' }
               }
             >
-              {/* {setTime()[idx]} */}
               {el.title}
               <span>{el.remainTicket} / 20</span>
             </button>

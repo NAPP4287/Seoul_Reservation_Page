@@ -3,18 +3,18 @@ import { useEffect, useState } from 'react';
 function Timer({
   setCertTime,
   certTime,
-  setErrorMsg,
+  setEndCertTime,
   setcertConfirm,
-  setBtnText,
+  setErrorMsg,
 }) {
   const [seconds, setSeconds] = useState(0);
-  const [minutes, setMinutes] = useState(3);
+  const [minutes, setMinutes] = useState(1);
 
   useEffect(() => {
     const countDown = setInterval(() => {
       if (seconds === 0 && minutes > 0) {
         setMinutes(minutes - 1);
-        setSeconds(59);
+        setSeconds(10);
       } else if (seconds > 0) {
         setSeconds(seconds - 1);
       }
@@ -23,15 +23,19 @@ function Timer({
     if (minutes === 0 && seconds === 0) {
       setCertTime(true);
       setcertConfirm(false);
-      setBtnText('재요청');
-      setErrorMsg('* 유효기간이 만료된 인증번호 입니다.');
+      setEndCertTime(true);
+      setErrorMsg(false);
     }
 
     return () => clearInterval(countDown);
   }, [seconds]);
 
   return (
-    <div style={{ color: 'black' }}>
+    <div
+      style={{
+        color: 'black',
+      }}
+    >
       {minutes === 0 ? '0' : ''}
       {minutes} : {seconds < 10 ? '0' : ''}
       {seconds}

@@ -10,8 +10,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { saveReservaion } from '../redux/reservation/reservationInfo';
 import { getAccessToken } from '../redux/token/accessToken';
 import { invalidModalOpen, invalidModalClose } from '../redux/modal/modalOpen';
+import { filterLanguage } from '../common/filterLanguage';
 
-function ReservationPage() {
+function ReservationPage({ langType }) {
   const param = new URLSearchParams(window.location.search);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -88,6 +89,7 @@ function ReservationPage() {
           queryIdx={queryIdx}
           setTicketList={setTicketList}
           setItemIdx={setItemIdx}
+          langType={langType}
         />
         {itemIdx === null ? null : (
           <SelectTime
@@ -95,12 +97,14 @@ function ReservationPage() {
             reservationInfo={reservationInfo}
             ticketList={ticketList}
             queryIdx={queryIdx}
+            langType={langType}
           />
         )}
 
         <SelectTicketCount
           setReservationInfo={setReservationInfo}
           reservationInfo={reservationInfo}
+          langType={langType}
         />
 
         {itemIdx === null ? null : (
@@ -109,18 +113,20 @@ function ReservationPage() {
               setReservationInfo={setReservationInfo}
               reservationInfo={reservationInfo}
               setToken={setToken}
+              langType={langType}
             />
             <Terms
               setTermsIdx={setTermsIdx}
               setReservationInfo={setReservationInfo}
               reservationInfo={reservationInfo}
+              langType={langType}
             />
             <button
               className={activeBtn ? 'normalBtn' : 'activeBtn'}
               onClick={reservationClick}
               disabled={activeBtn}
             >
-              예약하기
+              {filterLanguage('reservationBtn', langType)}
             </button>
           </div>
         )}

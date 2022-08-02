@@ -9,6 +9,24 @@ export const ModalBack = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  > .certModalBox {
+    width: calc(100% - 40px);
+    height: 200px;
+    max-width: 375px;
+    padding: 60px 20px 0 20px;
+    background-color: white;
+    > .title {
+      padding-bottom: 50px;
+    }
+    > button {
+      width: 100%;
+      height: 50px;
+      background-color: black;
+      color: white;
+      border: none;
+      border-radius: 5px;
+    }
+  }
   > .modalBox {
     width: calc(100% - 40px);
     max-width: 375px;

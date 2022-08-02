@@ -1,7 +1,8 @@
 import { TermsWrap } from '../style/termsStyle';
 import { useState } from 'react';
+import { filterLanguage } from '../common/filterLanguage';
 
-function Terms({ setTermsIdx, setReservationInfo, reservationInfo }) {
+function Terms({ setTermsIdx, setReservationInfo, reservationInfo, langType }) {
   const [inputs, setInputs] = useState([
     { name: 'one', checked: false },
     { name: 'two', checked: false },
@@ -51,7 +52,9 @@ function Terms({ setTermsIdx, setReservationInfo, reservationInfo }) {
   return (
     <div className='contentWrap leftPadding'>
       <div className='reservationTitleWrap'>
-        <div className='headTitle'>약관동의</div>
+        <div className='headTitle'>
+          {filterLanguage('termsTitle', langType)}
+        </div>
       </div>
 
       <TermsWrap>
@@ -67,7 +70,7 @@ function Terms({ setTermsIdx, setReservationInfo, reservationInfo }) {
               checkboxHandler(e);
             }}
           />
-          <label>전체동의</label>
+          <label>{filterLanguage('allTerms', langType)}</label>
         </li>
         <li>
           <input
@@ -79,7 +82,7 @@ function Terms({ setTermsIdx, setReservationInfo, reservationInfo }) {
             checked={inputs[1].checked}
           />
           <label onClick={() => setTermsIdx(1)}>
-            (필수) 개인(신용)정보 수집 · 이용 동의
+            {filterLanguage('termsPrivacy', langType)}
           </label>
         </li>
         <li>
@@ -91,7 +94,9 @@ function Terms({ setTermsIdx, setReservationInfo, reservationInfo }) {
             }}
             checked={inputs[2].checked}
           />{' '}
-          <label onClick={() => setTermsIdx(2)}>(필수) 개인정보 제공동의</label>
+          <label onClick={() => setTermsIdx(2)}>
+            {filterLanguage('termsInfo', langType)}
+          </label>
         </li>
         <li>
           <input
@@ -103,7 +108,7 @@ function Terms({ setTermsIdx, setReservationInfo, reservationInfo }) {
             checked={inputs[3].checked}
           />{' '}
           <label onClick={() => setTermsIdx(3)}>
-            (필수) 신청결과 알림 수신동의
+            {filterLanguage('termsNotice', langType)}
           </label>
         </li>
       </TermsWrap>

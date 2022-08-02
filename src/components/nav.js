@@ -36,7 +36,7 @@ function Nav() {
       </NoneBackNavWrap>
       {showList ? (
         <LanguageWrap>
-          {langList.map((el, idx) => (
+          {langList.nav.map((el, idx) => (
             <li key={idx} onClick={() => goLanguage(el.langType)}>
               {el.language}
             </li>

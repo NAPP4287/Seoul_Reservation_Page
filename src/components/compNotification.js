@@ -5,8 +5,9 @@ import {
   NotificationCheck,
 } from '../style/confirmReservationStyle';
 import downArrow from '../assets/downArrow.png';
+import { filterLanguage } from '../common/filterLanguage';
 
-function CompNotification({ setCheckNoti }) {
+function CompNotification({ setCheckNoti, langType }) {
   const [showDetail, setShowDetail] = useState(false);
 
   const openNotification = () => {
@@ -24,7 +25,9 @@ function CompNotification({ setCheckNoti }) {
   return (
     <NotificationWrap>
       <div className='reservationTitleWrap'>
-        <div className='headTitle'>주의사항 및 안내사항</div>
+        <div className='headTitle'>
+          {filterLanguage('noticeReservation', langType)}
+        </div>
       </div>
       <NotificationCheck>
         <li>

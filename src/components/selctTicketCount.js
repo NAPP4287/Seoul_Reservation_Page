@@ -1,6 +1,7 @@
 import { CountPersonWrap, ButtonWrap } from '../style/selectTicketCountStyle';
+import { filterLanguage } from '../common/filterLanguage';
 
-function SelectTicketCount({ setReservationInfo, reservationInfo }) {
+function SelectTicketCount({ setReservationInfo, reservationInfo, langType }) {
   const addPerson = (plusOrMinu) => {
     if (plusOrMinu === 'add') {
       setReservationInfo({
@@ -18,14 +19,16 @@ function SelectTicketCount({ setReservationInfo, reservationInfo }) {
   return (
     <div className='contentWrap'>
       <div className='reservationTitleWrap'>
-        <div className='headTitle'>인원/수량을 선택해주세요</div>
+        <div className='headTitle'>
+          {filterLanguage('selectGuest', langType)}
+        </div>
       </div>
       <CountPersonWrap>
         {reservationInfo.ticketIdx === null ? (
-          <p>*일정을 먼저 선택해주세요</p>
+          <p>*{filterLanguage('selectDateDesc', langType)}</p>
         ) : (
           <div className='personCountBtn'>
-            <p>예약인원</p>
+            <p>{filterLanguage('guests', langType)}</p>
             <ButtonWrap>
               <button
                 className='minus'

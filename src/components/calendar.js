@@ -11,6 +11,7 @@ import { useState, useEffect } from 'react';
 import { customAxios } from '../axios/custromAxios';
 import { saveEctInfo, getEctInfo } from '../redux/reservation/reservationEct';
 import { useDispatch, useSelector } from 'react-redux';
+import { filterLanguage } from '../common/filterLanguage';
 
 function CalendarComp({
   setReservationInfo,
@@ -18,6 +19,7 @@ function CalendarComp({
   queryIdx,
   setTicketList,
   setItemIdx,
+  langType,
 }) {
   const [calendarMonth, setCalendarMonth] = useState(9);
   const [activeColor, setActiveColor] = useState({
@@ -25,10 +27,11 @@ function CalendarComp({
     active: false,
   });
   const [dateArr, setDateArr] = useState([]);
-  const date = ['일', '월', '화', '수', '목', '금', '토'];
+  const date = ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'];
   const lastDate = new Date(2022, calendarMonth, 0).getDate();
   const startDay = new Date(2022, calendarMonth - 1).getDay();
   const currentDate = new Date();
+  const params = { lang: langType };
 
   let arrDate = [];
 
@@ -97,9 +100,11 @@ function CalendarComp({
   const handleChangeDate = (idx, selectDate, itemIdx) => {
     setActiveColor({ idx: idx, active: true });
     setItemIdx(itemIdx);
-    customAxios.get(`/reservation/date/${queryIdx}/${itemIdx}`).then((r) => {
-      setTicketList([...r.data.ticketList]);
-    });
+    customAxios
+      .get(`/reservation/date/${queryIdx}/${itemIdx}`, { params: params })
+      .then((r) => {
+        setTicketList([...r.data.ticketList]);
+      });
 
     const week = date[new Date(2022, calendarMonth - 1, selectDate).getDay()];
 
@@ -118,7 +123,9 @@ function CalendarComp({
   return (
     <div className='contentWrap'>
       <CalendarWrap>
-        <div className='headTitle'>일정을 선택해주세요</div>
+        <div className='headTitle'>
+          {filterLanguage('selectDateTitle', langType)}
+        </div>
 
         <MonthWrap>
           <button className='left' onClick={() => goMonth('prev')}>
@@ -168,10 +175,12 @@ function CalendarComp({
         </CalendarBody>
         <CalendarEnd>
           <div>
-            <span className='possible'></span> 예약가능
+            <span className='possible'></span>
+            {filterLanguage('reservationAvailable', langType)}
           </div>
           <div>
-            <span className='impossible'></span> 예약불가
+            <span className='impossible'></span>
+            {filterLanguage('reservationNotAvailble', langType)}
           </div>
         </CalendarEnd>
       </CalendarWrap>

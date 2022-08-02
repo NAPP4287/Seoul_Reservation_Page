@@ -1,7 +1,7 @@
 import CompReservationInfo from '../components/comReservationInfo';
 import { useNavigate } from 'react-router';
 
-function CompleteReservation() {
+function CompleteReservation({ langType }) {
   const navigate = useNavigate();
   const goLanding = () => {
     navigate('/');
@@ -10,7 +10,7 @@ function CompleteReservation() {
   return (
     <div>
       <div className='contentWrap leftPadding'>
-        <CompReservationInfo />
+        <CompReservationInfo langType={langType} />
       </div>
 
       <div>

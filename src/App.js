@@ -12,23 +12,28 @@ import CancelReservation from './page/cancelReservation';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { modalInfo } from './redux/modal/modalOpen';
+import { languageSelect } from './redux/langSelect/language';
 import BackNav from './components/backNav';
+import CertCompleteModal from './modal/certCompleteModal';
 
 function App() {
-  const { invalidOpen } = useSelector(modalInfo);
+  const { invalidOpen, certCompletOpen } = useSelector(modalInfo);
+  const { langType } = useSelector(languageSelect);
 
   return (
     <div className='App'>
       {invalidOpen ? <InvalidModal /> : null}
+      {certCompletOpen ? <CertCompleteModal /> : null}
+
       <BrowserRouter>
         <Routes>
-          <Route path='/' element={<LandingPage />} />
+          <Route path='/' element={<LandingPage langType={langType} />} />
           <Route
             path='/programList'
             element={
               <div>
                 <BackNav />
-                <ProList />
+                <ProList langType={langType} />
               </div>
             }
           />
@@ -37,7 +42,7 @@ function App() {
             element={
               <div>
                 <BackNav />
-                <CheckReservation />
+                <CheckReservation langType={langType} />
               </div>
             }
           />
@@ -46,7 +51,7 @@ function App() {
             element={
               <div>
                 <BackNav />
-                <CompleteReservation />
+                <CompleteReservation langType={langType} />
               </div>
             }
           />
@@ -55,7 +60,7 @@ function App() {
             element={
               <div>
                 <BackNav />
-                <CheckReservationList />
+                <CheckReservationList langType={langType} />
               </div>
             }
           />
@@ -64,7 +69,7 @@ function App() {
             element={
               <div>
                 <BackNav />
-                <EditReservation />
+                <EditReservation langType={langType} />
               </div>
             }
           />
@@ -73,7 +78,7 @@ function App() {
             element={
               <div>
                 <BackNav />
-                <CancelReservation />
+                <CancelReservation langType={langType} />
               </div>
             }
           />
@@ -82,7 +87,7 @@ function App() {
             element={
               <div>
                 <BackNav />
-                <ReservationPage />
+                <ReservationPage langType={langType} />
               </div>
             }
           />
@@ -91,7 +96,7 @@ function App() {
             element={
               <div>
                 <BackNav />
-                <ConfirmReservation />
+                <ConfirmReservation langType={langType} />
               </div>
             }
           />
@@ -100,7 +105,7 @@ function App() {
             element={
               <div>
                 <BackNav />
-                <CompleteReservation />
+                <CompleteReservation langType={langType} />
               </div>
             }
           />

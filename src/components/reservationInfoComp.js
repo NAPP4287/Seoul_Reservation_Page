@@ -8,6 +8,8 @@ import Timer from './timer';
 import { useState } from 'react';
 import { customAxios } from '../axios/custromAxios';
 import { useDispatch } from 'react-redux';
+import { filterLanguage } from '../common/filterLanguage';
+import { certCompleteModalOpen } from '../redux/modal/modalOpen';
 // import { setCookie } from '../axios/cookie';
 // import { saveToken } from '../redux/token/accessToken';
 
@@ -22,6 +24,7 @@ function ReservationInfoComp({
   setReservationInfo,
   reservationInfo,
   setToken,
+  langType,
 }) {
   const [selectOption, setSelectOption] = useState({
     selectType: '예약 유형을 선택하세요',
@@ -36,7 +39,11 @@ function ReservationInfoComp({
   const [btnText, setBtnText] = useState('인증요청');
 
   const [certTime, setCertTime] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
+  const [certComplete, setCertComplete] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(false);
+  const [endCertTime, setEndCertTime] = useState(false);
+  const [isCertActive, setIsCertActive] = useState(false);
+  const [isCodeActive, setIsCodeActive] = useState(false);
   const dispatch = useDispatch();
 
   const handlePhoneCertReq = () => {
@@ -44,6 +51,8 @@ function ReservationInfoComp({
   };
 
   const test = () => {
+    setEndCertTime(false);
+
     customAxios
       .post('/auth/phone', {
         phone: sendPhone.phone.replace('0', ''),
@@ -53,11 +62,12 @@ function ReservationInfoComp({
         console.log(r);
         setCertConfirm(true);
         setCertTime(false);
+        setIsCertActive(false);
       })
       .catch((e) => {
         const status = e.response.status;
         if (status === 400) {
-          setErrorMsg('잘못된 인증 요청입니다.');
+          setErrorMsg(true);
         } else if (status === 500) {
           setErrorMsg('서버 오류입니다.');
         }
@@ -111,12 +121,24 @@ function ReservationInfoComp({
     e.target.value = e.target.value.replace(/[^0-9]/g, '');
     setSendPhone({ ...sendPhone, phone: e.target.value });
     setReservationInfo({ ...reservationInfo, phone: e.target.value });
+
+    if (e.target.value.length === 11) {
+      setIsCertActive(true);
+    } else {
+      setIsCertActive(false);
+    }
   };
 
   const handleChangeCode = (e) => {
     e.target.value = e.target.value.replace(/[^0-9]/g, '');
     setSendPhone({ ...sendPhone, authCode: e.target.value });
     setReservationInfo({ ...reservationInfo, authCode: e.target.value });
+
+    if (e.target.value.length !== 0) {
+      setIsCodeActive(true);
+    } else {
+      setIsCodeActive(false);
+    }
   };
 
   const clickCheckCode = () => {
@@ -127,18 +149,22 @@ function ReservationInfoComp({
         authCode: sendPhone.authCode,
       })
       .then((r) => {
-        setErrorMsg('');
+        setErrorMsg(false);
         setCertConfirm(false);
         setBtnText('완료');
+        setCertComplete(true);
         setToken(r.data.Authorization);
-
+        setCertTime(true);
+        setEndCertTime(false);
+        dispatch(certCompleteModalOpen());
         // setCookie('myToken', r.data.Authorization);
         // dispatch(saveToken(r.data.Authorization));
       })
       .catch((e) => {
         const status = e.response.status;
         if (status === 400) {
-          setErrorMsg('잘못된 인증 요청입니다.');
+          setEndCertTime(false);
+          setErrorMsg(true);
         } else if (status === 500) {
           setErrorMsg('서버 오류입니다.');
         }
@@ -178,16 +204,16 @@ function ReservationInfoComp({
       )}
 
       <ChkBodyWrap>
-        <p>성명</p>
+        <p>{filterLanguage('name', langType)}</p>
         <input
-          placeholder='예약자 성명을 입력하세요'
+          placeholder={filterLanguage('namePlaceholder', langType)}
           onChange={handleChangeUserName}
           value={selectOption.name}
         />
       </ChkBodyWrap>
 
       <ChkBodyWrap>
-        <p>핸드폰 번호</p>
+        <p>{filterLanguage('phone', langType)}</p>
         <div className='countryWrap'>
           <LikeCountrySelectBox>
             <div
@@ -211,7 +237,7 @@ function ReservationInfoComp({
           </LikeCountrySelectBox>
 
           <input
-            placeholder='번호를 입력하세요'
+            placeholder={filterLanguage('phonePlaceholder', langType)}
             onChange={checkPhone}
             maxLength='11'
             value={sendPhone.phone}
@@ -220,36 +246,49 @@ function ReservationInfoComp({
       </ChkBodyWrap>
 
       <ChkBodyWrap>
-        <p>인증 번호</p>
+        <p>{filterLanguage('certNum', langType)}</p>
         <div className='certWrap'>
           <input
-            placeholder='인증 번호 입력'
+            placeholder={filterLanguage('certNumPlaceholder', langType)}
             value={reservationInfo.authCode}
             onChange={handleChangeCode}
-            disabled={btnText === '완료'}
           />
           <button
+            className={
+              isCertActive || endCertTime || certComplete ? 'active' : ''
+            }
             onClick={handlePhoneCertReq}
-            disabled={certConfirm || btnText === '완료'}
+            disabled={!isCertActive && !certTime}
           >
             {certConfirm ? (
               <Timer
                 setCertTime={setCertTime}
                 setcertConfirm={setCertConfirm}
                 certTime={certTime}
-                setErrorMsg={setErrorMsg}
+                setEndCertTime={setEndCertTime}
                 setBtnText={setBtnText}
+                setErrorMsg={setErrorMsg}
               />
+            ) : !certTime ? (
+              filterLanguage('sendCert', langType)
             ) : (
-              btnText
+              filterLanguage('recert', langType)
             )}
           </button>
         </div>
-        {certTime ? <span>{errorMsg}</span> : null}
+        {errorMsg ? (
+          <span>{filterLanguage('incorrectCert', langType)}</span>
+        ) : null}
+        {endCertTime ? (
+          <span>{filterLanguage('endCert', langType)}</span>
+        ) : null}
 
         {certConfirm ? (
-          <button className='normalBtn' onClick={clickCheckCode}>
-            인증완료
+          <button
+            className={isCodeActive ? 'active' : 'normalBtn'}
+            onClick={clickCheckCode}
+          >
+            {filterLanguage('certCompleteBtn', langType)}
           </button>
         ) : null}
       </ChkBodyWrap>

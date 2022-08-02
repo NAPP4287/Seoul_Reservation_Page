@@ -46,12 +46,22 @@ export const ChkBodyWrap = styled.div`
       border-radius: 3px;
       color: black;
     }
+    > .active {
+      background-color: black;
+      color: white;
+    }
   }
   > button {
     width: 100%;
     height: 40px;
     margin-top: 10px;
     font-weight: bold;
+    border: none;
+  }
+  > .active {
+    background-color: black;
+    color: white;
+    border-radius: 3px;
   }
   > span {
     padding: 10px 0;

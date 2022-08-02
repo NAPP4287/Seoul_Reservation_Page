@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react';
 import { saveEctInfo, getEctInfo } from '../redux/reservation/reservationEct';
 import { customAxios } from '../axios/custromAxios';
 import { useDispatch, useSelector } from 'react-redux';
+import { filterLanguage } from '../common/filterLanguage';
 
-function ProList() {
+function ProList({ langType }) {
   const [proList, setProList] = useState([]);
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -16,9 +17,9 @@ function ProList() {
     dispatch(saveEctInfo({ ...ectInfo, price: price, resType: title }));
   };
   useEffect(() => {
-    const params = { lang: 'ko' };
+    const params = { lang: langType };
     customAxios
-      .get('reservation/list', { params })
+      .get('reservation/list', { params: params })
       .then((r) => setProList([...r.data.list]));
   }, []);
   return (
@@ -30,80 +31,20 @@ function ProList() {
               <h3>{el.title}</h3>
 
               <BottomContent>
-                <span>{el.price === 0 ? '무료' : el.price}</span>
+                <span>
+                  {el.price === 0
+                    ? filterLanguage('price', langType)
+                    : el.price}
+                </span>
                 <button
+                  className='hiddenText'
                   onClick={() => clickProgram(el.viewIdx, el.price, el.title)}
                 >
-                  예약하기
+                  {filterLanguage('reservationBtn', langType)}
                 </button>
               </BottomContent>
             </li>
           ))}
-          {/* <li>
-            <h3>서울뷰티하우스</h3>
-
-            <BottomContent>
-              <span>무료</span>
-              <Link to='/programList/reservation?idx=0'>
-                <button>예약하기</button>
-              </Link>
-            </BottomContent>
-          </li>
-
-          <li>
-            <h3>인왕산 트래킹</h3>
-
-            <BottomContent>
-              <span>무료</span>
-              <Link to='/'>
-                <button>예약하기</button>
-              </Link>
-            </BottomContent>
-          </li>
-
-          <li>
-            <h3>어반 싸이클링</h3>
-
-            <BottomContent>
-              <span>무료</span>
-              <Link to='/'>
-                <button>예약하기</button>
-              </Link>
-            </BottomContent>
-          </li>
-
-          <li>
-            <h3>어반 싸이클링</h3>
-
-            <BottomContent>
-              <span>무료</span>
-              <Link to='/'>
-                <button>예약하기</button>
-              </Link>
-            </BottomContent>
-          </li>
-
-          <li>
-            <h3>경복궁 시티런</h3>
-
-            <BottomContent>
-              <span>무료</span>
-              <Link to='/'>
-                <button>예약하기</button>
-              </Link>
-            </BottomContent>
-          </li>
-
-          <li>
-            <h3>윤동주문학관 투어</h3>
-
-            <BottomContent>
-              <span>무료</span>
-              <Link to='/'>
-                <button>예약하기</button>
-              </Link>
-            </BottomContent>
-          </li> */}
         </ProgramListWrap>
       </div>
     </div>

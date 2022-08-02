@@ -1,7 +1,8 @@
 import ReservationInfoComp from './reservationInfoComp';
 import { useState } from 'react';
+import { filterLanguage } from '../common/filterLanguage';
 
-function InfoCert({ setReservationInfo, reservationInfo, setToken }) {
+function InfoCert({ setReservationInfo, reservationInfo, setToken, langType }) {
   const [certConfirm, setCertConfirm] = useState(false);
   const [showOptionBox, setShowOptionBox] = useState(false);
   const [showCountryCode, setShowCountryCode] = useState(false);
@@ -10,7 +11,9 @@ function InfoCert({ setReservationInfo, reservationInfo, setToken }) {
   return (
     <div className='contentWrap'>
       <div className='reservationTitleWrap'>
-        <div className='headTitle'>예약자 정보 및 본인 인증</div>
+        <div className='headTitle'>
+          {filterLanguage('contactDetail', langType)}
+        </div>
       </div>
 
       <div style={{ padding: '20px 0 20px 0' }}>
@@ -25,6 +28,7 @@ function InfoCert({ setReservationInfo, reservationInfo, setToken }) {
           setReservationInfo={setReservationInfo}
           reservationInfo={reservationInfo}
           setToken={setToken}
+          langType={langType}
         />
       </div>
     </div>
