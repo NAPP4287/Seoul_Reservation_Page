@@ -1,5 +1,6 @@
 import CompReservationInfo from '../components/comReservationInfo';
 import { useNavigate } from 'react-router';
+import { filterLanguage } from '../common/filterLanguage';
 
 function CompleteReservation({ langType }) {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ function CompleteReservation({ langType }) {
 
       <div>
         <button className='activeBtn' onClick={goLanding}>
-          확인
+          {filterLanguage('confirmBtn', langType)}
         </button>
       </div>
     </div>

@@ -6,8 +6,9 @@ import { setCookie } from '../axios/cookie';
 // import { saveToken } from '../redux/token/accessToken';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { filterLanguage } from '../common/filterLanguage';
 
-function CheckReservation() {
+function CheckReservation({ langType }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [certConfirm, setCertConfirm] = useState(false);
@@ -53,7 +54,7 @@ function CheckReservation() {
         }}
       >
         <ChkTitleWrap ref={outSection}>
-          <h3>예약 조회</h3>
+          <h3>{filterLanguage('checkTitle', langType)}</h3>
         </ChkTitleWrap>
 
         <ReservationInfoComp
@@ -67,6 +68,7 @@ function CheckReservation() {
           setReservationInfo={setReservationInfo}
           reservationInfo={reservationInfo}
           setToken={setToken}
+          langType={langType}
         />
 
         <button
@@ -74,7 +76,7 @@ function CheckReservation() {
           onClick={goReservationList}
           disabled={activeBtn}
         >
-          조회하기
+          {filterLanguage('check', langType)}
         </button>
       </ChkResWrap>
     </div>

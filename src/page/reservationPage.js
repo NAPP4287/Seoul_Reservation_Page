@@ -45,6 +45,11 @@ function ReservationPage({ langType }) {
   const [termsIdx, setTermsIdx] = useState(0);
   const [activeBtn, setActiveBtn] = useState(true);
 
+  const [activeTimeBtn, setActiveTimeBtn] = useState({
+    idx: null,
+    active: false,
+  });
+
   const [reservationInfo, setReservationInfo] = useState({
     ticketIdx: null,
     name: '',
@@ -80,7 +85,11 @@ function ReservationPage({ langType }) {
   return (
     <div>
       {termsIdx === 0 ? null : (
-        <TermsDetail termsIdx={termsIdx} setTermsIdx={setTermsIdx} />
+        <TermsDetail
+          termsIdx={termsIdx}
+          setTermsIdx={setTermsIdx}
+          langType={langType}
+        />
       )}
       <div>
         <CalendarComp
@@ -90,6 +99,7 @@ function ReservationPage({ langType }) {
           setTicketList={setTicketList}
           setItemIdx={setItemIdx}
           langType={langType}
+          setActiveTimeBtn={setActiveTimeBtn}
         />
         {itemIdx === null ? null : (
           <SelectTime
@@ -98,6 +108,8 @@ function ReservationPage({ langType }) {
             ticketList={ticketList}
             queryIdx={queryIdx}
             langType={langType}
+            activeTimeBtn={activeTimeBtn}
+            setActiveTimeBtn={setActiveTimeBtn}
           />
         )}
 

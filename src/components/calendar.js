@@ -20,6 +20,7 @@ function CalendarComp({
   setTicketList,
   setItemIdx,
   langType,
+  setActiveTimeBtn,
 }) {
   const [calendarMonth, setCalendarMonth] = useState(9);
   const [activeColor, setActiveColor] = useState({
@@ -43,12 +44,10 @@ function CalendarComp({
       customAxios
         .get(`reservation/view/${queryIdx}/20220${month}`)
         .then((r) => {
-          console.log('9', r);
           setDateArr([...r.data.dateList]);
         });
     } else {
       customAxios.get(`reservation/view/${queryIdx}/2022${month}`).then((r) => {
-        console.log('10', r);
         setDateArr([...r.data.dateList]);
       });
     }
@@ -104,7 +103,9 @@ function CalendarComp({
       .get(`/reservation/date/${queryIdx}/${itemIdx}`, { params: params })
       .then((r) => {
         setTicketList([...r.data.ticketList]);
-      });
+        setActiveTimeBtn({ idx: null, active: false });
+      })
+      .catch((e) => console.log(e));
 
     const week = date[new Date(2022, calendarMonth - 1, selectDate).getDay()];
 

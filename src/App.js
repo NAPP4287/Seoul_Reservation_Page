@@ -15,6 +15,7 @@ import { modalInfo } from './redux/modal/modalOpen';
 import { languageSelect } from './redux/langSelect/language';
 import BackNav from './components/backNav';
 import CertCompleteModal from './modal/certCompleteModal';
+import NavBackNone from './components/navBackNone';
 
 function App() {
   const { invalidOpen, certCompletOpen } = useSelector(modalInfo);
@@ -22,8 +23,8 @@ function App() {
 
   return (
     <div className='App'>
-      {invalidOpen ? <InvalidModal /> : null}
-      {certCompletOpen ? <CertCompleteModal /> : null}
+      {invalidOpen ? <InvalidModal langType={langType} /> : null}
+      {certCompletOpen ? <CertCompleteModal langType={langType} /> : null}
 
       <BrowserRouter>
         <Routes>
@@ -50,7 +51,7 @@ function App() {
             path='/checkReservation/complete'
             element={
               <div>
-                <BackNav />
+                <NavBackNone />
                 <CompleteReservation langType={langType} />
               </div>
             }

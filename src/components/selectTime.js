@@ -10,15 +10,15 @@ function SelectTime({
   ticketList,
   queryIdx,
   langType,
+  activeTimeBtn,
+  setActiveTimeBtn,
 }) {
-  const [activeBtn, setActiveBtn] = useState({ idx: null, active: false });
-
   const dispatch = useDispatch();
   const ectInfo = useSelector(getEctInfo);
 
   const handleTime = (idx, timeTitle) => {
     setReservationInfo({ ...reservationInfo, ticketIdx: idx });
-    setActiveBtn({ idx: idx, active: true });
+    setActiveTimeBtn({ idx: idx, active: true });
     console.log(timeTitle);
     dispatch(saveEctInfo({ ...ectInfo, time: timeTitle }));
   };
@@ -58,7 +58,7 @@ function SelectTime({
               disabled={el.count === 0 ? true : false}
               onClick={() => handleTime(el.ticketIdx, el.title)}
               style={
-                activeBtn.idx === el.ticketIdx && activeBtn.active
+                activeTimeBtn.idx === el.ticketIdx && activeTimeBtn.active
                   ? { backgroundColor: 'black', color: 'white' }
                   : { backgroundColor: 'transparent' }
               }

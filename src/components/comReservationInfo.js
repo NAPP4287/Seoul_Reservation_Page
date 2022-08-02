@@ -25,7 +25,8 @@ function CompReservationInfo({ langType }) {
         <PersonCountWrap>
           <div>{filterLanguage('personCount', langType)}</div>
           <div>
-            {reservationInfo.ticketCount}인/
+            {reservationInfo.ticketCount}
+            {filterLanguage('person', langType)}/
             {reservationInfo.price === 0
               ? filterLanguage('price', langType)
               : reservationInfo.price}

@@ -20,6 +20,11 @@ export const DetailBox = styled.div`
     font-weight: bold;
     padding-bottom: 10px;
   }
+  > ul {
+    .inner {
+      padding-left: 5px;
+    }
+  }
 `;
 
 export const TermsWrap = styled.div`
@@ -27,4 +32,5 @@ export const TermsWrap = styled.div`
   height: 100vh;
   position: fixed;
   z-index: 99999;
+  width: 100vw;
 `;

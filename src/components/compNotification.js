@@ -7,7 +7,7 @@ import {
 import downArrow from '../assets/downArrow.png';
 import { filterLanguage } from '../common/filterLanguage';
 
-function CompNotification({ setCheckNoti, langType }) {
+function CompNotification({ setCheckNoti, langType, noneCheck }) {
   const [showDetail, setShowDetail] = useState(false);
 
   const openNotification = () => {
@@ -31,14 +31,16 @@ function CompNotification({ setCheckNoti, langType }) {
       </div>
       <NotificationCheck>
         <li>
-          <input
-            name='one'
-            type={'checkbox'}
-            onChange={(e) => handleCheckNoti(e)}
-          />
+          {noneCheck ? null : (
+            <input
+              name='one'
+              type={'checkbox'}
+              onChange={(e) => handleCheckNoti(e)}
+            />
+          )}
 
           <div onClick={openNotification}>
-            <label>주의사항 및 안내사항 확인</label>
+            <label>{filterLanguage('noticeReservation', langType)}</label>
             <img
               src={downArrow}
               alt='down arrow'
@@ -53,7 +55,24 @@ function CompNotification({ setCheckNoti, langType }) {
 
         {showDetail ? (
           <NotificationBox>
-            ・서울 뷰티 하우스 관람 예약은 1인 1회에 한하여 선착순 예약제로
+            <li>{filterLanguage('resNotiTitle', langType)}</li>
+            <li>{filterLanguage('resNoti1', langType)}</li>
+            <li>{filterLanguage('resNoti2', langType)}</li>
+            <li>{filterLanguage('resNoti3', langType)}</li>
+            <li>{filterLanguage('resNoti4', langType)}</li>
+            <li>{filterLanguage('resNoti5', langType)}</li>
+            <li>{filterLanguage('resNoti6', langType)}</li>
+            <li>{filterLanguage('resNoti7', langType)}</li>
+            <li>{filterLanguage('resNoti8', langType)}</li>
+            <li>{filterLanguage('resNoti9', langType)}</li>
+            <br />
+            <li>{filterLanguage('placNotiTitle', langType)}</li>
+            <li>{filterLanguage('placNoti1', langType)}</li>
+            <li>{filterLanguage('placNoti2', langType)}</li>
+            <li>{filterLanguage('placNoti3', langType)}</li>
+            <li>{filterLanguage('placNoti4', langType)}</li>
+
+            {/* ・서울 뷰티 하우스 관람 예약은 1인 1회에 한하여 선착순 예약제로
             운영되며 취소 전까지 추가 신청 및 중복 예약은 불가능합니다.
             <br />
             ・신분증상에서의 실명 예약 필수입니다. <br />
@@ -83,7 +102,7 @@ function CompNotification({ setCheckNoti, langType }) {
             ・ 아이 동반일 경우 충분한 사전교육을 부탁드리며, 큰소리를 내거나
             다른 방문객의 불편을 초래하지 않도록 보살펴 주시기 바랍니다.
             <br />・ 관람자 부주의로 인한 시설물 훼손의 경우 상응하는 손해배상이
-            청구 될 수 있습니다.
+            청구 될 수 있습니다. */}
           </NotificationBox>
         ) : null}
       </NotificationCheck>

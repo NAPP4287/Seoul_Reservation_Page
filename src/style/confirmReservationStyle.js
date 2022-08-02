@@ -105,7 +105,7 @@ export const NotificationCheck = styled.ul`
   }
 `;
 
-export const NotificationBox = styled.div`
+export const NotificationBox = styled.ul`
   text-align: left;
   font-size: 13px;
   padding: 20px;

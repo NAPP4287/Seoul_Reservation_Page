@@ -46,6 +46,7 @@ export const CalendarHeader = styled.div`
   margin: 0 auto;
   > div {
     color: #8c8c8c;
+    width: 100%;
   }
 `;
 
@@ -53,6 +54,7 @@ export const CalendarBody = styled.div`
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
+  width: 100%;
   > button {
     width: calc(100% / 7);
     height: 40px;

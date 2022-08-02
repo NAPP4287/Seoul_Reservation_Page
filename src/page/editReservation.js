@@ -6,12 +6,15 @@ import { customAxios } from '../axios/custromAxios';
 import { useDispatch } from 'react-redux';
 import { saveCompleteInfo } from '../redux/reservation/completeReservation';
 import { useNavigate } from 'react-router';
+import { filterLanguage } from '../common/filterLanguage';
 
-function EditReservation() {
+function EditReservation({ langType }) {
   const [isPlace, setIsPlace] = useState(true);
   const [reservationCode, setReservationCode] = useState(null);
   const [showCancelModal, setShowCancelModal] = useState(false);
   const [checkNoti, setCheckNoti] = useState(true);
+
+  const noneCheck = true;
 
   const dispatch = useDispatch();
 
@@ -33,7 +36,9 @@ function EditReservation() {
   const getInfo = () => {
     customAxios
       .get(`/confirm/view/${reservationCode}`)
-      .then((r) => dispatch(saveCompleteInfo({ ...r.data })))
+      .then((r) => {
+        dispatch(saveCompleteInfo({ ...r.data }));
+      })
       .catch((e) => console.log(e));
   };
 
@@ -46,14 +51,20 @@ function EditReservation() {
         />
       ) : null}
       <div className='contentWrap'>
-        <CompReservationInfo />
-        {isPlace ? <CompNotification setCheckNoti={setCheckNoti} /> : null}
+        <CompReservationInfo langType={langType} />
+        {isPlace ? (
+          <CompNotification
+            setCheckNoti={setCheckNoti}
+            langType={langType}
+            noneCheck={noneCheck}
+          />
+        ) : null}
         <div className='buttonWrap leftPadding'>
           <button className='btnLeft' onClick={openCancelModal}>
-            예약 취소
+            {filterLanguage('cancelBtn', langType)}
           </button>
           <button className='btnRight' onClick={goLanding}>
-            확인
+            {filterLanguage('confirmBtn', langType)}
           </button>
         </div>
       </div>

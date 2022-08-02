@@ -20,7 +20,6 @@ function ReservationInfoComp({
   setShowOptionBox,
   showCountryCode,
   setShowCountryCode,
-  reservationPage,
   setReservationInfo,
   reservationInfo,
   setToken,
@@ -59,7 +58,6 @@ function ReservationInfoComp({
         countryCode: sendPhone.countryCode,
       })
       .then((r) => {
-        console.log(r);
         setCertConfirm(true);
         setCertTime(false);
         setIsCertActive(false);
@@ -174,38 +172,10 @@ function ReservationInfoComp({
 
   return (
     <div>
-      {reservationPage ? null : (
-        <ChkBodyWrap>
-          <p>예약 유형 선택</p>
-          <LikeSelectBox>
-            <div
-              className='selectType'
-              onClick={() => handleShowOptionBox('reservation')}
-              style={
-                selectOption.selectType === '예약 유형을 선택하세요'
-                  ? { color: '#c5c5c5' }
-                  : { color: 'black' }
-              }
-            >
-              {selectOption.selectType}
-            </div>
-            <ul
-              className='list-member'
-              style={showOptionBox ? { display: 'block' } : { display: 'none' }}
-            >
-              {programList.map((el, idx) => (
-                <li key={idx} onClick={() => clickOption('selectType', el)}>
-                  {el}
-                </li>
-              ))}
-            </ul>
-          </LikeSelectBox>
-        </ChkBodyWrap>
-      )}
-
       <ChkBodyWrap>
         <p>{filterLanguage('name', langType)}</p>
         <input
+          className='hiddenText'
           placeholder={filterLanguage('namePlaceholder', langType)}
           onChange={handleChangeUserName}
           value={selectOption.name}
@@ -237,6 +207,7 @@ function ReservationInfoComp({
           </LikeCountrySelectBox>
 
           <input
+            className='hiddenText'
             placeholder={filterLanguage('phonePlaceholder', langType)}
             onChange={checkPhone}
             maxLength='11'
@@ -249,13 +220,17 @@ function ReservationInfoComp({
         <p>{filterLanguage('certNum', langType)}</p>
         <div className='certWrap'>
           <input
+            className='hiddenText'
             placeholder={filterLanguage('certNumPlaceholder', langType)}
             value={reservationInfo.authCode}
+            maxLength='6'
             onChange={handleChangeCode}
           />
           <button
             className={
-              isCertActive || endCertTime || certComplete ? 'active' : ''
+              isCertActive || endCertTime || certComplete
+                ? 'active hiddenText'
+                : 'hiddenText'
             }
             onClick={handlePhoneCertReq}
             disabled={!isCertActive && !certTime}

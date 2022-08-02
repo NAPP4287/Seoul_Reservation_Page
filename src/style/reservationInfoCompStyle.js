@@ -15,7 +15,7 @@ export const ChkBodyWrap = styled.div`
     height: 40px;
     border-radius: 3px;
     border: 1px solid #8c8c8c;
-    padding: 0 5px;
+    padding: 0 0 0 5px;
   }
   > .countryWrap {
     display: flex;

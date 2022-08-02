@@ -19,6 +19,7 @@ export const TermsWrap = styled.ul`
       width: 100%;
       padding: 10px 0;
       text-decoration: underline;
+      line-height: 22px;
     }
     > input[type='checkbox'] {
       width: 20px;

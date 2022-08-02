@@ -20,6 +20,7 @@ function ConfirmReservation({ langType }) {
   const dispatch = useDispatch();
   const [checkNoti, setCheckNoti] = useState(true);
   const navigate = useNavigate();
+  const noneCheck = false;
 
   const onClickReservation = () => {
     console.log(typeof confirmRes);
@@ -54,7 +55,8 @@ function ConfirmReservation({ langType }) {
               <div className='dateBottom'>
                 <div>{filterLanguage('personCount', langType)}</div>
                 <div>
-                  {confirmRes.ticketCount}인/
+                  {confirmRes.ticketCount}
+                  {filterLanguage('person', langType)}/
                   {ectInfo.price === 0
                     ? filterLanguage('price', langType)
                     : ectInfo.price}
@@ -94,7 +96,11 @@ function ConfirmReservation({ langType }) {
                 </li>
               </ul>
             </UserInfoWrap>
-            <CompNotification setCheckNoti={setCheckNoti} langType={langType} />
+            <CompNotification
+              setCheckNoti={setCheckNoti}
+              langType={langType}
+              noneCheck={noneCheck}
+            />
           </ConfirmReservationWrap>
         </div>
         <button
