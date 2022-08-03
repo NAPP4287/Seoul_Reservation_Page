@@ -14,6 +14,7 @@ import { useSelector } from 'react-redux';
 import { modalInfo } from './redux/modal/modalOpen';
 import { languageSelect } from './redux/langSelect/language';
 import BackNav from './components/backNav';
+import Nav from './components/nav';
 import CertCompleteModal from './modal/certCompleteModal';
 import NavBackNone from './components/navBackNone';
 

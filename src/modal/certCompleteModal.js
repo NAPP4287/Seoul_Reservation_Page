@@ -14,7 +14,9 @@ function CertCompleteModal({ langType }) {
   return (
     <ModalBack>
       <div className='certModalBox'>
-        <div className='title'>인증이 완료됐습니다</div>
+        <div className='title'>
+          {filterLanguage('certModalTitle', langType)}
+        </div>
         <button onClick={closeModal}>
           {filterLanguage('confirmBtn', langType)}
         </button>

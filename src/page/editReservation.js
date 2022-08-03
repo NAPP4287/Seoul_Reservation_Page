@@ -48,6 +48,7 @@ function EditReservation({ langType }) {
         <CancelModal
           setShowCancelModal={setShowCancelModal}
           reservationCode={reservationCode}
+          langType={langType}
         />
       ) : null}
       <div className='contentWrap'>

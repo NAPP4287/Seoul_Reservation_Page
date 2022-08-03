@@ -31,10 +31,7 @@ function LandingPage({ langType }) {
         <LandingWrap>
           <LandingImg />
           <LandingContent>
-            <LandingTitle className='hiddenText'>
-              Seoul Beauty <br />
-              Travel Week
-            </LandingTitle>
+            <LandingTitle>Seoul Beauty Travel Week</LandingTitle>
             <ButtonWrap>
               <button
                 className='hiddenText'

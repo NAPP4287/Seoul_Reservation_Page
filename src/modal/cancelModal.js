@@ -1,10 +1,12 @@
 import { ModalBack } from '../style/invalidModalStyle';
 import { customAxios } from '../axios/custromAxios';
 import { useNavigate } from 'react-router';
+import { filterLanguage } from '../common/filterLanguage';
 
-function CancelModal({ setShowCancelModal, reservationCode }) {
+function CancelModal({ setShowCancelModal, reservationCode, langType }) {
   const navigate = useNavigate();
 
+  console.log(filterLanguage('yes', langType));
   const goLanding = () => {
     navigate('/');
   };
@@ -28,10 +30,12 @@ function CancelModal({ setShowCancelModal, reservationCode }) {
   return (
     <ModalBack>
       <div className='modalBox'>
-        <div className='title'>예약을 취소하시겠습니까?</div>
+        <div className='title'>{filterLanguage('queCancel', langType)}</div>
         <div className='btnWrap'>
-          <button onClick={cancelReservation}>확인</button>
-          <button onClick={closeModal}>취소</button>
+          <button onClick={cancelReservation}>
+            {filterLanguage('yes', langType)}
+          </button>
+          <button onClick={closeModal}>{filterLanguage('no', langType)}</button>
         </div>
       </div>
     </ModalBack>

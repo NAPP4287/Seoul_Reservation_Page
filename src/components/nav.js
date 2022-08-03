@@ -1,16 +1,25 @@
-import { NoneBackNavWrap, GlobalWrap, LanguageWrap } from '../style/navStyle';
+import {
+  NoneBackNavWrap,
+  GlobalWrap,
+  LanguageWrap,
+  WhiteBackPageBtn,
+} from '../style/navStyle';
 import { useDispatch } from 'react-redux';
 import { selectLanguage } from '../redux/langSelect/language';
 import { useState } from 'react';
 import { langList } from '../data/languageList';
 
-function Nav() {
+function Nav({ isBackBtn }) {
   const dispatch = useDispatch();
   const [showList, setShowList] = useState(false);
 
   const goLanguage = (lang) => {
     dispatch(selectLanguage(lang));
     setShowList(false);
+  };
+
+  const backPage = () => {
+    window.history.back();
   };
 
   const showLangList = () => {
@@ -21,10 +30,17 @@ function Nav() {
     <div>
       <NoneBackNavWrap>
         <div className='navPadding'>
-          <div></div>
-          <GlobalWrap onClick={showLangList}>
+          {isBackBtn ? (
+            <WhiteBackPageBtn onClick={backPage}>
+              <div></div>
+            </WhiteBackPageBtn>
+          ) : (
+            <div></div>
+          )}
+          <GlobalWrap onClick={showLangList} style={{ color: 'white' }}>
             Languages{' '}
             <div
+              className='whiteDown'
               style={
                 showList
                   ? { transform: 'rotate(180deg)' }

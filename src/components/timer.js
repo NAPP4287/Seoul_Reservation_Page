@@ -8,13 +8,13 @@ function Timer({
   setErrorMsg,
 }) {
   const [seconds, setSeconds] = useState(0);
-  const [minutes, setMinutes] = useState(1);
+  const [minutes, setMinutes] = useState(3);
 
   useEffect(() => {
     const countDown = setInterval(() => {
       if (seconds === 0 && minutes > 0) {
         setMinutes(minutes - 1);
-        setSeconds(10);
+        setSeconds(59);
       } else if (seconds > 0) {
         setSeconds(seconds - 1);
       }
@@ -34,6 +34,9 @@ function Timer({
     <div
       style={{
         color: 'black',
+        backgroundColor: '#d9d9d9',
+        height: '100%',
+        lineHeight: '40px',
       }}
     >
       {minutes === 0 ? '0' : ''}

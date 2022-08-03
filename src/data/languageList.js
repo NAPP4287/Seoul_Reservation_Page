@@ -863,6 +863,48 @@ export const langList = {
         '・観覧者の不注意による施設の備品等を破損した場合、相応の損害賠償が請求される可能性がございます。',
     },
   ],
+  certCompBtn: [
+    { langType: 'ko', language: '인증완료' },
+    { langType: 'cn', language: '完成认证' },
+    { langType: 'en', language: 'Confirm' },
+    { langType: 'jp', language: '認証完了' },
+  ],
+  certModalTitle: [
+    { langType: 'ko', language: '인증이 완료되었습니다. ' },
+    { langType: 'cn', language: '认证已完成' },
+    { langType: 'en', language: 'Verification is completed.' },
+    { langType: 'jp', language: '認証が完了しました。' },
+  ],
+  yes: [
+    { langType: 'ko', language: '네' },
+    { langType: 'cn', language: '是' },
+    { langType: 'en', language: 'Sure' },
+    { langType: 'jp', language: 'はい' },
+  ],
+  no: [
+    { langType: 'ko', language: '아니오' },
+    { langType: 'cn', language: '不是' },
+    { langType: 'en', language: 'No' },
+    { langType: 'jp', language: 'いいえ' },
+  ],
+  queCancel: [
+    { langType: 'ko', language: '예약을 취소하시겠습니까?' },
+    {
+      langType: 'cn',
+      language: '确定取消预订吗？',
+    },
+    {
+      langType: 'en',
+      language: 'Are you sure you want to cancel your reservation?',
+    },
+    { langType: 'jp', language: '予約をキャンセルしますか？' },
+  ],
+  completedCancel: [
+    { langType: 'ko', language: '에약이 취소됐습니다.' },
+    { langType: 'cn', language: '您的订单已取消' },
+    { langType: 'en', language: 'Your reservation has been cancelled. ' },
+    { langType: 'jp', language: '予約がキャンセルされました。' },
+  ],
   aaa: [
     { langType: 'ko', language: '인증완료' },
     { langType: 'cn', language: '인증완료' },

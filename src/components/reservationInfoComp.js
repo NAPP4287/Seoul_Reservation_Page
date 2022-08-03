@@ -263,7 +263,7 @@ function ReservationInfoComp({
             className={isCodeActive ? 'active' : 'normalBtn'}
             onClick={clickCheckCode}
           >
-            {filterLanguage('certCompleteBtn', langType)}
+            {filterLanguage('certCompBtn', langType)}
           </button>
         ) : null}
       </ChkBodyWrap>

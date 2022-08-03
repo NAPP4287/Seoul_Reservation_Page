@@ -7,8 +7,9 @@ import {
 import { getCompleteInfo } from '../redux/reservation/completeReservation';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { filterLanguage } from '../common/filterLanguage';
 
-function CancelReservation() {
+function CancelReservation({ langType }) {
   const navigate = useNavigate();
 
   const reservationInfo = useSelector(getCompleteInfo);
@@ -21,40 +22,55 @@ function CancelReservation() {
       <div className='contentWrap leftPadding'>
         <CompWrap>
           <div className='titleWrap'>
-            <div className='confirmHead'>예약이 취소됐습니다</div>
+            <div className='confirmHead'>
+              {filterLanguage('completedCancel', langType)}
+            </div>
             <div className='reservationNum'>
               {reservationInfo.reservationCode}
             </div>
           </div>
 
           <ReservationBox>
-            <div className='headTitle'>2022.7.23(토) 오후 12:00</div>
-            <PersonCountWrap>
-              <div>예약인원 (수량)</div>
+            <div className='headTitle innerPadding'>
+              2022.7.23(토) 오후 12:00
+            </div>
+            <PersonCountWrap className='innerPadding'>
+              <div>{filterLanguage('personCount', langType)}</div>
               <div>
-                {reservationInfo.ticketCount}인/
-                {reservationInfo.price === 0 ? '무료' : reservationInfo.price}
+                {reservationInfo.ticketCount}
+                {filterLanguage('person', langType)}/
+                {reservationInfo.price === 0
+                  ? filterLanguage('price', langType)
+                  : reservationInfo.price}
               </div>
             </PersonCountWrap>
 
             <UserInfoWrap>
               <div className='reservationTitleWrap'>
-                <div className='headTitle'>예약자 정보</div>
+                <div className='headTitle innerPadding'>
+                  {filterLanguage('userInfo', langType)}
+                </div>
               </div>
 
-              <ul>
+              <ul className='innerPadding'>
                 <li>
-                  <div className='type'>예약 유형</div>
+                  <div className='type'>
+                    {filterLanguage('userInfo', langType)}
+                  </div>
                   <p>{reservationInfo.title}</p>
                 </li>
 
                 <li>
-                  <div className='type'>예약자</div>
+                  <div className='type'>
+                    {filterLanguage('userTitle', langType)}
+                  </div>
                   <p>{reservationInfo.userName}</p>
                 </li>
 
                 <li>
-                  <div className='type'>핸드폰 번호</div>
+                  <div className='type'>
+                    {filterLanguage('phone', langType)}
+                  </div>
                   <p>
                     <span>+{reservationInfo.countryCode}</span>
                     {reservationInfo.userPhone}
@@ -65,9 +81,11 @@ function CancelReservation() {
           </ReservationBox>
         </CompWrap>
       </div>
-      <button className='activeBtn' onClick={goLanding}>
-        확인
-      </button>
+      <div className='btnWrap'>
+        <button className='activeBtn' onClick={goLanding}>
+          {filterLanguage('confirmBtn', langType)}
+        </button>
+      </div>
     </div>
   );
 }
