@@ -7,7 +7,10 @@ import whiteArrow from '../assets/whiteBack.png';
 export const NavWrap = styled.div`
   height: 80px;
   position: fixed;
+  max-width: 375px;
   width: 100%;
+  left: 50%;
+  transform: translate(-50%);
   z-index: 999;
   background-color: white;
   border-bottom: 1px solid #dcdcdc;
@@ -29,13 +32,14 @@ export const NavWrap = styled.div`
 export const NoneBackNavWrap = styled.div`
   height: 80px;
   position: fixed;
-  width: 375px;
-  z-index: 999;
-  background-color: transparent;
+  max-width: 375px;
+  width: 100%;
   left: 50%;
   transform: translate(-50%);
+  z-index: 999;
+  background-color: transparent;
   .navPadding {
-    padding: 0 20px;
+    /* padding: 0 20px; */
   }
   > div {
     height: 80px;
