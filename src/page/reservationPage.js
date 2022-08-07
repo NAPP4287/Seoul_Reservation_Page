@@ -133,13 +133,15 @@ function ReservationPage({ langType }) {
               reservationInfo={reservationInfo}
               langType={langType}
             />
-            <button
-              className={activeBtn ? 'normalBtn' : 'activeBtn'}
-              onClick={reservationClick}
-              disabled={activeBtn}
-            >
-              {filterLanguage('reservationBtn', langType)}
-            </button>
+            <div className='btnWrap'>
+              <button
+                className={activeBtn ? 'normalBtn' : 'activeBtn'}
+                onClick={reservationClick}
+                disabled={activeBtn}
+              >
+                {filterLanguage('reservationBtn', langType)}
+              </button>
+            </div>
           </div>
         )}
       </div>

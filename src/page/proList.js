@@ -1,4 +1,8 @@
-import { ProgramListWrap, BottomContent } from '../style/programListStyle';
+import {
+  ProgramListWrap,
+  BottomContent,
+  BackImgWrap,
+} from '../style/programListStyle';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { saveEctInfo, getEctInfo } from '../redux/reservation/reservationEct';
@@ -23,7 +27,8 @@ function ProList({ langType }) {
       .then((r) => setProList([...r.data.list]));
   }, []);
   return (
-    <div>
+    <BackImgWrap>
+      <div className='backImg'></div>
       <div className='contentWrap'>
         <ProgramListWrap>
           {proList.map((el, idx) => (
@@ -47,7 +52,7 @@ function ProList({ langType }) {
           ))}
         </ProgramListWrap>
       </div>
-    </div>
+    </BackImgWrap>
   );
 }
 

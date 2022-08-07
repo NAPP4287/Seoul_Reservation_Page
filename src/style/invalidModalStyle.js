@@ -48,7 +48,6 @@ export const ModalBack = styled.div`
     > .btnWrap {
       display: flex;
       margin: 0 auto;
-      background-color: red;
       width: 100%;
       > button {
         width: 50%;

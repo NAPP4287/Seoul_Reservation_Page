@@ -103,13 +103,15 @@ function ConfirmReservation({ langType }) {
             />
           </ConfirmReservationWrap>
         </div>
-        <button
-          className={checkNoti ? 'normalBtn' : 'activeBtn'}
-          disabled={checkNoti}
-          onClick={onClickReservation}
-        >
-          {filterLanguage('completeReservationBtn', langType)}
-        </button>
+        <div className='btnWrap'>
+          <button
+            className={checkNoti ? 'normalBtn' : 'activeBtn'}
+            disabled={checkNoti}
+            onClick={onClickReservation}
+          >
+            {filterLanguage('completeReservationBtn', langType)}
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -1,7 +1,29 @@
 import styled from 'styled-components';
+import backgroundImg from '../assets/example.jpg';
+
+export const BackImgWrap = styled.div`
+  background-color: black;
+  min-height: 100vh;
+  height: 100%;
+  max-width: 1024px;
+  width: 100%;
+  margin: 0 auto;
+  > .backImg {
+    min-height: 100vh;
+    height: 100%;
+    background-image: url(${backgroundImg});
+    opacity: 0.5;
+  }
+`;
 
 export const ProgramListWrap = styled.ul`
-  padding: 110px 0 20px 0;
+  position: absolute;
+  top: 110px;
+  padding: 0 140px;
+  width: 100%;
+  max-width: 1024px;
+  left: 50%;
+  transform: translate(-50%);
   > li {
     background-color: white;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.16);
@@ -26,6 +48,9 @@ export const ProgramListWrap = styled.ul`
   }
   > li:nth-child(1) {
     margin-top: 0;
+  }
+  @media (max-width: 500px) {
+    padding: 0 20px;
   }
 `;
 

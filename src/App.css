@@ -29,13 +29,15 @@
 }
 
 .landingWrap {
-  max-width: 375px;
+  max-width: 1024px;
+  width: 100%;
   margin: 0 auto;
 }
 
 .contentWrap {
-  max-width: 375px;
-  padding: 0 20px;
+  max-width: 1024px;
+  width: 100%;
+  padding: 0 140px;
   margin: 0 auto;
 }
 
@@ -54,8 +56,14 @@ input:focus {
   padding-bottom: 15px;
 }
 
+.btnWrap {
+  max-width: 1024px;
+  width: 100%;
+  margin: 0 auto;
+}
+
 .normalBtn {
-  width: calc(100% - 40px);
+  width: calc(100% - 280px);
   height: 50px;
   border: none;
   background-color: #ebebeb;
@@ -64,7 +72,7 @@ input:focus {
 }
 
 .activeBtn {
-  width: calc(100% - 40px);
+  width: calc(100% - 280px);
   height: 50px;
   border: none;
   background-color: black;
@@ -118,4 +126,14 @@ input:focus {
   background-color: red;
   max-width: 375px;
   height: 50px;
+}
+
+@media (max-width: 500px) {
+  .contentWrap {
+    padding: 0 20px;
+  }
+  .normalBtn,
+  .activeBtn {
+    width: calc(100% - 40px);
+  }
 }

@@ -7,7 +7,7 @@ import whiteArrow from '../assets/whiteBack.png';
 export const NavWrap = styled.div`
   height: 80px;
   position: fixed;
-  max-width: 375px;
+  max-width: 1024px;
   width: 100%;
   left: 50%;
   transform: translate(-50%);
@@ -32,12 +32,11 @@ export const NavWrap = styled.div`
 export const NoneBackNavWrap = styled.div`
   height: 80px;
   position: fixed;
-  max-width: 375px;
+  max-width: 1024px;
   width: 100%;
   left: 50%;
   transform: translate(-50%);
   z-index: 999;
-  background-color: transparent;
   .navPadding {
     /* padding: 0 20px; */
   }
@@ -60,12 +59,10 @@ export const GlobalWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* color: white; */
   > div {
     width: 10px;
     height: 10px;
     margin-left: 5px;
-    background-color: red;
     background: url(${smallDownArrow}) no-repeat center;
   }
   > .whiteDown {
@@ -95,21 +92,39 @@ export const WhiteBackPageBtn = styled.div`
   }
 `;
 
-export const LanguageWrap = styled.ul`
+export const LanguageWrap = styled.div`
   position: fixed;
   z-index: 999;
-  background-color: #f2f2f2;
-  right: 20px;
+  max-width: 1024px;
+  width: 100%;
+  margin: 0 auto;
+  left: 50%;
   top: 65px;
-  border-radius: 5px;
-  > li {
-    padding: 10px 20px;
-    font-size: 14px;
+  transform: translate(-50%);
+  padding: 0 20px;
+  > ul {
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    right: 20px;
+    float: right;
+    > li {
+      padding: 10px 20px;
+      font-size: 14px;
+    }
+    > li:nth-child(2n) {
+      background-color: white;
+    }
+    > li:nth-child(4) {
+      border-radius: 0 0 5px 5px;
+    }
   }
-  > li:nth-child(2n) {
-    background-color: white;
-  }
-  > li:nth-child(4) {
-    border-radius: 0 0 5px 5px;
-  }
+`;
+
+export const LanguageBoxWrap = styled.div`
+  max-width: 1024px;
+  height: 200px;
+  background-color: pink;
+  z-index: 99999;
+  margin: 0 auto;
+  position: absolute;
 `;

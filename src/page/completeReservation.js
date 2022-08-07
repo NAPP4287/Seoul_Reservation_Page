@@ -14,7 +14,7 @@ function CompleteReservation({ langType }) {
         <CompReservationInfo langType={langType} />
       </div>
 
-      <div>
+      <div className='btnWrap'>
         <button className='activeBtn' onClick={goLanding}>
           {filterLanguage('confirmBtn', langType)}
         </button>

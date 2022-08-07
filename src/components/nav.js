@@ -52,11 +52,13 @@ function Nav({ isBackBtn }) {
       </NoneBackNavWrap>
       {showList ? (
         <LanguageWrap>
-          {langList.nav.map((el, idx) => (
-            <li key={idx} onClick={() => goLanguage(el.langType)}>
-              {el.language}
-            </li>
-          ))}
+          <ul>
+            {langList.nav.map((el, idx) => (
+              <li key={idx} onClick={() => goLanguage(el.langType)}>
+                {el.language}
+              </li>
+            ))}
+          </ul>
         </LanguageWrap>
       ) : null}
     </div>
