@@ -24,7 +24,9 @@ export const ProgramListWrap = styled.ul`
   max-width: 1024px;
   left: 50%;
   transform: translate(-50%);
-
+  @media (max-width: 500px) {
+    padding: 0 20px;
+  }
   > li {
     background-color: white;
     border-radius: 3px;

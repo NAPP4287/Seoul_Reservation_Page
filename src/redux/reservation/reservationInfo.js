@@ -27,9 +27,21 @@ export const reservationInfoSlice = createSlice({
       state.IsCreditInfo = action.payload.IsCreditInfo;
       state.IsSmsReceive = action.payload.IsSmsReceive;
     },
+    removeReservation: (state, action) => {
+      state.ticketIdx = '';
+      state.name = '';
+      state.phone = '';
+      state.countryCode = '';
+      state.authCode = '';
+      state.ticketCount = '';
+      state.IsPersonalInfo = '';
+      state.IsCreditInfo = '';
+      state.IsSmsReceive = '';
+    },
   },
 });
 
-export const { saveReservaion } = reservationInfoSlice.actions;
+export const { saveReservaion, removeReservation } =
+  reservationInfoSlice.actions;
 export const getReservation = (state) => state.saveReservaion;
 export default reservationInfoSlice.reducer;

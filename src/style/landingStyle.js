@@ -17,10 +17,13 @@ export const LandingImg = styled.div`
 `;
 
 export const LandingTitle = styled.div`
-  font-size: 2.5rem;
+  font-size: 60px;
   font-weight: bold;
   color: white;
   padding-bottom: 150px;
+  @media (max-width: 500px) {
+    font-size: 40px;
+  }
 `;
 
 export const ButtonWrap = styled.div`

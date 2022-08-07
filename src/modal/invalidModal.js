@@ -2,8 +2,10 @@ import { ModalBack } from '../style/invalidModalStyle';
 import { useNavigate } from 'react-router';
 
 function InvalidModal() {
+  const navigate = useNavigate();
+
   const goLanding = () => {
-    window.location.replace('/');
+    navigate('/');
   };
   return (
     <ModalBack>

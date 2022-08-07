@@ -64,7 +64,7 @@ input:focus {
 }
 
 .normalBtn {
-  width: calc(100% - 280px);
+  width: calc(100% - 252px);
   height: 50px;
   border: none;
   background-color: #ebebeb;
@@ -73,7 +73,7 @@ input:focus {
 }
 
 .activeBtn {
-  width: calc(100% - 280px);
+  width: calc(100% - 252px);
   height: 50px;
   border: none;
   background-color: black;
@@ -123,10 +123,10 @@ input:focus {
   white-space: nowrap;
 }
 
-.testt {
-  background-color: red;
-  max-width: 375px;
-  height: 50px;
+.timerHeight {
+  color: 'black';
+  background-color: '#d9d9d9';
+  height: '100%';
 }
 
 @media (max-width: 500px) {

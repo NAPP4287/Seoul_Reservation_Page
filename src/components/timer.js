@@ -31,14 +31,7 @@ function Timer({
   }, [seconds]);
 
   return (
-    <div
-      style={{
-        color: 'black',
-        backgroundColor: '#d9d9d9',
-        height: '100%',
-        lineHeight: '40px',
-      }}
-    >
+    <div className='timerHeight'>
       {minutes === 0 ? '0' : ''}
       {minutes} : {seconds < 10 ? '0' : ''}
       {seconds}

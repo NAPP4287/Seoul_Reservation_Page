@@ -26,7 +26,10 @@ function ProList({ langType }) {
     const params = { lang: langType };
     customAxios
       .get('reservation/list', { params: params })
-      .then((r) => setProList([...r.data.list]))
+      .then((r) => {
+        console.log(r);
+        setProList([...r.data.list]);
+      })
       .then(() => setCl(true))
       .catch((e) => console.log(e));
   }, []);

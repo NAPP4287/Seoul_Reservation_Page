@@ -2,11 +2,15 @@ import { ModalBack } from '../style/invalidModalStyle';
 import { customAxios } from '../axios/custromAxios';
 import { useNavigate } from 'react-router';
 import { filterLanguage } from '../common/filterLanguage';
+import { useDispatch } from 'react-redux';
+import { removeToken } from '../redux/token/accessToken';
+import { useState } from 'react';
+import InvalidModal from '../modal/invalidModal';
 
 function CancelModal({ setShowCancelModal, reservationCode, langType }) {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
-  console.log(filterLanguage('yes', langType));
   const goLanding = () => {
     navigate('/');
   };
@@ -24,7 +28,11 @@ function CancelModal({ setShowCancelModal, reservationCode, langType }) {
         if (r.data.result === 'success') {
           navigate('/checkReservation/reservationList/edit/cancel');
         }
-      });
+      })
+      .then(() => {
+        dispatch(removeToken());
+      })
+      .catch((e) => console.log(e));
   };
 
   return (

@@ -4,7 +4,7 @@ import {
   ReservationTime,
   UserInfoWrap,
 } from '../style/confirmReservationStyle';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CompNotification from '../components/compNotification';
 import { useSelector, useDispatch } from 'react-redux';
 import { saveCompleteInfo } from '../redux/reservation/completeReservation';
@@ -14,18 +14,28 @@ import { useNavigate } from 'react-router';
 import CompReservationInfo from '../components/comReservationInfo';
 import { filterLanguage } from '../common/filterLanguage';
 import Loading from './loading';
+import { getAccessToken } from '../redux/token/accessToken';
+import InvalidModal from '../modal/invalidModal';
 
 function ConfirmReservation({ langType }) {
   const confirmRes = useSelector((state) => state.saveReservation);
+  const token = useSelector(getAccessToken);
   const ectInfo = useSelector(getEctInfo);
   const dispatch = useDispatch();
   const [checkNoti, setCheckNoti] = useState(true);
-  const [cl, setCl] = useState(false);
+  const [isValid, setIsValid] = useState(false);
   const navigate = useNavigate();
   const noneCheck = false;
 
+  useEffect(() => {
+    if (token.accessToken === '') {
+      setIsValid(true);
+    } else {
+      setIsValid(false);
+    }
+  }, []);
+
   const onClickReservation = () => {
-    console.log(typeof confirmRes);
     customAxios
       .post('/reservation/create', confirmRes)
       .then((r) => {
@@ -33,13 +43,14 @@ function ConfirmReservation({ langType }) {
         dispatch(saveCompleteInfo({ ...r.data }));
         navigate('/checkReservation/complete');
       })
-      .then(() => setCl(true))
       .catch((e) => console.log(e));
   };
 
   return (
-    <div>
-      {cl ? (
+    <>
+      {!isValid ? (
+        <InvalidModal />
+      ) : (
         <div className='leftPadding'>
           <div className='contentWrap'>
             <ConfirmReservationWrap>
@@ -117,10 +128,8 @@ function ConfirmReservation({ langType }) {
             </button>
           </div>
         </div>
-      ) : (
-        <Loading />
       )}
-    </div>
+    </>
   );
 }
 
