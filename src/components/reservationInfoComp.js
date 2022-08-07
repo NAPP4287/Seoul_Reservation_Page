@@ -2,6 +2,7 @@ import {
   ChkBodyWrap,
   LikeSelectBox,
   LikeCountrySelectBox,
+  CountryListWrap,
 } from '../style/reservationInfoCompStyle';
 import { programList, countryCode } from '../data/programList';
 import Timer from './timer';
@@ -172,6 +173,20 @@ function ReservationInfoComp({
 
   return (
     <div>
+      {showCountryCode ? (
+        <CountryListWrap>
+          <ul
+            className='list-member'
+            style={showCountryCode ? { display: 'block' } : { display: 'none' }}
+          >
+            {countryCode.map((el) => (
+              <li key={el} onClick={() => clickOption('countryCode', el)}>
+                +{el}
+              </li>
+            ))}
+          </ul>
+        </CountryListWrap>
+      ) : null}
       <ChkBodyWrap>
         <p>{filterLanguage('name', langType)}</p>
         <input
@@ -186,24 +201,19 @@ function ReservationInfoComp({
         <p>{filterLanguage('phone', langType)}</p>
         <div className='countryWrap'>
           <LikeCountrySelectBox>
-            <div
-              className='selectType'
-              onClick={() => handleShowOptionBox('countryCode')}
-            >
-              +{sendPhone.countryCode}
-            </div>
-            <ul
-              className='list-member'
-              style={
-                showCountryCode ? { display: 'block' } : { display: 'none' }
-              }
-            >
-              {countryCode.map((el) => (
-                <li key={el} onClick={() => clickOption('countryCode', el)}>
-                  +{el}
-                </li>
-              ))}
-            </ul>
+            {sendPhone.countryCode === '기타' ? (
+              <div className='ectCountry'>
+                +
+                <input />
+              </div>
+            ) : (
+              <div
+                className='selectType'
+                onClick={() => handleShowOptionBox('countryCode')}
+              >
+                +{sendPhone.countryCode}
+              </div>
+            )}
           </LikeCountrySelectBox>
 
           <input

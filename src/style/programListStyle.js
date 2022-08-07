@@ -19,14 +19,14 @@ export const BackImgWrap = styled.div`
 export const ProgramListWrap = styled.ul`
   position: absolute;
   top: 110px;
-  padding: 0 140px;
+  padding: 0 126px;
   width: 100%;
   max-width: 1024px;
   left: 50%;
   transform: translate(-50%);
+
   > li {
     background-color: white;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.16);
     border-radius: 3px;
     height: 143px;
     margin-top: 20px;
@@ -48,9 +48,6 @@ export const ProgramListWrap = styled.ul`
   }
   > li:nth-child(1) {
     margin-top: 0;
-  }
-  @media (max-width: 500px) {
-    padding: 0 20px;
   }
 `;
 

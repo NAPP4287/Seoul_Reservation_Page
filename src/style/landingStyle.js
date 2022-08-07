@@ -24,15 +24,14 @@ export const LandingTitle = styled.div`
 `;
 
 export const ButtonWrap = styled.div`
-  display: flex;
   > button {
     width: 100%;
-    height: 220px;
+    height: 120px;
     background-color: white;
     border: none;
     border-radius: 8px;
     font-weight: bold;
-    font-size: 20px;
+    font-size: 24px;
   }
   > button:nth-child(2) {
     margin-left: 20px;
@@ -44,17 +43,17 @@ export const ButtonWrap = styled.div`
       font-size: 1rem;
       border-radius: 3px;
     }
-    > button:nth-child(2) {
-      margin-left: 0;
-      margin-top: 25px;
-    }
+  }
+  > button:nth-child(2) {
+    margin-left: 0;
+    margin-top: 25px;
   }
 `;
 
 export const LandingContent = styled.div`
   max-width: 1024px;
   width: 100%;
-  padding: 0 140px;
+  padding: 0 126px;
   position: absolute;
   top: 50%;
   transform: translate(0, -50%);

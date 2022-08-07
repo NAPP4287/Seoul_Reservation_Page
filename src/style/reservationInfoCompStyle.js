@@ -88,13 +88,12 @@ export const LikeSelectBox = styled.div`
   }
   > .list-member {
     width: calc(100% - 40px);
-    max-width: 335px;
     background-color: white;
     position: absolute;
     border: 1px solid #8c8c8c;
     border-radius: 3px;
     > li {
-      height: 45px;
+      height: 48px;
       line-height: 45px;
       padding: 0 5px;
       font-size: 13px;
@@ -118,21 +117,64 @@ export const LikeCountrySelectBox = styled.div`
     border-radius: 3px;
     border: 1px solid #8c8c8c;
   }
-  > .list-member {
+  > .ectCountry {
+    display: flex;
     width: 100px;
-    background-color: white;
-    position: absolute;
+    height: 40px;
     border: 1px solid #8c8c8c;
+    line-height: 40px;
+    margin-right: 10px;
+    padding: 0 5px;
     border-radius: 3px;
+    > input {
+      border: none;
+      width: 60px;
+      height: 28px;
+      border-bottom: 1px solid black;
+      padding-left: 5px;
+    }
+  }
+`;
+
+export const CountryListWrap = styled.div`
+  max-width: 1024px;
+  width: 100%;
+  min-height: 100vh;
+  height: 100%;
+  padding: 0 126px;
+  left: 50%;
+  transform: translate(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  z-index: 9999;
+  > .list-member {
+    border-radius: 3px;
+    position: absolute;
+    width: 100%;
+    left: 50%;
+    transform: translate(-50%);
+    bottom: 60px;
+    padding: 0 126px;
+    @media (max-width: 500px) {
+      padding: 0 20px;
+    }
     > li {
+      background-color: white;
       height: 45px;
       line-height: 45px;
       padding: 0 5px;
       font-size: 13px;
       cursor: pointer;
     }
+    > li:nth-child(1) {
+      border-radius: 20px 20px 0 0;
+    }
+    > li:nth-child(5) {
+      border-radius: 0 0 20px 20px;
+    }
     > li:hover {
-      background: #f2f2f2;
+      background: #d9d9d9;
     }
   }
 `;
