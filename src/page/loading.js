@@ -1,7 +1,12 @@
 import { LoadingWrap } from '../style/loadingStyle';
+import Spinner from '../assets/loadingSpin.gif';
 
 function Loading() {
-  return <div></div>;
+  return (
+    <LoadingWrap>
+      <img src={Spinner} alt='loading' />
+    </LoadingWrap>
+  );
 }
 
 export default Loading;

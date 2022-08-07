@@ -7,12 +7,14 @@ import { useDispatch } from 'react-redux';
 import { saveCompleteInfo } from '../redux/reservation/completeReservation';
 import { useNavigate } from 'react-router';
 import { filterLanguage } from '../common/filterLanguage';
+import Loading from './loading';
 
 function EditReservation({ langType }) {
   const [isPlace, setIsPlace] = useState(true);
   const [reservationCode, setReservationCode] = useState(null);
   const [showCancelModal, setShowCancelModal] = useState(false);
   const [checkNoti, setCheckNoti] = useState(true);
+  const [cl, setCl] = useState(false);
 
   const noneCheck = true;
 
@@ -39,36 +41,43 @@ function EditReservation({ langType }) {
       .then((r) => {
         dispatch(saveCompleteInfo({ ...r.data }));
       })
+      .then(() => setCl(true))
       .catch((e) => console.log(e));
   };
 
   return (
     <div>
-      {showCancelModal ? (
-        <CancelModal
-          setShowCancelModal={setShowCancelModal}
-          reservationCode={reservationCode}
-          langType={langType}
-        />
-      ) : null}
-      <div className='contentWrap'>
-        <CompReservationInfo langType={langType} />
-        {isPlace ? (
-          <CompNotification
-            setCheckNoti={setCheckNoti}
-            langType={langType}
-            noneCheck={noneCheck}
-          />
-        ) : null}
-        <div className='buttonWrap leftPadding'>
-          <button className='btnLeft' onClick={openCancelModal}>
-            {filterLanguage('cancelBtn', langType)}
-          </button>
-          <button className='btnRight' onClick={goLanding}>
-            {filterLanguage('confirmBtn', langType)}
-          </button>
-        </div>
-      </div>
+      {cl ? (
+        <>
+          {showCancelModal ? (
+            <CancelModal
+              setShowCancelModal={setShowCancelModal}
+              reservationCode={reservationCode}
+              langType={langType}
+            />
+          ) : null}
+          <div className='contentWrap'>
+            <CompReservationInfo langType={langType} />
+            {isPlace ? (
+              <CompNotification
+                setCheckNoti={setCheckNoti}
+                langType={langType}
+                noneCheck={noneCheck}
+              />
+            ) : null}
+            <div className='buttonWrap leftPadding'>
+              <button className='btnLeft' onClick={openCancelModal}>
+                {filterLanguage('cancelBtn', langType)}
+              </button>
+              <button className='btnRight' onClick={goLanding}>
+                {filterLanguage('confirmBtn', langType)}
+              </button>
+            </div>
+          </div>
+        </>
+      ) : (
+        <Loading />
+      )}
     </div>
   );
 }

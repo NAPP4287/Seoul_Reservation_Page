@@ -13,12 +13,14 @@ import { customAxios } from '../axios/custromAxios';
 import { useNavigate } from 'react-router';
 import CompReservationInfo from '../components/comReservationInfo';
 import { filterLanguage } from '../common/filterLanguage';
+import Loading from './loading';
 
 function ConfirmReservation({ langType }) {
   const confirmRes = useSelector((state) => state.saveReservation);
   const ectInfo = useSelector(getEctInfo);
   const dispatch = useDispatch();
   const [checkNoti, setCheckNoti] = useState(true);
+  const [cl, setCl] = useState(false);
   const navigate = useNavigate();
   const noneCheck = false;
 
@@ -31,88 +33,93 @@ function ConfirmReservation({ langType }) {
         dispatch(saveCompleteInfo({ ...r.data }));
         navigate('/checkReservation/complete');
       })
+      .then(() => setCl(true))
       .catch((e) => console.log(e));
   };
 
   return (
     <div>
-      <div className='leftPadding'>
-        <div className='contentWrap'>
-          <ConfirmReservationWrap>
-            <ConfirmHeadWrap>
-              <div className='confirmHead'>
-                {filterLanguage('checkResTitle', langType)}
-              </div>
-              {/* <div className='reservationNum'>
+      {cl ? (
+        <div className='leftPadding'>
+          <div className='contentWrap'>
+            <ConfirmReservationWrap>
+              <ConfirmHeadWrap>
+                <div className='confirmHead'>
+                  {filterLanguage('checkResTitle', langType)}
+                </div>
+                {/* <div className='reservationNum'>
                 예약번호 (고유) 날짜 영문자 조합
               </div> */}
-            </ConfirmHeadWrap>
-            <ReservationTime>
-              <div className='date'>
-                2022.{ectInfo.month}.{ectInfo.date}({ectInfo.week}){' '}
-                {ectInfo.time}
-              </div>
-              <div className='dateBottom'>
-                <div>{filterLanguage('personCount', langType)}</div>
-                <div>
-                  {confirmRes.ticketCount}
-                  {filterLanguage('person', langType)}/
-                  {ectInfo.price === 0
-                    ? filterLanguage('price', langType)
-                    : ectInfo.price}
+              </ConfirmHeadWrap>
+              <ReservationTime>
+                <div className='date'>
+                  2022.{ectInfo.month}.{ectInfo.date}({ectInfo.week}){' '}
+                  {ectInfo.time}
                 </div>
-              </div>
-            </ReservationTime>
-
-            <UserInfoWrap>
-              <div className='reservationTitleWrap'>
-                <div className='headTitle'>
-                  {filterLanguage('userInfo', langType)}
+                <div className='dateBottom'>
+                  <div>{filterLanguage('personCount', langType)}</div>
+                  <div>
+                    {confirmRes.ticketCount}
+                    {filterLanguage('person', langType)}/
+                    {ectInfo.price === 0
+                      ? filterLanguage('price', langType)
+                      : ectInfo.price}
+                  </div>
                 </div>
-              </div>
-              <ul>
-                <li>
-                  <div className='type'>
-                    {filterLanguage('reservationType', langType)}
-                  </div>
-                  <p>{ectInfo.resType}</p>
-                </li>
+              </ReservationTime>
 
-                <li>
-                  <div className='type'>
-                    {filterLanguage('userTitle', langType)}
+              <UserInfoWrap>
+                <div className='reservationTitleWrap'>
+                  <div className='headTitle'>
+                    {filterLanguage('userInfo', langType)}
                   </div>
-                  <p>{confirmRes.name}</p>
-                </li>
+                </div>
+                <ul>
+                  <li>
+                    <div className='type'>
+                      {filterLanguage('reservationType', langType)}
+                    </div>
+                    <p>{ectInfo.resType}</p>
+                  </li>
 
-                <li>
-                  <div className='type'>
-                    {filterLanguage('phone', langType)}
-                  </div>
-                  <p>
-                    <span>+{confirmRes.countryCode}</span>
-                    {confirmRes.phone}
-                  </p>
-                </li>
-              </ul>
-            </UserInfoWrap>
-            <CompNotification
-              setCheckNoti={setCheckNoti}
-              langType={langType}
-              noneCheck={noneCheck}
-            />
-          </ConfirmReservationWrap>
+                  <li>
+                    <div className='type'>
+                      {filterLanguage('userTitle', langType)}
+                    </div>
+                    <p>{confirmRes.name}</p>
+                  </li>
+
+                  <li>
+                    <div className='type'>
+                      {filterLanguage('phone', langType)}
+                    </div>
+                    <p>
+                      <span>+{confirmRes.countryCode}</span>
+                      {confirmRes.phone}
+                    </p>
+                  </li>
+                </ul>
+              </UserInfoWrap>
+              <CompNotification
+                setCheckNoti={setCheckNoti}
+                langType={langType}
+                noneCheck={noneCheck}
+              />
+            </ConfirmReservationWrap>
+          </div>
+          <div className='btnWrap'>
+            <button
+              className={checkNoti ? 'normalBtn' : 'activeBtn'}
+              disabled={checkNoti}
+              onClick={onClickReservation}
+            >
+              {filterLanguage('completeReservationBtn', langType)}
+            </button>
+          </div>
         </div>
-        <div className='btnWrap'>
-          <button
-            className={checkNoti ? 'normalBtn' : 'activeBtn'}
-            disabled={checkNoti}
-            onClick={onClickReservation}
-          >
-            {filterLanguage('completeReservationBtn', langType)}
-          </button>
-        </div>
-      </div>
+      ) : (
+        <Loading />
+      )}
     </div>
   );
 }

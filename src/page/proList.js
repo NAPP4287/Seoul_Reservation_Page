@@ -9,9 +9,11 @@ import { saveEctInfo, getEctInfo } from '../redux/reservation/reservationEct';
 import { customAxios } from '../axios/custromAxios';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterLanguage } from '../common/filterLanguage';
+import Loading from './loading';
 
 function ProList({ langType }) {
   const [proList, setProList] = useState([]);
+  const [cl, setCl] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const ectInfo = useSelector(getEctInfo);
@@ -24,35 +26,45 @@ function ProList({ langType }) {
     const params = { lang: langType };
     customAxios
       .get('reservation/list', { params: params })
-      .then((r) => setProList([...r.data.list]));
+      .then((r) => setProList([...r.data.list]))
+      .then(() => setCl(true))
+      .catch((e) => console.log(e));
   }, []);
   return (
-    <BackImgWrap>
-      <div className='backImg'></div>
-      <div className='contentWrap'>
-        <ProgramListWrap>
-          {proList.map((el, idx) => (
-            <li key={idx}>
-              <h3>{el.title}</h3>
+    <>
+      {cl ? (
+        <BackImgWrap>
+          <div className='backImg'></div>
+          <div className='contentWrap'>
+            <ProgramListWrap>
+              {proList.map((el, idx) => (
+                <li key={idx}>
+                  <h3>{el.title}</h3>
 
-              <BottomContent>
-                <span>
-                  {el.price === 0
-                    ? filterLanguage('price', langType)
-                    : el.price}
-                </span>
-                <button
-                  className='hiddenText'
-                  onClick={() => clickProgram(el.viewIdx, el.price, el.title)}
-                >
-                  {filterLanguage('reservationBtn', langType)}
-                </button>
-              </BottomContent>
-            </li>
-          ))}
-        </ProgramListWrap>
-      </div>
-    </BackImgWrap>
+                  <BottomContent>
+                    <span>
+                      {el.price === 0
+                        ? filterLanguage('price', langType)
+                        : el.price}
+                    </span>
+                    <button
+                      className='hiddenText'
+                      onClick={() =>
+                        clickProgram(el.viewIdx, el.price, el.title)
+                      }
+                    >
+                      {filterLanguage('reservationBtn', langType)}
+                    </button>
+                  </BottomContent>
+                </li>
+              ))}
+            </ProgramListWrap>
+          </div>
+        </BackImgWrap>
+      ) : (
+        <Loading />
+      )}
+    </>
   );
 }
 

@@ -16,6 +16,7 @@ import { languageSelect } from './redux/langSelect/language';
 import BackNav from './components/backNav';
 import CertCompleteModal from './modal/certCompleteModal';
 import NavBackNone from './components/navBackNone';
+import Loading from './page/loading';
 
 function App() {
   const { invalidOpen, certCompletOpen } = useSelector(modalInfo);
@@ -23,6 +24,7 @@ function App() {
 
   return (
     <div className='App'>
+      {/* <Loading></Loading> */}
       {invalidOpen ? <InvalidModal langType={langType} /> : null}
       {certCompletOpen ? <CertCompleteModal langType={langType} /> : null}
 

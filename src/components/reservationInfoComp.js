@@ -180,7 +180,7 @@ function ReservationInfoComp({
   return (
     <div>
       {showCountryCode ? (
-        <CountryListWrap>
+        <CountryListWrap onClick={() => setShowCountryCode(false)}>
           <ul
             className='list-member'
             style={showCountryCode ? { display: 'block' } : { display: 'none' }}
@@ -201,6 +201,7 @@ function ReservationInfoComp({
           onChange={handleChangeUserName}
           value={selectOption.name}
         />
+        <p className='inputDesc'>* 신분증 또는 여권상의 실명을 입력해주세요.</p>
       </ChkBodyWrap>
 
       <ChkBodyWrap>

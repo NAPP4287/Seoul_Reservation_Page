@@ -1,7 +1,18 @@
 import styled from 'styled-components';
 
 export const LoadingWrap = styled.div`
-  height: 100vh;
+  position: absolute;
   width: 100vw;
-  background-color: red;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f2f2f2;
+  > img {
+    width: 50px;
+  }
 `;

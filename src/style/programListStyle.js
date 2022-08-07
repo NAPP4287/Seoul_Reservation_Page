@@ -34,6 +34,7 @@ export const ProgramListWrap = styled.ul`
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.16);
     > h3 {
       text-align: left;
       white-space: nowrap;

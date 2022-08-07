@@ -10,12 +10,18 @@ export const ChkBodyWrap = styled.div`
     font-size: 13px;
     padding-bottom: 7px;
   }
+  > .inputDesc {
+    padding-top: 5px;
+  }
   > input {
     width: calc(100% - 6px);
-    height: 40px;
+    height: 55px;
     border-radius: 3px;
     border: 1px solid #8c8c8c;
     padding: 0 0 0 5px;
+    @media (max-width: 500px) {
+      height: 44px;
+    }
   }
   > .countryWrap {
     display: flex;
@@ -38,13 +44,16 @@ export const ChkBodyWrap = styled.div`
     }
     > button {
       width: 90px;
-      height: 40px;
+      height: 55px;
       margin-left: 10px;
       background-color: #d9d9d9;
       font-size: 11px;
       border: none;
       border-radius: 3px;
       color: black;
+      @media (max-width: 500px) {
+        height: 44px;
+      }
     }
     > .active {
       background-color: black;
@@ -53,10 +62,13 @@ export const ChkBodyWrap = styled.div`
   }
   > button {
     width: 100%;
-    height: 40px;
+    height: 55px;
     margin-top: 10px;
     font-weight: bold;
     border: none;
+    @media (max-width: 500px) {
+      height: 44px;
+    }
   }
   > .active {
     background-color: black;
@@ -110,25 +122,32 @@ export const LikeCountrySelectBox = styled.div`
     width: 100px;
     background: url(${smallDownArrow}) no-repeat right 9px center;
     background-color: white;
-    height: 40px;
-    line-height: 40px;
+    height: 55px;
+    line-height: 55px;
     padding: 0 5px;
     font-size: 13px;
     border-radius: 3px;
     border: 1px solid #8c8c8c;
+    @media (max-width: 500px) {
+      height: 44px;
+      line-height: 44px;
+    }
   }
   > .ectCountry {
     display: flex;
     width: 100px;
-    height: 40px;
+    height: 55px;
     border: 1px solid #8c8c8c;
-    line-height: 40px;
+    line-height: 55px;
     margin-right: 10px;
     padding: 0 5px;
     border-radius: 3px;
     display: flex;
     align-items: center;
     justify-content: center;
+    @media (max-width: 500px) {
+      height: 44px;
+    }
     > input {
       border: none;
       width: 60px;

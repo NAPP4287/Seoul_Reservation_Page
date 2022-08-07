@@ -15,6 +15,7 @@ export const SelectTimeBox = styled.div`
   width: 100%;
   white-space: nowrap;
   overflow-x: auto;
+  display: flex;
   > button {
     width: 120px;
     height: 60px;
