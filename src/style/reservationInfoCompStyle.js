@@ -126,12 +126,15 @@ export const LikeCountrySelectBox = styled.div`
     margin-right: 10px;
     padding: 0 5px;
     border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     > input {
       border: none;
       width: 60px;
-      height: 28px;
+      height: 18px;
+      line-height: 18px;
       border-bottom: 1px solid black;
-      padding-left: 5px;
     }
   }
 `;

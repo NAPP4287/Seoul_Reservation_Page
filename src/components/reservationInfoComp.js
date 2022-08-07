@@ -52,11 +52,10 @@ function ReservationInfoComp({
 
   const test = () => {
     setEndCertTime(false);
-
     customAxios
       .post('/auth/phone', {
         phone: sendPhone.phone.replace('0', ''),
-        countryCode: sendPhone.countryCode,
+        countryCode: reservationInfo.countryCode,
       })
       .then((r) => {
         setCertConfirm(true);
@@ -171,6 +170,13 @@ function ReservationInfoComp({
       });
   };
 
+  const handleEctCountryCode = (e) => {
+    e.target.value = e.target.value.replace(/[^0-9]/g, '');
+    setReservationInfo({ ...reservationInfo, countryCode: e.target.value });
+    setSelectOption({ ...selectOption, selectType: e.target.value });
+    console.log(reservationInfo);
+  };
+
   return (
     <div>
       {showCountryCode ? (
@@ -204,7 +210,10 @@ function ReservationInfoComp({
             {sendPhone.countryCode === '기타' ? (
               <div className='ectCountry'>
                 +
-                <input />
+                <input
+                  maxLength='3'
+                  onChange={(e) => handleEctCountryCode(e)}
+                />
               </div>
             ) : (
               <div
