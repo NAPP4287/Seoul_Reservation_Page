@@ -22,7 +22,7 @@ export const LandingTitle = styled.div`
   font-size: 60px;
   font-weight: bold;
   color: white;
-  padding-bottom: 150px;
+  padding-bottom: 50px;
   @media (max-width: 500px) {
     font-size: 40px;
   }
@@ -59,7 +59,8 @@ export const LandingContent = styled.div`
   max-width: 1024px;
   width: 100%;
   padding: 0 126px;
-  margin-top: 150px;
+  /* margin-top: 150px;
+  margin-bottom: 150px; */
   display: flex;
   flex-direction: column;
   /* position: absolute;
@@ -72,7 +73,7 @@ export const LandingContent = styled.div`
     text-decoration: underline;
     margin-top: 30px;
     display: block;
-    padding-bottom: 40px;
+    /* padding-bottom: 40px; */
   }
 
   @media (max-width: 500px) {
