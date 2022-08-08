@@ -9,25 +9,31 @@ export const BackImgWrap = styled.div`
   width: 100%;
   margin: 0 auto;
   > .backImg {
+    width: 100%;
     min-height: 100vh;
     height: 100%;
+    padding: 0 126px;
     background-image: url(${backgroundImg});
-    opacity: 0.5;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @media (max-width: 500px) {
+      padding: 0 20px;
+    }
   }
 `;
 
 export const ProgramListWrap = styled.ul`
-  position: absolute;
-  top: 110px;
-  padding: 0 126px;
   width: 100%;
   max-width: 1024px;
-  left: 50%;
-  transform: translate(-50%);
-  @media (max-width: 500px) {
-    padding: 0 20px;
-  }
+  height: 100%;
+  min-height: 100vh;
+  padding: 110px 0 40px 0;
+  /* left: 50%;
+  transform: translate(-50%); */
   > li {
+    width: 100%;
     background-color: white;
     border-radius: 3px;
     height: 143px;

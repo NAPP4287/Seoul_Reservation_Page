@@ -29,32 +29,33 @@ function LandingPage({ langType }) {
       <Nav />
       <div className='landingWrap'>
         <LandingWrap>
-          <LandingImg />
-          <LandingContent>
-            <LandingTitle>Seoul Beauty Travel Week</LandingTitle>
-            <ButtonWrap>
-              <button
-                className='hiddenText'
-                onClick={() => {
-                  clickGoPage('reservation');
-                }}
-              >
-                {filterLanguage('reservationBtn', langType)}
-              </button>
-              <button
-                className='hiddenText'
-                onClick={() => {
-                  clickGoPage('check');
-                }}
-              >
-                {filterLanguage('checkReservationBtn', langType)}
-              </button>
-            </ButtonWrap>
+          <LandingImg>
+            <LandingContent>
+              <LandingTitle>Seoul Beauty Travel Week</LandingTitle>
+              <ButtonWrap>
+                <button
+                  className='hiddenText'
+                  onClick={() => {
+                    clickGoPage('reservation');
+                  }}
+                >
+                  {filterLanguage('reservationBtn', langType)}
+                </button>
+                <button
+                  className='hiddenText'
+                  onClick={() => {
+                    clickGoPage('check');
+                  }}
+                >
+                  {filterLanguage('checkReservationBtn', langType)}
+                </button>
+              </ButtonWrap>
 
-            <a className='hiddenText' href='https://www.naver.com/'>
-              {filterLanguage('seoulBeautyHomePage', langType)}
-            </a>
-          </LandingContent>
+              <a className='hiddenText' href='https://www.naver.com/'>
+                {filterLanguage('seoulBeautyHomePage', langType)}
+              </a>
+            </LandingContent>
+          </LandingImg>
         </LandingWrap>
       </div>
     </div>

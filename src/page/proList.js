@@ -37,8 +37,7 @@ function ProList({ langType }) {
     <>
       {cl ? (
         <BackImgWrap>
-          <div className='backImg'></div>
-          <div className='contentWrap'>
+          <div className='backImg'>
             <ProgramListWrap>
               {proList.map((el, idx) => (
                 <li key={idx}>

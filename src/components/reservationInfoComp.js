@@ -201,7 +201,9 @@ function ReservationInfoComp({
           onChange={handleChangeUserName}
           value={selectOption.name}
         />
-        <p className='inputDesc'>* 신분증 또는 여권상의 실명을 입력해주세요.</p>
+        <p className='inputDesc'>
+          * {filterLanguage('noticeRealName', langType)}
+        </p>
       </ChkBodyWrap>
 
       <ChkBodyWrap>

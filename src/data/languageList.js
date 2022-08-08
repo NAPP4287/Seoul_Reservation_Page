@@ -1,9 +1,9 @@
 export const langList = {
   nav: [
     { langType: 'ko', language: '한국어' },
-    { langType: 'cn', language: '中文（简体）' },
     { langType: 'en', language: 'English' },
     { langType: 'jp', language: '日本語' },
+    { langType: 'cn', language: '中文（简体）' },
   ],
   reservationBtn: [
     { langType: 'ko', language: '예약하기' },
@@ -904,6 +904,15 @@ export const langList = {
     { langType: 'cn', language: '您的订单已取消' },
     { langType: 'en', language: 'Your reservation has been cancelled. ' },
     { langType: 'jp', language: '予約がキャンセルされました。' },
+  ],
+  noticeRealName: [
+    { langType: 'ko', language: '신분증 또는 여권상의 실명을 입력해주세요.' },
+    { langType: 'cn', language: '请填写护照上的真实姓名' },
+    { langType: 'en', language: 'Please enter your passport full name' },
+    {
+      langType: 'jp',
+      language: '身分証またはパスポート上の実名を入力してください。',
+    },
   ],
   aaa: [
     { langType: 'ko', language: '인증완료' },

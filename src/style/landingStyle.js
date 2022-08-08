@@ -2,18 +2,20 @@ import styled from 'styled-components';
 import backgroundImg from '../assets/example.jpg';
 
 export const LandingWrap = styled.div`
-  height: 100vh;
+  height: 100%;
   width: 100%;
   max-width: 1024px;
-  background-color: black;
 `;
 
 export const LandingImg = styled.div`
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  height: 100%;
   background-image: url(${backgroundImg});
   background-size: cover;
-  opacity: 0.5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const LandingTitle = styled.div`
@@ -57,9 +59,12 @@ export const LandingContent = styled.div`
   max-width: 1024px;
   width: 100%;
   padding: 0 126px;
-  position: absolute;
+  margin-top: 150px;
+  display: flex;
+  flex-direction: column;
+  /* position: absolute;
   top: 50%;
-  transform: translate(0, -50%);
+  transform: translate(0, -50%); */
   > a {
     color: white;
     font-size: 16px;
@@ -67,6 +72,7 @@ export const LandingContent = styled.div`
     text-decoration: underline;
     margin-top: 30px;
     display: block;
+    padding-bottom: 40px;
   }
 
   @media (max-width: 500px) {
