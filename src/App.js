@@ -24,11 +24,10 @@ function App() {
 
   return (
     <div className='App'>
-      {/* <Loading></Loading> */}
       {invalidOpen ? <InvalidModal langType={langType} /> : null}
       {certCompletOpen ? <CertCompleteModal langType={langType} /> : null}
-
       <BrowserRouter>
+        {/* <Loading></Loading> */}
         <Routes>
           <Route path='/' element={<LandingPage langType={langType} />} />
           <Route

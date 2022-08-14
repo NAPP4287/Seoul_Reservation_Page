@@ -29,7 +29,7 @@ function ReservationPage({ langType }) {
     if (isNaN(numberIdx)) {
       dispatch(invalidModalOpen());
     } else {
-      if (numberIdx > 6 || numberIdx < 0) {
+      if (numberIdx > 7 || numberIdx < 0) {
         dispatch(invalidModalOpen());
       } else {
         dispatch(invalidModalClose());

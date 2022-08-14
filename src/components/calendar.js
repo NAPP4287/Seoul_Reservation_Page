@@ -29,6 +29,7 @@ function CalendarComp({
   });
   const [dateArr, setDateArr] = useState([]);
   const [isNull, setIsNull] = useState(false);
+  const [noneDay, setNoneDay] = useState(false);
   const [callItemIdx, setCallItemIdx] = useState(0);
   const date = ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'];
   const lastDate = new Date(2022, calendarMonth, 0).getDate();
@@ -47,6 +48,7 @@ function CalendarComp({
         .get(`reservation/view/${queryIdx}/20220${month}`)
         .then((r) => {
           if (r.data.dateList !== null) {
+            setNoneDay(false);
             setIsNull(false);
             setDateArr([...r.data.dateList]);
           } else {
@@ -56,7 +58,12 @@ function CalendarComp({
         });
     } else {
       customAxios.get(`reservation/view/${queryIdx}/2022${month}`).then((r) => {
-        setDateArr([...r.data.dateList]);
+        if (r.data.dateList !== null) {
+          setNoneDay(false);
+          setDateArr([...r.data.dateList]);
+        } else {
+          setNoneDay(true);
+        }
       });
     }
   };
@@ -95,13 +102,8 @@ function CalendarComp({
       });
       const itemIdxArr = dateArr.map((el) => el.itemIdx);
       const isTypeArr = dateArr.map((el) => el.isType);
-      const activeDateArr = dateArr.filter((el) => {
-        if (el.itemIdx !== null) {
-          return el.date;
-        }
-      });
 
-      if (activeDate.includes(i)) {
+      if (activeDate.includes(i) && !noneDay) {
         arrDate.push({
           date: i,
           isType: filterDate[0].isType,
@@ -161,7 +163,11 @@ function CalendarComp({
 
           <h3>2022.{calendarMonth}</h3>
 
-          <button className='right' onClick={() => goMonth('next')}>
+          <button
+            className='right'
+            onClick={() => goMonth('next')}
+            disabled={isNull}
+          >
             {calendarMonth === 10 ? (
               <div></div>
             ) : (

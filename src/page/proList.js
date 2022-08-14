@@ -20,6 +20,7 @@ function ProList({ langType }) {
 
   const clickProgram = (viewIdx, price, title) => {
     navigate(`/programList/reservation?idx=${viewIdx}`);
+    console.log(ectInfo);
     dispatch(saveEctInfo({ ...ectInfo, price: price, resType: title }));
   };
   useEffect(() => {
@@ -27,7 +28,6 @@ function ProList({ langType }) {
     customAxios
       .get('reservation/list', { params: params })
       .then((r) => {
-        console.log(r);
         setProList([...r.data.list]);
       })
       .then(() => setCl(true))
