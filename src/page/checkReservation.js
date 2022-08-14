@@ -3,7 +3,7 @@ import { useState, useRef } from 'react';
 import ReservationInfoComp from '../components/reservationInfoComp';
 import { useEffect } from 'react';
 import { setCookie } from '../axios/cookie';
-// import { saveToken } from '../redux/token/accessToken';
+import { saveToken } from '../redux/token/accessToken';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { filterLanguage } from '../common/filterLanguage';
@@ -35,8 +35,8 @@ function CheckReservation({ langType }) {
   });
 
   const goReservationList = () => {
-    // dispatch(saveToken(token));
-    // setCookie('myToken', token);
+    dispatch(saveToken(token));
+    setCookie('myToken', token);
     navigate('/checkReservation/reservationList');
     console.log(token);
   };

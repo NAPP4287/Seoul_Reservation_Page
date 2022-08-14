@@ -21,7 +21,6 @@ function CompleteReservation({ langType }) {
   }, []);
 
   const navigate = useNavigate();
-  console.log(token);
   const goLanding = () => {
     dispatch(removeToken());
     navigate('/');

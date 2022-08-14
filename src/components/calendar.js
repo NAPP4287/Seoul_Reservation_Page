@@ -48,7 +48,6 @@ function CalendarComp({
         .then((r) => {
           if (r.data.dateList !== null) {
             setIsNull(false);
-            console.log(r);
             setDateArr([...r.data.dateList]);
           } else {
             setIsNull(true);
@@ -57,8 +56,6 @@ function CalendarComp({
         });
     } else {
       customAxios.get(`reservation/view/${queryIdx}/2022${month}`).then((r) => {
-        console.log(r);
-
         setDateArr([...r.data.dateList]);
       });
     }
@@ -118,7 +115,6 @@ function CalendarComp({
   };
 
   const handleChangeDate = (idx, selectDate, itemIdx) => {
-    console.log(idx, queryIdx, itemIdx);
     setActiveColor({ idx: idx, active: true });
     setItemIdx(itemIdx);
     customAxios

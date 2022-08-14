@@ -920,6 +920,111 @@ export const langList = {
     { langType: 'en', language: 'Others' },
     { langType: 'jp', language: '其の外' },
   ],
+  error: {
+    AIT: [
+      {
+        langType: 'ko',
+        language:
+          '이미 예약이 있습니다. 동일 핸드폰번호로 프로그램 및 공간 예약은 한 번만 가능합니다.',
+      },
+      { langType: 'cn', language: '已预约完成. 同个手机号码仅限预约一次。' },
+      {
+        langType: 'en',
+        language:
+          'There is already a reservation. You can only reserve on program and space with the same  phone number. ',
+      },
+      {
+        langType: 'jp',
+        language:
+          'すでに予約があります。同一の携帯番号でプログラムおよび場所の予約は一度のみ可能です。',
+      },
+    ],
+    ATM: [
+      {
+        langType: 'ko',
+        language: '유효기간이 만료된 인증번호 입니다.',
+      },
+      { langType: 'cn', language: '验证码已失效' },
+      { langType: 'en', language: 'That verification number has expired.' },
+      { langType: 'jp', language: '有効期間が満了した認証番号です。' },
+    ],
+    'IAN-1': [
+      { langType: 'ko', language: '잘못된 인증 번호입니다.' },
+      { langType: 'cn', language: '인증완료' },
+      { langType: 'en', language: '인증완료' },
+      { langType: 'jp', language: '인증완료' },
+    ],
+    'IAN-2': [
+      {
+        langType: 'ko',
+        language: '번호가 다르거나 이미 인증한 인증번호입니다.',
+      },
+      { langType: 'cn', language: '인증완료' },
+      { langType: 'en', language: '인증완료' },
+      { langType: 'jp', language: '인증완료' },
+    ],
+    CPI: [
+      {
+        langType: 'ko',
+        language:
+          '핸드폰 정보가 정상적이지 않습니다. 핸드폰 인증 과정이 다시 필요합니다.',
+      },
+      { langType: 'cn', language: '인증완료' },
+      { langType: 'en', language: '인증완료' },
+      { langType: 'jp', language: '인증완료' },
+    ],
+
+    INT: [
+      {
+        langType: 'ko',
+        language:
+          '판매하는 티켓이 아닙니다. IDX가 사용하지 않는 티켓 정보 요청',
+      },
+      { langType: 'cn', language: '인증완료' },
+      { langType: 'en', language: '인증완료' },
+      { langType: 'jp', language: '인증완료' },
+    ],
+    NTL: [
+      { langType: 'ko', language: '남은 티켓이 없습니다.' },
+      { langType: 'cn', language: '인증완료' },
+      { langType: 'en', language: '인증완료' },
+      { langType: 'jp', language: '인증완료' },
+    ],
+    RMT: [
+      {
+        langType: 'ko',
+        language: '구매할 수 있는 수량보다 많은 티켓을 요청했습니다. ',
+      },
+      { langType: 'cn', language: '인증완료' },
+      { langType: 'en', language: '인증완료' },
+      { langType: 'jp', language: '인증완료' },
+    ],
+    'NTL-2': [
+      { langType: 'ko', language: '구매하는 티켓이 0 미만입니다.' },
+      { langType: 'cn', language: '인증완료' },
+      { langType: 'en', language: '인증완료' },
+      { langType: 'jp', language: '인증완료' },
+    ],
+    'NTL-3': [
+      {
+        langType: 'ko',
+        language: '구매 수량 티켓보다 남은 티켓이 부족합니다.',
+      },
+      { langType: 'cn', language: '인증완료' },
+      { langType: 'en', language: '인증완료' },
+      { langType: 'jp', language: '인증완료' },
+    ],
+
+    TMR: [
+      {
+        langType: 'ko',
+        language: '너무 많은 요청을 보냈습니다. 3분뒤 다시 시도하세요.',
+      },
+      { langType: 'cn', language: '인증완료' },
+      { langType: 'en', language: '인증완료' },
+      { langType: 'jp', language: '인증완료' },
+    ],
+  },
   aaa: [
     { langType: 'ko', language: '인증완료' },
     { langType: 'cn', language: '인증완료' },

@@ -18,9 +18,9 @@ function CheckReservationList({ langType }) {
 
   useEffect(() => {
     if (token.accessToken === '') {
-      setIsValid(true);
-    } else {
       setIsValid(false);
+    } else {
+      setIsValid(true);
     }
 
     getReservationList();
@@ -30,7 +30,12 @@ function CheckReservationList({ langType }) {
     customAxios
       .get('/confirm/list', { params: params })
       .then((r) => {
-        setProgramList([...r.data.list]);
+        console.log(r);
+        if (r.data.list === null) {
+          setProgramList([]);
+        } else {
+          setProgramList([...r.data.list]);
+        }
       })
       .then(() => setCl(true))
       .catch((e) => console.log(e));

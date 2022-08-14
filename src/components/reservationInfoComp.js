@@ -12,8 +12,9 @@ import { useDispatch } from 'react-redux';
 import { filterLanguage } from '../common/filterLanguage';
 import { certCompleteModalOpen } from '../redux/modal/modalOpen';
 import { countryLang } from '../data/programList';
-// import { setCookie } from '../axios/cookie';
-// import { saveToken } from '../redux/token/accessToken';
+import { setCookie } from '../axios/cookie';
+import { saveToken } from '../redux/token/accessToken';
+import { errorMsgList } from '../data/errorMsg';
 
 function ReservationInfoComp({
   certConfirm,
@@ -48,27 +49,32 @@ function ReservationInfoComp({
   const dispatch = useDispatch();
 
   const handlePhoneCertReq = () => {
-    test();
+    setCertComplete(false);
+    reqPhone();
   };
 
-  const test = () => {
+  const reqPhone = () => {
     setEndCertTime(false);
     customAxios
       .post('/auth/phone', {
-        phone: sendPhone.phone.replace('0', ''),
+        phone:
+          reservationInfo.countryCode === '82'
+            ? sendPhone.phone.replace('0', '')
+            : sendPhone.phone,
         countryCode: reservationInfo.countryCode,
       })
       .then((r) => {
+        console.log(sendPhone);
         setCertConfirm(true);
         setCertTime(false);
         setIsCertActive(false);
       })
       .catch((e) => {
         const status = e.response.status;
-        if (status === 400) {
-          setErrorMsg(true);
-        } else if (status === 500) {
+        if (status === 500) {
           setErrorMsg('서버 오류입니다.');
+        } else {
+          alert(e.response.data.message);
         }
         setCertTime(true);
       });
@@ -156,16 +162,22 @@ function ReservationInfoComp({
         setCertTime(true);
         setEndCertTime(false);
         dispatch(certCompleteModalOpen());
-        // setCookie('myToken', r.data.Authorization);
-        // dispatch(saveToken(r.data.Authorization));
+        setCookie('myToken', r.data.Authorization);
+        dispatch(saveToken(r.data.Authorization));
+        if (reservationInfo.countryCode === '82') {
+          setReservationInfo({
+            ...reservationInfo,
+            phone: sendPhone.phone.replace('0', ''),
+          });
+        }
       })
       .catch((e) => {
         const status = e.response.status;
-        if (status === 400) {
-          setEndCertTime(false);
-          setErrorMsg(true);
-        } else if (status === 500) {
+        const errorMsg = e.response.data.message;
+        if (status === 500) {
           setErrorMsg('서버 오류입니다.');
+        } else {
+          alert(errorMsgList[`${errorMsg}`]);
         }
         setCertTime(true);
       });

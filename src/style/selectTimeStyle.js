@@ -16,6 +16,9 @@ export const SelectTimeBox = styled.div`
   white-space: nowrap;
   overflow-x: auto;
   display: flex;
+  > .disableBtn {
+    background-color: red;
+  }
   > button {
     width: 120px;
     height: 60px;
@@ -27,8 +30,10 @@ export const SelectTimeBox = styled.div`
     font-size: 14px;
     > span {
       display: block;
+      padding: 0 40px;
     }
   }
+
   > button:nth-child(1) {
     margin-left: 0;
   }

@@ -25,6 +25,8 @@ function Timer({
       setcertConfirm(false);
       setEndCertTime(true);
       setErrorMsg(false);
+    } else {
+      setCertTime(false);
     }
 
     return () => clearInterval(countDown);

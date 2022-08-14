@@ -14,8 +14,9 @@ import { useNavigate } from 'react-router';
 import CompReservationInfo from '../components/comReservationInfo';
 import { filterLanguage } from '../common/filterLanguage';
 import Loading from './loading';
-import { getAccessToken } from '../redux/token/accessToken';
+import { getAccessToken, removeToken } from '../redux/token/accessToken';
 import InvalidModal from '../modal/invalidModal';
+import { errorMsgList } from '../data/errorMsg';
 
 function ConfirmReservation({ langType }) {
   const confirmRes = useSelector((state) => state.saveReservation);
@@ -28,8 +29,11 @@ function ConfirmReservation({ langType }) {
   const navigate = useNavigate();
   const noneCheck = false;
 
+  const param = new URLSearchParams(window.location.search);
+  const queryIdx = param.get('idx');
+
   useEffect(() => {
-    if (token.accessToken === '') {
+    if (token.accessToken !== '') {
       setIsValid(true);
     } else {
       setIsValid(false);
@@ -45,7 +49,19 @@ function ConfirmReservation({ langType }) {
         dispatch(saveCompleteInfo({ ...r.data }));
         navigate('/checkReservation/complete');
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        const errorStatus = e.response.status;
+        const errorMsg = e.response.data.message;
+
+        if (errorStatus === 500) {
+          alert('서버 오류 입니다. 잠시 후 다시 시도해 주세요.');
+          dispatch(removeToken());
+          navigate('/');
+        } else {
+          alert(errorMsgList[`${errorMsg}`]);
+          dispatch(removeToken());
+        }
+      });
   };
 
   return (
@@ -117,6 +133,7 @@ function ConfirmReservation({ langType }) {
                 setCheckNoti={setCheckNoti}
                 langType={langType}
                 noneCheck={noneCheck}
+                queryIdx={queryIdx}
               />
             </ConfirmReservationWrap>
           </div>

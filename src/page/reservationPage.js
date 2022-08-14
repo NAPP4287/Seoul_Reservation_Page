@@ -65,7 +65,7 @@ function ReservationPage({ langType }) {
   const reservationClick = () => {
     console.log(reservationInfo);
     dispatch(saveReservaion({ ...reservationInfo }));
-    navigate('/reservationConfirm');
+    navigate(`/reservationConfirm?idx=${queryIdx}`);
   };
 
   const checkReservation = () => {

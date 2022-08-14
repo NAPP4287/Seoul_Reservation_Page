@@ -33,19 +33,19 @@ function SelectTicketCount({ setReservationInfo, reservationInfo, langType }) {
               <button
                 className='minus'
                 onClick={() => addPerson('minus')}
-                disabled={reservationInfo.ticketCount === 0}
+                disabled={reservationInfo.ticketCount === 1}
               >
                 -
               </button>
               <span>{reservationInfo.ticketCount}</span>
               <button
                 onClick={() => addPerson('add')}
-                disabled={reservationInfo.ticketCount === 2}
-                style={
-                  reservationInfo.ticketCount === 2
-                    ? { backroundColor: '#C5C5C5' }
-                    : { backgroundColor: 'black' }
-                }
+                disabled={reservationInfo.ticketCount === 1}
+                // style={
+                //   reservationInfo.ticketCount === 2
+                //     ? { backroundColor: '#C5C5C5' }
+                //     : { backgroundColor: 'black' }
+                // }
               >
                 +
               </button>
