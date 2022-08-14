@@ -914,6 +914,12 @@ export const langList = {
       language: '身分証またはパスポート上の実名を入力してください。',
     },
   ],
+  ect: [
+    { langType: 'ko', language: '기타' },
+    { langType: 'cn', language: '其他' },
+    { langType: 'en', language: 'Others' },
+    { langType: 'jp', language: '其の外' },
+  ],
   aaa: [
     { langType: 'ko', language: '인증완료' },
     { langType: 'cn', language: '인증완료' },

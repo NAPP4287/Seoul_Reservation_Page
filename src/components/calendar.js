@@ -28,6 +28,8 @@ function CalendarComp({
     active: false,
   });
   const [dateArr, setDateArr] = useState([]);
+  const [isNull, setIsNull] = useState(false);
+  const [callItemIdx, setCallItemIdx] = useState(0);
   const date = ['Sun', 'Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'];
   const lastDate = new Date(2022, calendarMonth, 0).getDate();
   const startDay = new Date(2022, calendarMonth - 1).getDay();
@@ -44,10 +46,19 @@ function CalendarComp({
       customAxios
         .get(`reservation/view/${queryIdx}/20220${month}`)
         .then((r) => {
-          setDateArr([...r.data.dateList]);
+          if (r.data.dateList !== null) {
+            setIsNull(false);
+            console.log(r);
+            setDateArr([...r.data.dateList]);
+          } else {
+            setIsNull(true);
+            setCalendarMonth(10);
+          }
         });
     } else {
       customAxios.get(`reservation/view/${queryIdx}/2022${month}`).then((r) => {
+        console.log(r);
+
         setDateArr([...r.data.dateList]);
       });
     }
@@ -80,14 +91,24 @@ function CalendarComp({
       const activeMonth = dateArr.map((el) =>
         Number(el.itemDate.split('.')[1])
       );
+      const filterDate = dateArr.filter((el) => {
+        if (Number(el.itemDate.split('.')[2]) === i) {
+          return el;
+        }
+      });
       const itemIdxArr = dateArr.map((el) => el.itemIdx);
       const isTypeArr = dateArr.map((el) => el.isType);
+      const activeDateArr = dateArr.filter((el) => {
+        if (el.itemIdx !== null) {
+          return el.date;
+        }
+      });
 
       if (activeDate.includes(i)) {
         arrDate.push({
           date: i,
-          isType: isTypeArr[i - 1],
-          itemIdx: itemIdxArr[i - 1],
+          isType: filterDate[0].isType,
+          itemIdx: filterDate[0].itemIdx,
         });
       } else {
         arrDate.push({ date: i, isType: 1, itemIdx: null });
@@ -97,6 +118,7 @@ function CalendarComp({
   };
 
   const handleChangeDate = (idx, selectDate, itemIdx) => {
+    console.log(idx, queryIdx, itemIdx);
     setActiveColor({ idx: idx, active: true });
     setItemIdx(itemIdx);
     customAxios
@@ -129,7 +151,11 @@ function CalendarComp({
         </div>
 
         <MonthWrap>
-          <button className='left' onClick={() => goMonth('prev')}>
+          <button
+            className='left'
+            onClick={() => goMonth('prev')}
+            disabled={isNull}
+          >
             {calendarMonth === 9 ? (
               <div></div>
             ) : (

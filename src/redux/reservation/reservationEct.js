@@ -20,8 +20,6 @@ export const reservationEctSlice = createSlice({
       state.resType = action.payload.resType;
       state.price = action.payload.price;
       state.time = action.payload.time;
-
-      console.log(state.month, state.date, state.time);
     },
   },
 });

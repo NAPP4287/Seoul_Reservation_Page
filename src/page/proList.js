@@ -32,7 +32,7 @@ function ProList({ langType }) {
       })
       .then(() => setCl(true))
       .catch((e) => console.log(e));
-  }, []);
+  }, [langType]);
   return (
     <>
       {cl ? (

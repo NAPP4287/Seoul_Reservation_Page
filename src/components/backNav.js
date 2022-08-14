@@ -11,7 +11,6 @@ import { langList } from '../data/languageList';
 
 function BackNav() {
   const dispatch = useDispatch();
-
   const [showList, setShowList] = useState(false);
 
   const backPage = () => {

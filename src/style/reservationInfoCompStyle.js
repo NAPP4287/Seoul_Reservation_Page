@@ -188,6 +188,8 @@ export const CountryListWrap = styled.div`
       padding: 0 5px;
       font-size: 13px;
       cursor: pointer;
+      padding: 0 20px;
+      border-bottom: 1px solid #8c8c8c;
     }
     > li:nth-child(1) {
       border-radius: 20px 20px 0 0;

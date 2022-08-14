@@ -9,4 +9,5 @@ export const customAxios = axios.create({
     'Content-Type': 'application/json',
     Authorization: `Bearer ${getCookie('myToken')}`,
   },
+  withCredentials: true,
 });

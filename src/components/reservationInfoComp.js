@@ -11,6 +11,7 @@ import { customAxios } from '../axios/custromAxios';
 import { useDispatch } from 'react-redux';
 import { filterLanguage } from '../common/filterLanguage';
 import { certCompleteModalOpen } from '../redux/modal/modalOpen';
+import { countryLang } from '../data/programList';
 // import { setCookie } from '../axios/cookie';
 // import { saveToken } from '../redux/token/accessToken';
 
@@ -185,9 +186,13 @@ function ReservationInfoComp({
             className='list-member'
             style={showCountryCode ? { display: 'block' } : { display: 'none' }}
           >
-            {countryCode.map((el) => (
+            {countryCode.map((el, idx) => (
               <li key={el} onClick={() => clickOption('countryCode', el)}>
-                +{el}
+                +
+                {idx === countryLang.length - 1
+                  ? filterLanguage('ect', langType)
+                  : el}{' '}
+                {' ' + countryLang[idx]}
               </li>
             ))}
           </ul>
