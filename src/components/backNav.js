@@ -6,6 +6,7 @@ import {
 } from '../style/navStyle';
 import { useDispatch } from 'react-redux';
 import { selectLanguage } from '../redux/langSelect/language';
+import { removeToken } from '../redux/token/accessToken';
 import { useState } from 'react';
 import { langList } from '../data/languageList';
 
@@ -14,6 +15,7 @@ function BackNav() {
   const [showList, setShowList] = useState(false);
 
   const backPage = () => {
+    dispatch(removeToken());
     window.history.back();
   };
 

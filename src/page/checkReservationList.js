@@ -52,7 +52,7 @@ function CheckReservationList({ langType }) {
     <>
       {/* !isValid => isValid로 꼭 변경할 것 */}
       {!isValid ? (
-        <InvalidModal />
+        <InvalidModal langType={langType} />
       ) : (
         <>
           {cl ? (

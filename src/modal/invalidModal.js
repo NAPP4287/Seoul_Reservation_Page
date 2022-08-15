@@ -1,17 +1,18 @@
 import { ModalBack } from '../style/invalidModalStyle';
-import { useNavigate } from 'react-router';
+import { filterLanguage } from '../common/filterLanguage';
 
-function InvalidModal() {
-  const navigate = useNavigate();
-
+function InvalidModal({ langType }) {
   const goLanding = () => {
-    navigate('/');
+    window.location.replace('/');
   };
+
   return (
     <ModalBack>
       <div className='modalBox'>
         <div className='title'>유효하지 않는 접근입니다.</div>
-        <button onClick={goLanding}>확인</button>
+        <button onClick={goLanding}>
+          {filterLanguage('confirmBtn', langType)}
+        </button>
       </div>
     </ModalBack>
   );

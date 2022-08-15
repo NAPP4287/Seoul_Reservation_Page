@@ -4,7 +4,7 @@ import {
   LikeCountrySelectBox,
   CountryListWrap,
 } from '../style/reservationInfoCompStyle';
-import { programList, countryCode } from '../data/programList';
+import { countryCode } from '../data/programList';
 import Timer from './timer';
 import { useState } from 'react';
 import { customAxios } from '../axios/custromAxios';

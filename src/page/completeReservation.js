@@ -29,7 +29,7 @@ function CompleteReservation({ langType }) {
   return (
     <div>
       {!isValid ? (
-        <InvalidModal />
+        <InvalidModal langType={langType} />
       ) : (
         <>
           <div className='contentWrap leftPadding'>

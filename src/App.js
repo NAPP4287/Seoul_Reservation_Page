@@ -15,7 +15,6 @@ import { modalInfo } from './redux/modal/modalOpen';
 import { languageSelect } from './redux/langSelect/language';
 import BackNav from './components/backNav';
 import CertCompleteModal from './modal/certCompleteModal';
-import NavBackNone from './components/navBackNone';
 import Loading from './page/loading';
 
 function App() {
@@ -52,7 +51,7 @@ function App() {
             path='/checkReservation/complete'
             element={
               <div>
-                <NavBackNone />
+                <BackNav />
                 <CompleteReservation langType={langType} />
               </div>
             }

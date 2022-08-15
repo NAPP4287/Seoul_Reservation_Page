@@ -60,7 +60,7 @@ function EditReservation({ langType }) {
   return (
     <div>
       {!isValid ? (
-        <InvalidModal />
+        <InvalidModal langType={langType} />
       ) : (
         <>
           {cl ? (

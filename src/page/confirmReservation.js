@@ -41,9 +41,10 @@ function ConfirmReservation({ langType }) {
   }, []);
 
   const onClickReservation = () => {
-    const params = { userIdx: userIdx };
+    const params = { useridx: userIdx };
+    console.log('confirmRes : ', confirmRes);
     customAxios
-      .post('/reservation/create', { params: params }, confirmRes)
+      .post('/reservation/create', confirmRes, { params: params })
       .then((r) => {
         console.log(r.data);
         dispatch(saveCompleteInfo({ ...r.data }));
@@ -67,7 +68,7 @@ function ConfirmReservation({ langType }) {
   return (
     <>
       {!isValid ? (
-        <InvalidModal />
+        <InvalidModal langType={langType} />
       ) : (
         <div className='leftPadding'>
           <div className='contentWrap'>

@@ -10,6 +10,7 @@ export const ChkResWrap = styled.div`
     height: 50px;
     border: none;
     width: (100% - 280px);
+    max-width: 744px;
     left: 50%;
     transform: translate(-50%);
   }
