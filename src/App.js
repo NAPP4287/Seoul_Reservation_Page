@@ -14,6 +14,7 @@ import { useSelector } from 'react-redux';
 import { modalInfo } from './redux/modal/modalOpen';
 import { languageSelect } from './redux/langSelect/language';
 import BackNav from './components/backNav';
+import NoneBackNav from './components/noneBackNav';
 import CertCompleteModal from './modal/certCompleteModal';
 import Loading from './page/loading';
 
@@ -51,7 +52,7 @@ function App() {
             path='/checkReservation/complete'
             element={
               <div>
-                <BackNav />
+                <NoneBackNav />
                 <CompleteReservation langType={langType} />
               </div>
             }
@@ -78,7 +79,7 @@ function App() {
             path='/checkReservation/reservationList/edit/cancel'
             element={
               <div>
-                <BackNav />
+                <NoneBackNav />
                 <CancelReservation langType={langType} />
               </div>
             }

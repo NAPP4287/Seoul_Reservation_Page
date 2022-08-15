@@ -39,7 +39,7 @@ function CancelModal({ setShowCancelModal, reservationCode, langType }) {
     <ModalBack>
       <div className='modalBox'>
         <div className='title'>{filterLanguage('queCancel', langType)}</div>
-        <div className='btnWrap'>
+        <div className='cancelBtnWrap'>
           <button onClick={cancelReservation}>
             {filterLanguage('yes', langType)}
           </button>

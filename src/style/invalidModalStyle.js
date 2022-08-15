@@ -45,7 +45,7 @@ export const ModalBack = styled.div`
       background-color: #f5f5f7;
       margin: 0 auto;
     }
-    > .btnWrap {
+    > .cancelBtnWrap {
       display: flex;
       margin: 0 auto;
       width: 100%;

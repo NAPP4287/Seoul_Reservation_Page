@@ -7,9 +7,27 @@ import {
 import { useSelector } from 'react-redux';
 import { getCompleteInfo } from '../redux/reservation/completeReservation';
 import { filterLanguage } from '../common/filterLanguage';
+import { useState } from 'react';
+import { getEctInfo } from '../redux/reservation/reservationEct';
 
 function CompReservationInfo({ langType }) {
   const reservationInfo = useSelector(getCompleteInfo);
+  const reservationEct = useSelector(getEctInfo);
+
+  console.log(reservationEct);
+
+  const setTime = () => {
+    const hour = Number(reservationEct.time.split(':')[0]);
+    const minutes = reservationEct.time.split(':')[1];
+
+    if (hour < 12) {
+      return `AM ${reservationEct.time}`;
+    } else if (hour === 12) {
+      return `PM ${reservationEct.time}`;
+    } else {
+      return `PM ${hour - 12}:${minutes}`;
+    }
+  };
 
   return (
     <CompWrap>
@@ -21,7 +39,9 @@ function CompReservationInfo({ langType }) {
       </div>
 
       <ReservationBox>
-        <div className='headTitle'>2022.7.23(토) 오후 12:00</div>
+        <div className='headTitle'>
+          2022.{reservationEct.month}.{reservationEct.date} {setTime()}
+        </div>
         <PersonCountWrap>
           <div>{filterLanguage('personCount', langType)}</div>
           <div>

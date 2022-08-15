@@ -900,7 +900,7 @@ export const langList = {
     { langType: 'jp', language: '予約をキャンセルしますか？' },
   ],
   completedCancel: [
-    { langType: 'ko', language: '에약이 취소됐습니다.' },
+    { langType: 'ko', language: '예약이 취소됐습니다.' },
     { langType: 'cn', language: '您的订单已取消' },
     { langType: 'en', language: 'Your reservation has been cancelled. ' },
     { langType: 'jp', language: '予約がキャンセルされました。' },

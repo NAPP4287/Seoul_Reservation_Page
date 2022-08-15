@@ -1,7 +1,10 @@
 import CompReservationInfo from '../components/comReservationInfo';
 import { useNavigate } from 'react-router';
 import { filterLanguage } from '../common/filterLanguage';
-import { removeReservation } from '../redux/reservation/reservationInfo';
+import {
+  removeReservation,
+  getReservation,
+} from '../redux/reservation/reservationInfo';
 import { removeToken, getAccessToken } from '../redux/token/accessToken';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
@@ -13,10 +16,11 @@ function CompleteReservation({ langType }) {
   const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
+    console.log(token.accessToken);
     if (token.accessToken === '') {
-      setIsValid(true);
-    } else {
       setIsValid(false);
+    } else {
+      setIsValid(true);
     }
   }, []);
 

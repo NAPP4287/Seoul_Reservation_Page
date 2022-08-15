@@ -12,7 +12,7 @@ import { useDispatch } from 'react-redux';
 import { filterLanguage } from '../common/filterLanguage';
 import { certCompleteModalOpen } from '../redux/modal/modalOpen';
 import { countryLang } from '../data/programList';
-import { setCookie } from '../axios/cookie';
+import { setCookie, removeCookie } from '../axios/cookie';
 import { saveToken } from '../redux/token/accessToken';
 import { errorMsgList } from '../data/errorMsg';
 
@@ -147,8 +147,6 @@ function ReservationInfoComp({
   };
 
   const clickCheckCode = () => {
-    console.log(reservationInfo, sendPhone);
-
     customAxios
       .post('/auth/phone/check', {
         phone: sendPhone.phone.replace('0', ''),
@@ -164,6 +162,8 @@ function ReservationInfoComp({
         setCertTime(true);
         setEndCertTime(false);
         dispatch(certCompleteModalOpen());
+        console.log(r.data.Authorization);
+        removeCookie('myToken');
         setCookie('myToken', r.data.Authorization);
         dispatch(saveToken(r.data.Authorization));
         if (reservationInfo.countryCode === '82') {

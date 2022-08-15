@@ -8,8 +8,35 @@ import {
 import Nav from '../components/nav';
 import { useNavigate } from 'react-router-dom';
 import { filterLanguage } from '../common/filterLanguage';
+import { customAxios } from '../axios/custromAxios';
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  saveReservaion,
+  getReservation,
+} from '../redux/reservation/reservationInfo';
 
 function LandingPage({ langType }) {
+  const dispatch = useDispatch();
+  const reservationInfo = useSelector(getReservation);
+  const [userIdx, setUserIdx] = useState(19);
+  const param = new URLSearchParams(window.location.search);
+
+  useEffect(() => {
+    customAxios
+      .get('/', { params: { userIdx: userIdx } })
+      .then((r) => {
+        setUserIdx(param.get('userIdx'));
+      })
+      .then(() => {
+        if (userIdx === null) {
+          dispatch(saveReservaion({ ...reservationInfo, userIdx: 0 }));
+        } else {
+          dispatch(saveReservaion({ ...reservationInfo, userIdx: userIdx }));
+        }
+      });
+  }, []);
+
   const navigate = useNavigate();
   const clickGoPage = (page) => {
     switch (page) {

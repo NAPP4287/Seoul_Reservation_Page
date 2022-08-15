@@ -20,11 +20,12 @@ import { errorMsgList } from '../data/errorMsg';
 
 function ConfirmReservation({ langType }) {
   const confirmRes = useSelector((state) => state.saveReservation);
+  console.log(confirmRes);
   const token = useSelector(getAccessToken);
   const ectInfo = useSelector(getEctInfo);
   const dispatch = useDispatch();
   const [checkNoti, setCheckNoti] = useState(true);
-  const [isValid, setIsValid] = useState(false);
+  const [isValid, setIsValid] = useState(true);
   const [userIdx, setUserIdx] = useState(0);
   const navigate = useNavigate();
   const noneCheck = false;
@@ -41,10 +42,9 @@ function ConfirmReservation({ langType }) {
   }, []);
 
   const onClickReservation = () => {
-    const params = { useridx: userIdx };
     console.log('confirmRes : ', confirmRes);
     customAxios
-      .post('/reservation/create', confirmRes, { params: params })
+      .post('/reservation/create', confirmRes)
       .then((r) => {
         console.log(r.data);
         dispatch(saveCompleteInfo({ ...r.data }));

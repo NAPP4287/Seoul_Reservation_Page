@@ -35,10 +35,9 @@ function CheckReservation({ langType }) {
   });
 
   const goReservationList = () => {
-    dispatch(saveToken(token));
-    setCookie('myToken', token);
-    navigate('/checkReservation/reservationList');
     console.log(token);
+    navigate('/checkReservation/reservationList');
+    window.location.reload();
   };
 
   return (

@@ -1,22 +1,13 @@
-import {
-  NavWrap,
-  GlobalWrap,
-  BackPageBtn,
-  LanguageWrap,
-} from '../style/navStyle';
+import { NavWrap, GlobalWrap, LanguageWrap } from '../style/navStyle';
 import { useDispatch } from 'react-redux';
 import { selectLanguage } from '../redux/langSelect/language';
 import { removeToken } from '../redux/token/accessToken';
 import { useState } from 'react';
 import { langList } from '../data/languageList';
 
-function BackNav() {
+function NoneBackNav() {
   const dispatch = useDispatch();
   const [showList, setShowList] = useState(false);
-
-  const backPage = () => {
-    window.history.back();
-  };
 
   const goLanguage = (lang) => {
     dispatch(selectLanguage(lang));
@@ -31,9 +22,7 @@ function BackNav() {
     <div>
       <NavWrap>
         <div className='navPadding'>
-          <BackPageBtn onClick={backPage}>
-            <div></div>
-          </BackPageBtn>
+          <div></div>
           <GlobalWrap className='btnColor' onClick={showLangList}>
             Languages{' '}
             <div
@@ -61,4 +50,4 @@ function BackNav() {
   );
 }
 
-export default BackNav;
+export default NoneBackNav;

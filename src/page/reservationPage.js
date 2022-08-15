@@ -7,7 +7,10 @@ import TermsDetail from '../components/termsDetail';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { saveReservaion } from '../redux/reservation/reservationInfo';
+import {
+  saveReservaion,
+  getReservation,
+} from '../redux/reservation/reservationInfo';
 import { getAccessToken } from '../redux/token/accessToken';
 import { invalidModalOpen, invalidModalClose } from '../redux/modal/modalOpen';
 import { filterLanguage } from '../common/filterLanguage';
@@ -17,9 +20,9 @@ function ReservationPage({ langType }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const getToken = useSelector(getAccessToken);
+  const getUserIdx = useSelector(getReservation);
   const queryIdx = param.get('idx');
   const [token, setToken] = useState('');
-
   const [itemIdx, setItemIdx] = useState(null);
   const [ticketList, setTicketList] = useState([]);
 
@@ -64,8 +67,11 @@ function ReservationPage({ langType }) {
 
   const reservationClick = () => {
     console.log('reservationInfo : ', reservationInfo);
-    dispatch(saveReservaion({ ...reservationInfo }));
+    dispatch(
+      saveReservaion({ ...reservationInfo, userIdx: getUserIdx.userIdx })
+    );
     navigate(`/reservationConfirm?idx=${queryIdx}`);
+    window.location.reload();
   };
 
   const checkReservation = () => {

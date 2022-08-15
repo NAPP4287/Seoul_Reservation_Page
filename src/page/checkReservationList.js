@@ -12,23 +12,25 @@ function CheckReservationList({ langType }) {
   const [programList, setProgramList] = useState([]);
   const navigate = useNavigate();
   const params = { lang: langType };
-  const [cl, setCl] = useState(false);
-  const [isValid, setIsValid] = useState(false);
+  const [cl, setCl] = useState(true);
+  const [isValid, setIsValid] = useState(true);
   const token = useSelector(getAccessToken);
 
   useEffect(() => {
+    console.log(token);
     if (token.accessToken === '') {
       setIsValid(false);
     } else {
       setIsValid(true);
     }
-
     getReservationList();
   }, []);
 
   const getReservationList = () => {
     customAxios
-      .get('/confirm/list', { params: params })
+      .get('/confirm/list', {
+        params: params,
+      })
       .then((r) => {
         console.log(r);
         if (r.data.list === null) {
@@ -38,14 +40,21 @@ function CheckReservationList({ langType }) {
         }
       })
       .then(() => setCl(true))
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        if (e.response.status === 401) {
+          setCl(true);
+          setIsValid(false);
+        } else {
+          setCl(false);
+        }
+      });
   };
 
   const goChkReservation = (reservationCode) => {
-    console.log(reservationCode);
     navigate(
       `/checkReservation/reservationList/edit?reservationCode=${reservationCode}`
     );
+    window.location.reload();
   };
 
   return (

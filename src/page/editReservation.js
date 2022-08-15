@@ -18,16 +18,8 @@ function EditReservation({ langType }) {
   const [checkNoti, setCheckNoti] = useState(true);
   const [cl, setCl] = useState(false);
   const token = useSelector(getAccessToken);
-  const [isValid, setIsValid] = useState(false);
+  const [isValid, setIsValid] = useState(true);
   const noneCheck = true;
-
-  useEffect(() => {
-    if (token.accessToken === '') {
-      setIsValid(true);
-    } else {
-      setIsValid(false);
-    }
-  }, []);
 
   const dispatch = useDispatch();
 
@@ -35,6 +27,12 @@ function EditReservation({ langType }) {
     const params = new URLSearchParams(window.location.search);
     setReservationCode(params.get('reservationCode'));
     getInfo();
+
+    if (token.accessToken === '') {
+      setIsValid(false);
+    } else {
+      setIsValid(true);
+    }
   }, [reservationCode]);
 
   const openCancelModal = () => {
@@ -51,6 +49,7 @@ function EditReservation({ langType }) {
     customAxios
       .get(`/confirm/view/${reservationCode}`)
       .then((r) => {
+        console.log(r.data);
         dispatch(saveCompleteInfo({ ...r.data }));
       })
       .then(() => setCl(true))
