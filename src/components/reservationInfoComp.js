@@ -147,10 +147,12 @@ function ReservationInfoComp({
   };
 
   const clickCheckCode = () => {
+    console.log(reservationInfo, sendPhone);
+
     customAxios
       .post('/auth/phone/check', {
         phone: sendPhone.phone.replace('0', ''),
-        countryCode: sendPhone.countryCode,
+        countryCode: reservationInfo.countryCode,
         authCode: sendPhone.authCode,
       })
       .then((r) => {
@@ -187,7 +189,6 @@ function ReservationInfoComp({
     e.target.value = e.target.value.replace(/[^0-9]/g, '');
     setReservationInfo({ ...reservationInfo, countryCode: e.target.value });
     setSelectOption({ ...selectOption, selectType: e.target.value });
-    console.log(reservationInfo);
   };
 
   return (
@@ -200,11 +201,7 @@ function ReservationInfoComp({
           >
             {countryCode.map((el, idx) => (
               <li key={el} onClick={() => clickOption('countryCode', el)}>
-                +
-                {idx === countryLang.length - 1
-                  ? filterLanguage('ect', langType)
-                  : el}{' '}
-                {' ' + countryLang[idx]}
+                +{el} {' ' + filterLanguage('nation', langType)[idx]}
               </li>
             ))}
           </ul>
@@ -227,7 +224,7 @@ function ReservationInfoComp({
         <p>{filterLanguage('phone', langType)}</p>
         <div className='countryWrap'>
           <LikeCountrySelectBox>
-            {sendPhone.countryCode === '기타' ? (
+            {sendPhone.countryCode === 'etc' ? (
               <div className='ectCountry'>
                 +
                 <input

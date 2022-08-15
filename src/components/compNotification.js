@@ -64,7 +64,9 @@ function CompNotification({ setCheckNoti, langType, noneCheck, queryIdx }) {
 
         {showDetail ? (
           <NotificationBox>
-            <li>{noticeContent}</li>
+            {noticeContent.split('\n').map((e) => (
+              <li key={e}>{e}</li>
+            ))}
           </NotificationBox>
         ) : null}
       </NotificationCheck>

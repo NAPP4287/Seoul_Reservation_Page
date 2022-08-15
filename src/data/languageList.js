@@ -1025,6 +1025,15 @@ export const langList = {
       { langType: 'jp', language: '인증완료' },
     ],
   },
+  nation: [
+    { langType: 'ko', language: ['한국', '미국', '일본', '중국', '기타'] },
+    { langType: 'cn', language: ['韩国', '美国', '日本', '中国', '其他'] },
+    { langType: 'en', language: ['Korea', 'U.S.', 'Japan', 'China', 'Others'] },
+    {
+      langType: 'jp',
+      language: ['韓国', 'アメリカ', '日本', '中国', '其の外'],
+    },
+  ],
   aaa: [
     { langType: 'ko', language: '인증완료' },
     { langType: 'cn', language: '인증완료' },
