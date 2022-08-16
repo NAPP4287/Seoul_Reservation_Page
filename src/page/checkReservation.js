@@ -3,14 +3,15 @@ import { useState, useRef } from 'react';
 import ReservationInfoComp from '../components/reservationInfoComp';
 import { useEffect } from 'react';
 import { setCookie } from '../axios/cookie';
-import { saveToken } from '../redux/token/accessToken';
-import { useDispatch } from 'react-redux';
+import { getAccessToken } from '../redux/token/accessToken';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { filterLanguage } from '../common/filterLanguage';
 
 function CheckReservation({ langType }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  // const accessToken = useSelector(getAccessToken);
   const [certConfirm, setCertConfirm] = useState(false);
   const [showOptionBox, setShowOptionBox] = useState(false);
   const [showCountryCode, setShowCountryCode] = useState(false);
@@ -22,7 +23,6 @@ function CheckReservation({ langType }) {
   });
   const [activeBtn, setActiveBtn] = useState(false);
   const [token, setToken] = useState('');
-
   const outSection = useRef();
   const reservationPage = true;
 
@@ -35,9 +35,8 @@ function CheckReservation({ langType }) {
   });
 
   const goReservationList = () => {
-    console.log(token);
     navigate('/checkReservation/reservationList');
-    window.location.reload();
+    // window.location.reload();
   };
 
   return (

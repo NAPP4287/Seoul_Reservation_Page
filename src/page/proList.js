@@ -20,7 +20,6 @@ function ProList({ langType }) {
 
   const clickProgram = (viewIdx, price, title) => {
     navigate(`/programList/reservation?idx=${viewIdx}`);
-    console.log(ectInfo);
     dispatch(saveEctInfo({ ...ectInfo, price: price, resType: title }));
   };
   useEffect(() => {

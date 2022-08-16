@@ -17,7 +17,6 @@ function CheckReservationList({ langType }) {
   const token = useSelector(getAccessToken);
 
   useEffect(() => {
-    console.log(token);
     if (token.accessToken === '') {
       setIsValid(false);
     } else {
@@ -30,9 +29,9 @@ function CheckReservationList({ langType }) {
     customAxios
       .get('/confirm/list', {
         params: params,
+        headers: { authorization: `Bearer ${token.accessToken}` },
       })
       .then((r) => {
-        console.log(r);
         if (r.data.list === null) {
           setProgramList([]);
         } else {
@@ -54,7 +53,6 @@ function CheckReservationList({ langType }) {
     navigate(
       `/checkReservation/reservationList/edit?reservationCode=${reservationCode}`
     );
-    window.location.reload();
   };
 
   return (

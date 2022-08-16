@@ -10,6 +10,9 @@ const initialState = {
   ticketCount: 0,
   price: null,
   writeDate: '',
+  viewIdx: null,
+  ticketDate: '',
+  ticketTitle: '',
   Authorization: 'JWT 토큰, 유저가 예약 취소할때 필요함',
 };
 
@@ -27,6 +30,9 @@ export const completeReservationSlice = createSlice({
       state.ticketCount = action.payload.ticketCount;
       state.price = action.payload.price;
       state.writeDate = action.payload.writeDate;
+      state.price = action.payload.price;
+      state.writeDate = action.payload.writeDate;
+      state.viewIdx = action.payload.viewIdx;
       state.Authorization = action.payload.Authorization;
     },
   },

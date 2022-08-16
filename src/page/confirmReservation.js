@@ -20,7 +20,6 @@ import { errorMsgList } from '../data/errorMsg';
 
 function ConfirmReservation({ langType }) {
   const confirmRes = useSelector((state) => state.saveReservation);
-  console.log(confirmRes);
   const token = useSelector(getAccessToken);
   const ectInfo = useSelector(getEctInfo);
   const dispatch = useDispatch();
@@ -42,11 +41,11 @@ function ConfirmReservation({ langType }) {
   }, []);
 
   const onClickReservation = () => {
-    console.log('confirmRes : ', confirmRes);
     customAxios
-      .post('/reservation/create', confirmRes)
+      .post('/reservation/create', confirmRes, {
+        headers: { authorization: `Bearer ${token.accessToken}` },
+      })
       .then((r) => {
-        console.log(r.data);
         dispatch(saveCompleteInfo({ ...r.data }));
         navigate('/checkReservation/complete');
       })
@@ -59,7 +58,8 @@ function ConfirmReservation({ langType }) {
           dispatch(removeToken());
           navigate('/');
         } else {
-          alert(errorMsgList[`${errorMsg}`]);
+          alert(errorMsg);
+          navigate('/');
           dispatch(removeToken());
         }
       });

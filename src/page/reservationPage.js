@@ -66,12 +66,10 @@ function ReservationPage({ langType }) {
   });
 
   const reservationClick = () => {
-    console.log('reservationInfo : ', reservationInfo);
     dispatch(
       saveReservaion({ ...reservationInfo, userIdx: getUserIdx.userIdx })
     );
     navigate(`/reservationConfirm?idx=${queryIdx}`);
-    window.location.reload();
   };
 
   const checkReservation = () => {

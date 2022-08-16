@@ -8,6 +8,8 @@ import {
 import { removeToken, getAccessToken } from '../redux/token/accessToken';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+import { getCompleteInfo } from '../redux/reservation/completeReservation';
+import { getEctInfo } from '../redux/reservation/reservationEct';
 import InvalidModal from '../modal/invalidModal';
 
 function CompleteReservation({ langType }) {
@@ -15,8 +17,10 @@ function CompleteReservation({ langType }) {
   const token = useSelector(getAccessToken);
   const [isValid, setIsValid] = useState(false);
 
+  const reservationInfo = useSelector(getCompleteInfo);
+  const reservationEct = useSelector(getEctInfo);
+
   useEffect(() => {
-    console.log(token.accessToken);
     if (token.accessToken === '') {
       setIsValid(false);
     } else {
@@ -37,7 +41,7 @@ function CompleteReservation({ langType }) {
       ) : (
         <>
           <div className='contentWrap leftPadding'>
-            <CompReservationInfo langType={langType} />
+            <CompReservationInfo langType={langType} info={reservationInfo} />
           </div>
 
           <div className='btnWrap'>

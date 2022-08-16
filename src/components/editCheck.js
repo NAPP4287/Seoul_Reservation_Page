@@ -5,23 +5,19 @@ import {
   UserInfoWrap,
 } from '../style/compReservationInfoStyle';
 import { useSelector } from 'react-redux';
-import { getCompleteInfo } from '../redux/reservation/completeReservation';
 import { filterLanguage } from '../common/filterLanguage';
 import { useState } from 'react';
 import { getEctInfo } from '../redux/reservation/reservationEct';
 
-function CompReservationInfo({ langType }) {
-  const reservationInfo = useSelector(getCompleteInfo);
-  const reservationEct = useSelector(getEctInfo);
-
+function EditCheckInfo({ langType, info }) {
   const setTime = () => {
-    const hour = Number(reservationEct.time.split(':')[0]);
-    const minutes = reservationEct.time.split(':')[1];
+    const hour = Number(info.time.split(':')[0]);
+    const minutes = info.time.split(':')[1];
 
     if (hour < 12) {
-      return `AM ${reservationEct.time}`;
+      return `AM ${info.time}`;
     } else if (hour === 12) {
-      return `PM ${reservationEct.time}`;
+      return `PM ${info.time}`;
     } else {
       return `PM ${hour - 12}:${minutes}`;
     }
@@ -33,21 +29,17 @@ function CompReservationInfo({ langType }) {
         <div className='confirmHead'>
           {filterLanguage('completeTitle', langType)}
         </div>
-        <div className='reservationNum'>{reservationInfo.reservationCode}</div>
+        <div className='reservationNum'>{info.reservationCode}</div>
       </div>
 
       <ReservationBox>
-        <div className='headTitle'>
-          2022.{reservationEct.month}.{reservationEct.date} {setTime()}
-        </div>
+        <div className='headTitle'>{info.date}</div>
         <PersonCountWrap>
           <div>{filterLanguage('personCount', langType)}</div>
           <div>
-            {reservationInfo.ticketCount}
+            {info.ticketCount}
             {filterLanguage('person', langType)}/
-            {reservationInfo.price === 0
-              ? filterLanguage('price', langType)
-              : reservationInfo.price}
+            {info.price === 0 ? filterLanguage('price', langType) : info.price}
           </div>
         </PersonCountWrap>
 
@@ -63,21 +55,21 @@ function CompReservationInfo({ langType }) {
               <div className='type'>
                 {filterLanguage('reservationType', langType)}
               </div>
-              <p>{reservationInfo.title}</p>
+              <p>{info.title}</p>
             </li>
 
             <li>
               <div className='type'>
                 {filterLanguage('userTitle', langType)}
               </div>
-              <p>{reservationInfo.userName}</p>
+              <p>{info.userName}</p>
             </li>
 
             <li>
               <div className='type'>{filterLanguage('phone', langType)}</div>
               <p>
-                <span>+{reservationInfo.countryCode}</span>
-                {reservationInfo.userPhone}
+                <span>+{info.countryCode}</span>
+                {info.userPhone}
               </p>
             </li>
           </ul>
@@ -87,4 +79,4 @@ function CompReservationInfo({ langType }) {
   );
 }
 
-export default CompReservationInfo;
+export default EditCheckInfo;

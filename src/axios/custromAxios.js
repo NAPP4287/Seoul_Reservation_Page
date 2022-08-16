@@ -7,7 +7,7 @@ export const customAxios = axios.create({
   baseURL: `http://first.likealocal.co.kr:4500`,
   headers: {
     'Content-Type': 'application/json',
-    Authorization: `Bearer ${getCookie('myToken')}`,
+    // Authorization: `Bearer ${getCookie('myToken')}`,
   },
   withCredentials: true,
 });

@@ -64,7 +64,6 @@ function ReservationInfoComp({
         countryCode: reservationInfo.countryCode,
       })
       .then((r) => {
-        console.log(sendPhone);
         setCertConfirm(true);
         setCertTime(false);
         setIsCertActive(false);
@@ -162,9 +161,8 @@ function ReservationInfoComp({
         setCertTime(true);
         setEndCertTime(false);
         dispatch(certCompleteModalOpen());
-        console.log(r.data.Authorization);
-        removeCookie('myToken');
-        setCookie('myToken', r.data.Authorization);
+        // removeCookie('myToken');
+        // setCookie('myToken', r.data.Authorization);
         dispatch(saveToken(r.data.Authorization));
         if (reservationInfo.countryCode === '82') {
           setReservationInfo({
@@ -179,7 +177,7 @@ function ReservationInfoComp({
         if (status === 500) {
           setErrorMsg('서버 오류입니다.');
         } else {
-          alert(errorMsgList[`${errorMsg}`]);
+          alert(errorMsg);
         }
         setCertTime(true);
       });

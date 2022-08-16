@@ -1,31 +1,30 @@
 import { useEffect, useState } from 'react';
-import CompReservationInfo from '../components/comReservationInfo';
 import CompNotification from '../components/compNotification';
 import CancelModal from '../modal/cancelModal';
 import { customAxios } from '../axios/custromAxios';
 import { useDispatch, useSelector } from 'react-redux';
-import { saveCompleteInfo } from '../redux/reservation/completeReservation';
 import { removeToken, getAccessToken } from '../redux/token/accessToken';
 import { useNavigate } from 'react-router';
 import { filterLanguage } from '../common/filterLanguage';
 import Loading from './loading';
 import InvalidModal from '../modal/invalidModal';
+import EditCheckInfo from '../components/editCheck';
 
 function EditReservation({ langType }) {
-  const [isPlace, setIsPlace] = useState(true);
   const [reservationCode, setReservationCode] = useState(null);
   const [showCancelModal, setShowCancelModal] = useState(false);
   const [checkNoti, setCheckNoti] = useState(true);
   const [cl, setCl] = useState(false);
+  const [info, setInfo] = useState({});
   const token = useSelector(getAccessToken);
   const [isValid, setIsValid] = useState(true);
   const noneCheck = true;
 
   const dispatch = useDispatch();
+  const params = new URLSearchParams(window.location.search);
+  const urlReservationCode = params.get('reservationCode');
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    setReservationCode(params.get('reservationCode'));
     getInfo();
 
     if (token.accessToken === '') {
@@ -33,7 +32,7 @@ function EditReservation({ langType }) {
     } else {
       setIsValid(true);
     }
-  }, [reservationCode]);
+  }, []);
 
   const openCancelModal = () => {
     setShowCancelModal(true);
@@ -47,13 +46,17 @@ function EditReservation({ langType }) {
 
   const getInfo = () => {
     customAxios
-      .get(`/confirm/view/${reservationCode}`)
+      .get(`/confirm/view/${urlReservationCode}`, {
+        headers: { authorization: `Bearer ${token.accessToken}` },
+      })
       .then((r) => {
-        console.log(r.data);
-        dispatch(saveCompleteInfo({ ...r.data }));
+        setInfo({ ...r.data });
       })
       .then(() => setCl(true))
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        console.log(e);
+        setIsValid(false);
+      });
   };
 
   return (
@@ -67,19 +70,18 @@ function EditReservation({ langType }) {
               {showCancelModal ? (
                 <CancelModal
                   setShowCancelModal={setShowCancelModal}
-                  reservationCode={reservationCode}
+                  reservationCode={urlReservationCode}
                   langType={langType}
                 />
               ) : null}
               <div className='contentWrap'>
-                <CompReservationInfo langType={langType} />
-                {isPlace ? (
-                  <CompNotification
-                    setCheckNoti={setCheckNoti}
-                    langType={langType}
-                    noneCheck={noneCheck}
-                  />
-                ) : null}
+                <EditCheckInfo langType={langType} info={info} />
+                <CompNotification
+                  setCheckNoti={setCheckNoti}
+                  langType={langType}
+                  noneCheck={noneCheck}
+                  queryIdx={info.viewIdx}
+                />
                 <div className='buttonWrap leftPadding'>
                   <button className='btnLeft' onClick={openCancelModal}>
                     {filterLanguage('cancelBtn', langType)}
