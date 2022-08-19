@@ -5,7 +5,7 @@ export const BackImgWrap = styled.div`
   background-color: black;
   min-height: 100vh;
   height: 100%;
-  max-width: 1024px;
+  max-width: 1920px;
   width: 100%;
   margin: 0 auto;
   > .backImg {

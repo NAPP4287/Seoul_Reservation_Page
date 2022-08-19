@@ -7,7 +7,7 @@ import whiteArrow from '../assets/whiteBack.png';
 export const NavWrap = styled.div`
   height: 80px;
   position: fixed;
-  max-width: 1024px;
+  max-width: 1920px;
   width: 100%;
   left: 50%;
   transform: translate(-50%);
@@ -32,7 +32,7 @@ export const NavWrap = styled.div`
 export const NoneBackNavWrap = styled.div`
   height: 80px;
   position: fixed;
-  max-width: 1024px;
+  max-width: 1920px;
   width: 100%;
   left: 50%;
   transform: translate(-50%);
@@ -95,7 +95,7 @@ export const WhiteBackPageBtn = styled.div`
 export const LanguageWrap = styled.div`
   position: fixed;
   z-index: 999;
-  max-width: 1024px;
+  max-width: 1920px;
   width: 100%;
   margin: 0 auto;
   left: 50%;

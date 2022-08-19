@@ -4,7 +4,7 @@ import backgroundImg from '../assets/example.jpg';
 export const LandingWrap = styled.div`
   height: 100%;
   width: 100%;
-  max-width: 1024px;
+  max-width: 1920px;
 `;
 
 export const LandingImg = styled.div`
@@ -29,6 +29,7 @@ export const LandingTitle = styled.div`
 `;
 
 export const ButtonWrap = styled.div`
+  /* display: flex; */
   > button {
     width: 100%;
     height: 120px;
@@ -56,7 +57,7 @@ export const ButtonWrap = styled.div`
 `;
 
 export const LandingContent = styled.div`
-  max-width: 1024px;
+  max-width: 1920px;
   width: 100%;
   padding: 0 126px;
   /* margin-top: 150px;
