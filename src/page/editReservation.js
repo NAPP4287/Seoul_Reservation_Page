@@ -75,7 +75,11 @@ function EditReservation({ langType }) {
                 />
               ) : null}
               <div className='contentWrap'>
-                <EditCheckInfo langType={langType} info={info} />
+                <EditCheckInfo
+                  langType={langType}
+                  info={info}
+                  checkRes={true}
+                />
                 <CompNotification
                   setCheckNoti={setCheckNoti}
                   langType={langType}

@@ -9,15 +9,15 @@ import { filterLanguage } from '../common/filterLanguage';
 import { useState } from 'react';
 import { getEctInfo } from '../redux/reservation/reservationEct';
 
-function EditCheckInfo({ langType, info }) {
+function EditCheckInfo({ langType, info, checkRes }) {
   const setTime = () => {
-    const hour = Number(info.time.split(':')[0]);
-    const minutes = info.time.split(':')[1];
+    const hour = Number(info.ticketTitle.split(':')[0]);
+    const minutes = info.ticketTitle.split(':')[1];
 
     if (hour < 12) {
-      return `AM ${info.time}`;
+      return `AM ${info.ticketTitle}`;
     } else if (hour === 12) {
-      return `PM ${info.time}`;
+      return `PM ${info.ticketTitle}`;
     } else {
       return `PM ${hour - 12}:${minutes}`;
     }
@@ -33,7 +33,10 @@ function EditCheckInfo({ langType, info }) {
       </div>
 
       <ReservationBox>
-        <div className='headTitle'>{info.date}</div>
+        <div className='headTitle'>
+          {info.ticketDate + ' '}
+          {setTime()}
+        </div>
         <PersonCountWrap>
           <div>{filterLanguage('personCount', langType)}</div>
           <div>
