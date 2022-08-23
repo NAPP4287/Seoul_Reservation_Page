@@ -13,9 +13,12 @@ function CancelReservation({ langType }) {
   const navigate = useNavigate();
 
   const reservationInfo = useSelector(getCompleteInfo);
+  console.log(reservationInfo);
   const goLanding = () => {
     navigate('/');
   };
+
+  console.log(reservationInfo);
 
   return (
     <div>

@@ -3,6 +3,7 @@ import CompNotification from '../components/compNotification';
 import CancelModal from '../modal/cancelModal';
 import { customAxios } from '../axios/custromAxios';
 import { useDispatch, useSelector } from 'react-redux';
+import { saveCompleteInfo } from '../redux/reservation/completeReservation';
 import { removeToken, getAccessToken } from '../redux/token/accessToken';
 import { useNavigate } from 'react-router';
 import { filterLanguage } from '../common/filterLanguage';
@@ -51,6 +52,7 @@ function EditReservation({ langType }) {
       })
       .then((r) => {
         setInfo({ ...r.data });
+        dispatch(saveCompleteInfo({ ...r.data }));
       })
       .then(() => setCl(true))
       .catch((e) => {

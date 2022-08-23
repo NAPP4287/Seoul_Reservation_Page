@@ -262,12 +262,10 @@ function ReservationInfoComp({
           />
           <button
             className={
-              isCertActive || endCertTime || certComplete
-                ? 'active hiddenText'
-                : 'hiddenText'
+              isCertActive || endCertTime ? 'active hiddenText' : 'hiddenText'
             }
             onClick={handlePhoneCertReq}
-            disabled={!isCertActive && !certTime}
+            disabled={(!isCertActive && !certTime) || certComplete}
           >
             {certConfirm ? (
               <Timer
