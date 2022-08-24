@@ -12,29 +12,25 @@ import { customAxios } from '../axios/custromAxios';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import {
-  saveReservaion,
+  saveReservation,
   getReservation,
 } from '../redux/reservation/reservationInfo';
 
 function LandingPage({ langType }) {
   const dispatch = useDispatch();
-  const reservationInfo = useSelector(getReservation);
-  const [userIdx, setUserIdx] = useState(19);
+  const reservation = useSelector(getReservation);
+
   const param = new URLSearchParams(window.location.search);
+  const paramUserIdx = param.get('userIdx');
 
   useEffect(() => {
-    customAxios
-      .get('/', { params: { userIdx: userIdx } })
-      .then((r) => {
-        setUserIdx(param.get('userIdx'));
-      })
-      .then(() => {
-        if (userIdx === null) {
-          dispatch(saveReservaion({ ...reservationInfo, userIdx: 0 }));
-        } else {
-          dispatch(saveReservaion({ ...reservationInfo, userIdx: userIdx }));
-        }
-      });
+    if (paramUserIdx !== null) {
+      dispatch(
+        saveReservation({ ...getReservation, userIdx: Number(paramUserIdx) })
+      );
+    } else {
+      dispatch(saveReservation({ ...getReservation, userIdx: 0 }));
+    }
   }, []);
 
   const navigate = useNavigate();

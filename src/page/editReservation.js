@@ -33,7 +33,7 @@ function EditReservation({ langType }) {
     } else {
       setIsValid(true);
     }
-  }, []);
+  }, [langType]);
 
   const openCancelModal = () => {
     setShowCancelModal(true);

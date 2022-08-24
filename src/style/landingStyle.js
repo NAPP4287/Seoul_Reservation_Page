@@ -29,7 +29,7 @@ export const LandingTitle = styled.div`
 `;
 
 export const ButtonWrap = styled.div`
-  /* display: flex; */
+  display: flex;
   > button {
     width: 100%;
     height: 120px;
@@ -37,10 +37,11 @@ export const ButtonWrap = styled.div`
     border: none;
     border-radius: 8px;
     font-weight: bold;
-    font-size: 24px;
+    font-size: 20px;
   }
   > button:nth-child(2) {
-    margin-left: 20px;
+    margin-left: 25px;
+    margin-top: 0;
   }
   @media (max-width: 500px) {
     display: block;
@@ -49,10 +50,10 @@ export const ButtonWrap = styled.div`
       font-size: 1rem;
       border-radius: 3px;
     }
-  }
-  > button:nth-child(2) {
-    margin-left: 0;
-    margin-top: 25px;
+    > button:nth-child(2) {
+      margin-left: 0;
+      margin-top: 25px;
+    }
   }
 `;
 
@@ -60,13 +61,11 @@ export const LandingContent = styled.div`
   max-width: 1920px;
   width: 100%;
   padding: 0 126px;
+  max-width: 772px;
   /* margin-top: 150px;
   margin-bottom: 150px; */
   display: flex;
   flex-direction: column;
-  /* position: absolute;
-  top: 50%;
-  transform: translate(0, -50%); */
   > a {
     color: white;
     font-size: 16px;

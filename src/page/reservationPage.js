@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  saveReservaion,
+  saveReservation,
   getReservation,
 } from '../redux/reservation/reservationInfo';
 import { getAccessToken } from '../redux/token/accessToken';
@@ -67,7 +67,7 @@ function ReservationPage({ langType }) {
 
   const reservationClick = () => {
     dispatch(
-      saveReservaion({ ...reservationInfo, userIdx: getUserIdx.userIdx })
+      saveReservation({ ...reservationInfo, userIdx: getUserIdx.userIdx })
     );
     navigate(`/reservationConfirm?idx=${queryIdx}`);
   };

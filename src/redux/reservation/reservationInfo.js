@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   ticketIdx: null,
-  userIdx: 19,
+  userIdx: 0,
   name: '',
   phone: '',
   countryCode: '82',
@@ -17,7 +17,7 @@ export const reservationInfoSlice = createSlice({
   name: 'reservationInfo',
   initialState,
   reducers: {
-    saveReservaion: (state, action) => {
+    saveReservation: (state, action) => {
       state.ticketIdx = action.payload.ticketIdx;
       state.userIdx = action.payload.userIdx;
       state.name = action.payload.name;
@@ -44,7 +44,7 @@ export const reservationInfoSlice = createSlice({
   },
 });
 
-export const { saveReservaion, removeReservation } =
+export const { saveReservation, removeReservation } =
   reservationInfoSlice.actions;
 export const getReservation = (state) => state.saveReservation;
 export default reservationInfoSlice.reducer;

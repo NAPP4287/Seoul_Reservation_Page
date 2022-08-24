@@ -278,6 +278,8 @@ function ReservationInfoComp({
               />
             ) : !certTime ? (
               filterLanguage('sendCert', langType)
+            ) : certComplete ? (
+              filterLanguage('certCompBtn', langType)
             ) : (
               filterLanguage('recert', langType)
             )}

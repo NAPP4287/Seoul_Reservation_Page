@@ -23,7 +23,7 @@ function CheckReservationList({ langType }) {
       setIsValid(true);
     }
     getReservationList();
-  }, []);
+  }, [langType]);
 
   const getReservationList = () => {
     customAxios

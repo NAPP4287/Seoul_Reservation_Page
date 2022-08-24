@@ -26,7 +26,7 @@ export const BackImgWrap = styled.div`
 
 export const ProgramListWrap = styled.ul`
   width: 100%;
-  max-width: 1024px;
+  max-width: 772px;
   height: 100%;
   min-height: 100vh;
   padding: 110px 0 40px 0;
